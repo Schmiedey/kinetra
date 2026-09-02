@@ -56,7 +56,9 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
   bonesVisible: true,
   muscleOpacity: 0.78,
   selectedMuscle: null,
-  camera: '3D',
+  // Lead with a guaranteed full-body view. The free 3D camera remains available
+  // once the user wants to orbit the model.
+  camera: 'Front',
   jointsVisible: true,
   tab: 'Movements',
   slots: [

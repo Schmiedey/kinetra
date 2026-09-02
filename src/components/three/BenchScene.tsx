@@ -399,7 +399,7 @@ export default function BenchScene({
       <Canvas
         shadows
         dpr={[1, 1.6]}
-        camera={{ position: [2.35, 1.95, 2.6], fov: compact ? 42 : 38 }}
+        camera={{ position: [0, 1.25, 3.8], fov: compact ? 42 : 38 }}
         gl={{ antialias: true }}
         fallback={
           <div className="scene-fallback">
