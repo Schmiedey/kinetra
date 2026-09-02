@@ -38,6 +38,32 @@ describe('movement library', () => {
             ).toBeLessThan(1e-6);
         }
   });
+  it('uses bench support only for press and hip-thrust poses', () => {
+    expect(
+      movementPose(
+        catalog.find((m) => m.id === 'incline-bench')!,
+        0.5,
+      ).bench,
+    ).toBe(true);
+    expect(
+      movementPose(
+        catalog.find((m) => m.id === 'decline-bench')!,
+        0.5,
+      ).bench,
+    ).toBe(true);
+    expect(
+      movementPose(
+        catalog.find((m) => m.id === 'hip-thrust')!,
+        0.5,
+      ).bench,
+    ).toBe(true);
+    expect(
+      movementPose(
+        catalog.find((m) => m.id === 'pushup')!,
+        0.5,
+      ).bench,
+    ).toBe(false);
+  });
   it('rejects corrupt imports and preserves complete custom movement snapshots', () => {
     expect(
       validLibrary({

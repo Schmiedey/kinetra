@@ -13,6 +13,7 @@ import { buildAnatomy } from '../components/three/AnatomicalBody';
 import { applyPose } from '../components/three/anatomyRig';
 import { movementPose, emphasis } from './motion';
 import type { Movement, GroupId } from './catalog';
+import { benchOrigin } from '../engine/anthropometry';
 function updateMovementRig(
   rig: ReturnType<typeof buildAnatomy>,
   movement: Movement,
@@ -98,6 +99,76 @@ function Rod({
       <cylinderGeometry args={[r, r, delta.length(), 12]} />
       <meshStandardMaterial color={color} metalness={0.65} roughness={0.3} />
     </mesh>
+  );
+}
+/**
+ * The press poses are generated around benchOrigin. Keep the equipment on that
+ * same hinge and rotation so flat, incline, and decline previews support the
+ * body instead of drifting below it.
+ */
+function PressBench({ angle }: { angle: number }) {
+  return (
+    <group position={benchOrigin} rotation={[(angle * Math.PI) / 180, 0, 0]}>
+      <mesh position={[0, -0.02, -0.38]}>
+        <boxGeometry args={[0.34, 0.095, 1.12]} />
+        <meshStandardMaterial color="#344438" roughness={0.9} />
+      </mesh>
+      <mesh position={[0, -0.075, -0.38]}>
+        <boxGeometry args={[0.29, 0.025, 1.08]} />
+        <meshStandardMaterial color="#748177" metalness={0.5} roughness={0.4} />
+      </mesh>
+      {[-0.3, 0.45].map((z) => (
+        <group key={z}>
+          <Rod a={[0, -0.5, z]} b={[0, -0.08, z]} r={0.022} color="#526157" />
+          <Rod
+            a={[-0.27, -0.5, z]}
+            b={[0.27, -0.5, z]}
+            r={0.022}
+            color="#526157"
+          />
+        </group>
+      ))}
+    </group>
+  );
+}
+function HipThrustBench() {
+  return (
+    <group position={[0, 0.42, 0.28]}>
+      <mesh position={[0, 0.08, 0]}>
+        <boxGeometry args={[0.36, 0.12, 0.54]} />
+        <meshStandardMaterial color="#344438" roughness={0.9} />
+      </mesh>
+      {[-0.19, 0.19].map((x) => (
+        <Rod
+          key={x}
+          a={[x, -0.42, 0]}
+          b={[x, 0.02, 0]}
+          r={0.022}
+          color="#526157"
+        />
+      ))}
+      <Rod
+        a={[-0.23, -0.42, 0]}
+        b={[0.23, -0.42, 0]}
+        r={0.022}
+        color="#526157"
+      />
+    </group>
+  );
+}
+function MachineSeat() {
+  return (
+    <group position={[0, 0.5, 0.08]}>
+      <mesh>
+        <boxGeometry args={[0.42, 0.09, 0.42]} />
+        <meshStandardMaterial color="#344438" roughness={0.9} />
+      </mesh>
+      <mesh position={[0, 0.27, -0.16]}>
+        <boxGeometry args={[0.42, 0.58, 0.08]} />
+        <meshStandardMaterial color="#344438" roughness={0.9} />
+      </mesh>
+      <Rod a={[0, -0.46, 0]} b={[0, -0.05, 0]} r={0.028} color="#526157" />
+    </group>
   );
 }
 function Equipment({
@@ -188,21 +259,12 @@ function Equipment({
             />
           </group>
         ))}
-      {(pose.bench || pose.seated) && (
-        <mesh
-          position={[0, pose.seated ? 0.52 : 0.46, pose.seated ? 0 : 0.1]}
-          rotation={[
-            movement.pattern === 'Horizontal press'
-              ? (-movement.angle * Math.PI) / 180
-              : 0,
-            0,
-            0,
-          ]}
-        >
-          <boxGeometry args={[0.3, 0.08, pose.seated ? 0.42 : 1.15]} />
-          <meshStandardMaterial color="#293f32" roughness={0.9} />
-        </mesh>
-      )}
+      {movement.pattern === 'Horizontal press' &&
+        movement.equipment !== 'Bodyweight' && (
+          <PressBench angle={movement.angle} />
+        )}
+      {movement.pattern === 'Hip extension' && <HipThrustBench />}
+      {pose.seated && <MachineSeat />}
     </>
   );
 }
