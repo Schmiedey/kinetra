@@ -31,7 +31,51 @@ import {
 } from './catalog';
 import type { Library } from './useLibrary';
 import { useSimulationStore } from '../store/useSimulationStore';
+import { analyzeMovement } from './lab';
 const MovementScene = lazy(() => import('./MovementScene'));
+
+function DetailedMovementLab({
+  movement,
+  progress,
+}: {
+  movement: Movement;
+  progress: number;
+}) {
+  const reading = analyzeMovement(movement, progress);
+  const rows = [
+    ['Rep position', `${reading.phasePercent}%`],
+    ['Elbow flexion', `${reading.elbowFlexionDeg}°`],
+    ['Knee flexion', `${reading.kneeFlexionDeg}°`],
+    ['Foot / stance width', `${reading.stanceWidthCm} cm`],
+  ];
+  return (
+    <section
+      className="detailed-movement-lab"
+      aria-label="Detailed movement lab"
+    >
+      <div className="detailed-movement-lab-heading">
+        <div>
+          <span className="eyebrow">DETAILED MOVEMENT LAB</span>
+          <h3>Live pose geometry</h3>
+        </div>
+        <span>{reading.setup}</span>
+      </div>
+      <div className="detailed-movement-readings">
+        {rows.map(([label, value]) => (
+          <div key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </div>
+        ))}
+      </div>
+      <p>
+        These readings update with the playhead, range, angle and stance
+        controls. They describe the generic articulated pose used in this
+        preview, not a measurement of your body or an injury assessment.
+      </p>
+    </section>
+  );
+}
 export function RangeControl({
   label,
   value,
@@ -566,6 +610,7 @@ export default function MovementLibrary({ library }: { library: Library }) {
               onChange={(stance) => setSettings({ ...settings, stance })}
             />
           </div>
+          <DetailedMovementLab movement={movement} progress={progress} />
           <div className="movement-anatomy">
             <div>
               <span className="eyebrow">ILLUSTRATIVE MUSCLE EMPHASIS</span>
@@ -670,7 +715,7 @@ export default function MovementLibrary({ library }: { library: Library }) {
                     useSimulationStore.getState().setTab('Sandbox');
                   }}
                 >
-                  Detailed bench lab <ArrowRight size={14} />
+                  Calculated bench mechanics <ArrowRight size={14} />
                 </Button>
               )}
           </div>

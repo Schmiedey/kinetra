@@ -8,6 +8,7 @@ import {
   emptyLibrary,
 } from './catalog';
 import { movementPose } from './motion';
+import { analyzeMovement } from './lab';
 import { gripCenter } from '../components/three/anatomyRig';
 describe('movement library', () => {
   it('covers every pattern with valid editable templates', () => {
@@ -63,6 +64,19 @@ describe('movement library', () => {
         0.5,
       ).bench,
     ).toBe(false);
+  });
+  it('produces finite detailed-pose readings for every movement and rep position', () => {
+    for (const movement of catalog)
+      for (const progress of [0, 0.5, 1]) {
+        const reading = analyzeMovement(movement, progress);
+        expect(
+          Object.values(reading)
+            .filter((value) => typeof value === 'number')
+            .every(Number.isFinite),
+          movement.name,
+        ).toBe(true);
+        expect(reading.phasePercent).toBe(Math.round(progress * 100));
+      }
   });
   it('rejects corrupt imports and preserves complete custom movement snapshots', () => {
     expect(
