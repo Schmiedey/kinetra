@@ -55,9 +55,16 @@ for kind in ['skeleton','anatomy']:
   g=groups[key];g['type']='bone' if kind=='skeleton' else 'muscle';g['rigId']=key if kind=='skeleton' else None;g['muscleId']=mid;g['side']=side if kind=='anatomy' else None
   p=m['primitives'][0];pos=accessor(d,b,p['attributes']['POSITION']);norms=accessor(d,b,p['attributes']['NORMAL']);idx=accessor(d,b,p['indices']);start=len(g['positions'])
   for v in pos:
-   # Curl the articulated finger surfaces into a fixed grip pose before skinning.
+   # Curl finger surfaces into a fixed grip pose before skinning. Keep the
+   # distal phalanges spaced along a continuous arc instead of collapsing
+   # them to one z plane (which produces visibly broken hands).
    if kind=='skeleton' and key.endswith('Hand') and ('finger' in name or 'thumb' in name):
-    depth=max(0,750-v[2]);theta=min(3.25,depth/32);v=[v[0],v[1]+32*(1-math.cos(theta)),750-32*math.sin(theta)] if depth else v
+    depth=max(0,750-v[2]);radius=35.0;max_theta=1.2;arc_len=radius*max_theta
+    if depth:
+     theta=min(max_theta,depth/radius);arc_depth=min(depth,arc_len);remain=max(0,depth-arc_len)
+     y_bend=radius*(1-math.cos(theta)) + remain*math.sin(max_theta)
+     z_bend=radius*math.sin(theta) + remain*math.cos(max_theta)
+     v=[v[0],v[1]+y_bend,750-z_bend]
    g['positions'].append(transform(v))
   g['normals'].extend(normal(n) for n in norms);g['indices'].extend(i+start for i in idx);g['sourceNames'].append(name)
   if kind=='anatomy':g['sourceMappings'].append(mapping[name])
