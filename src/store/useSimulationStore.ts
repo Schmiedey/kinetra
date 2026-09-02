@@ -27,7 +27,7 @@ interface SimulationStore {
   bonesVisible: boolean;
   muscleOpacity: number;
   selectedMuscle: MuscleId | null;
-  tab: 'Sandbox' | 'Compare' | 'Research';
+  tab: 'Movements' | 'Workout' | 'Sandbox' | 'Compare' | 'Research';
   slots: ComparisonSlot[];
   locks: (keyof BenchConfig)[];
   updateConfig: (patch: Partial<BenchConfig>) => void;
@@ -58,7 +58,7 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
   selectedMuscle: null,
   camera: '3D',
   jointsVisible: true,
-  tab: 'Sandbox',
+  tab: 'Movements',
   slots: [
     { name: 'A', config: { ...defaultConfig } },
     { name: 'B', config: { ...defaultConfig, benchAngleDeg: 30 } },

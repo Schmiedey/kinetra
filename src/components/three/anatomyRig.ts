@@ -44,7 +44,21 @@ export const sourceLandmarks = (side: 1 | -1) => ({
 const vector = (p: Vec3) => new Vector3(...p);
 // The source hand mesh's wrist landmark is proximal to the palm center. Keep
 // that registration distance when attaching it to the simulated bar target.
-export const handRootOffsetM = 0.06;
+export const gripCenter = new Vector3(0, 0.055, 0.03);
+export function gripMatrix(
+  hand: Vec3,
+  elbow: Vec3,
+  axis = new Vector3(1, 0, 0),
+) {
+  const y = vector(hand).sub(vector(elbow));
+  y.addScaledVector(axis, -y.dot(axis));
+  if (y.lengthSq() < 0.001) y.set(0, 1, 0);
+  y.normalize();
+  const z = new Vector3().crossVectors(axis, y).normalize();
+  const matrix = new Matrix4().makeBasis(axis, y, z);
+  const offset = gripCenter.clone().applyMatrix4(matrix);
+  return matrix.setPosition(vector(hand).sub(offset));
+}
 export function segmentMatrix(a: Vec3, b: Vec3, scale = 1) {
   const direction = vector(b).sub(vector(a)).normalize();
   return new Matrix4().compose(
@@ -59,12 +73,7 @@ export function bindMatrices(): Matrix4[] {
     const s = sourceLandmarks(name.startsWith('left') ? 1 : -1);
     if (name.endsWith('UpperArm')) return segmentMatrix(s.shoulder, s.elbow);
     if (name.endsWith('Forearm')) return segmentMatrix(s.elbow, s.wrist);
-    if (name.endsWith('Hand'))
-      return segmentMatrix(s.wrist, [
-        s.wrist[0] + s.wrist[0] - s.elbow[0],
-        s.wrist[1] + s.wrist[1] - s.elbow[1],
-        s.wrist[2] + s.wrist[2] - s.elbow[2],
-      ]);
+    if (name.endsWith('Hand')) return new Matrix4().makeTranslation(...s.wrist);
     if (name.endsWith('Thigh')) return segmentMatrix(s.hip, s.knee);
     if (name.endsWith('Shin')) return segmentMatrix(s.knee, s.ankle);
     return new Matrix4().makeTranslation(...s.ankle);
@@ -91,9 +100,9 @@ export function poseMatrices(
     const shoulder = positive ? j.rightShoulder : j.leftShoulder,
       elbow = positive ? j.rightElbow : j.leftElbow,
       hand = positive ? j.rightHand : j.leftHand;
-    const foreDirection = vector(hand).sub(vector(elbow)).normalize();
-    const wrist = vector(hand)
-      .addScaledVector(foreDirection, -handRootOffsetM)
+    const handPose = gripMatrix(hand, elbow);
+    const wrist = new Vector3()
+      .setFromMatrixPosition(handPose)
       .toArray() as Vec3;
     const hip = bodyToWorld(s.hip, config.benchAngleDeg),
       knee: Vec3 = [side * 0.195, 0.445, 0.83],
@@ -108,7 +117,7 @@ export function poseMatrices(
       return segment(shoulder, elbow, s.shoulder, s.elbow);
     if (name.endsWith('Forearm'))
       return segment(elbow, wrist, s.elbow, s.wrist);
-    if (name.endsWith('Hand')) return segmentMatrix(wrist, hand);
+    if (name.endsWith('Hand')) return handPose;
     if (name.endsWith('Thigh')) return segment(hip, knee, s.hip, s.knee);
     if (name.endsWith('Shin')) return segment(knee, ankle, s.knee, s.ankle);
     return new Matrix4().compose(

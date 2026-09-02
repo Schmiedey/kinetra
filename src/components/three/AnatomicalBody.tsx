@@ -35,6 +35,7 @@ import {
 interface Tissue {
   mesh: SkinnedMesh;
   id: MuscleId | null;
+  movementGroup: string | null;
   name: string;
 }
 export function buildAnatomy(source: Group) {
@@ -70,6 +71,20 @@ export function buildAnatomy(source: Group) {
         );
         indices.push(...skin.indices);
         weights.push(...skin.weights);
+      } else if (meta.type === 'muscle') {
+        const upper = meta.side === 'left' ? 1 : 7;
+        const thigh = meta.side === 'left' ? 4 : 10;
+        const group = meta.movementGroup;
+        const index = ['biceps', 'sideDelts', 'rearDelts'].includes(group)
+          ? upper
+          : ['quads', 'hamstrings'].includes(group)
+            ? thigh
+            : group === 'calves'
+              ? thigh + 1
+              : 0;
+        const blend = group === 'glutes' ? 0.35 : 0;
+        indices.push(index, thigh, 0, 0);
+        weights.push(1 - blend, blend, 0, 0);
       } else {
         const index = rigNames.indexOf(meta.rigId);
         if (index < 0)
@@ -103,7 +118,12 @@ export function buildAnatomy(source: Group) {
     mesh.userData = { ...meta };
     mesh.renderOrder = id ? 2 : 0;
     group.add(mesh);
-    tissues.push({ mesh, id, name: (meta.sourceNames as string[]).join('; ') });
+    tissues.push({
+      mesh,
+      id,
+      movementGroup: meta.movementGroup ?? null,
+      name: (meta.sourceNames as string[]).join('; '),
+    });
   });
   return { group, bones, skeleton, tissues };
 }
@@ -122,6 +142,10 @@ function updateAnatomy(
   rig.skeleton.update();
   for (const tissue of rig.tissues) {
     const material = tissue.mesh.material as MeshStandardMaterial;
+    if (!tissue.id && tissue.movementGroup) {
+      tissue.mesh.visible = false;
+      continue;
+    }
     if (!tissue.id) {
       tissue.mesh.visible = bonesVisible;
       continue;
@@ -146,7 +170,7 @@ export default function AnatomicalBody({
   frame: SimulationFrame;
   mode: VisualizationMode;
 }) {
-  const gltf = useGLTF('/models/liftlab-anatomy.glb?v=4');
+  const gltf = useGLTF('/models/liftlab-anatomy.glb?v=5');
   const rig = useMemo(() => buildAnatomy(gltf.scene), [gltf.scene]);
   const selected = useSimulationStore((s) => s.selectedMuscle),
     opacity = useSimulationStore((s) => s.muscleOpacity),
@@ -185,4 +209,4 @@ export default function AnatomicalBody({
   return <primitive object={rig.group} onClick={pick} dispose={null} />;
 }
 if (typeof window !== 'undefined')
-  useGLTF.preload('/models/liftlab-anatomy.glb?v=4');
+  useGLTF.preload('/models/liftlab-anatomy.glb?v=5');

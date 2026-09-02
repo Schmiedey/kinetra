@@ -9,6 +9,7 @@ import {
   sourceLandmarks,
   muscleAppearance,
   applyPose,
+  gripCenter,
 } from './anatomyRig';
 import { simulate } from '../../engine/simulate';
 import { defaultConfig } from '../../exercises/benchPress';
@@ -23,13 +24,16 @@ const gltf = await new GLTFLoader().parseAsync(
 );
 describe('sourced anatomical geometry and live rig', () => {
   it('ships the claimed sourced meshes with licensed provenance', () => {
-    expect(manifest.counts).toEqual({ bones: 200, muscles: 14 });
-    expect(manifest.groups).toHaveLength(21);
-    expect(manifest.license).toBe('CC BY-SA 2.1 Japan');
+    expect(manifest.counts).toEqual({ bones: 200, muscles: 62 });
+    expect(manifest.groups).toHaveLength(41);
+    expect(manifest.componentLicenses).toEqual({
+      bp3d: 'CC BY-SA 2.1 Japan',
+      'z-anatomy': 'CC BY-SA 4.0',
+    });
     for (const group of manifest.groups) {
       expect(group.sourceVertexCount).toBeGreaterThan(500);
       for (const mapping of group.sourceMappings)
-        expect(mapping.source).toBe('bp3d');
+        expect(['bp3d', 'z-anatomy']).toContain(mapping.source);
     }
   });
   it('binds real vertex geometry to normalized anatomical skin weights', () => {
@@ -72,6 +76,19 @@ describe('sourced anatomical geometry and live rig', () => {
             const elbow2 = new Vector3(...s.elbow)
               .applyMatrix4(inverse[f])
               .applyMatrix4(pose[f]);
+            const contact = new Vector3(...s.wrist)
+              .add(gripCenter)
+              .applyMatrix4(inverse[f + 1])
+              .applyMatrix4(pose[f + 1]);
+            expect(
+              contact.distanceTo(
+                new Vector3(
+                  ...(side === 1
+                    ? frame.joints.rightHand
+                    : frame.joints.leftHand),
+                ),
+              ),
+            ).toBeLessThan(1e-6);
             expect(
               shoulder.distanceTo(
                 new Vector3(

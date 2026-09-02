@@ -5,10 +5,10 @@
     "skeleton": "46e5ccc6f02e26727246aa78106dedb6f6d65da3",
     "anatomy": "a112885444785a9dd93c5753b46ac790e6e036b3"
   },
-  "license": "CC BY-SA 2.1 Japan",
+  "license": "Per-component: CC BY-SA 2.1 Japan (bp3d); CC BY-SA 4.0 (z-anatomy)",
   "counts": {
     "bones": 200,
-    "muscles": 14
+    "muscles": 62
   },
   "groups": [
     {
@@ -98,6 +98,7 @@
       "rigId": "torso",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 233670,
       "triangleCount": 427184
     },
@@ -138,6 +139,7 @@
       "rigId": "leftFoot",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 9240,
       "triangleCount": 15650
     },
@@ -176,6 +178,7 @@
       "rigId": "leftHand",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 5957,
       "triangleCount": 9922
     },
@@ -216,6 +219,7 @@
       "rigId": "rightFoot",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 9329,
       "triangleCount": 15160
     },
@@ -254,6 +258,7 @@
       "rigId": "rightHand",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 6055,
       "triangleCount": 9552
     },
@@ -268,6 +273,7 @@
       "rigId": "leftThigh",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 1803,
       "triangleCount": 3514
     },
@@ -282,6 +288,7 @@
       "rigId": "leftShin",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 1457,
       "triangleCount": 2816
     },
@@ -295,6 +302,7 @@
       "rigId": "leftUpperArm",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 2073,
       "triangleCount": 3844
     },
@@ -309,6 +317,7 @@
       "rigId": "leftForearm",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 864,
       "triangleCount": 1456
     },
@@ -323,6 +332,7 @@
       "rigId": "rightThigh",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 1752,
       "triangleCount": 3408
     },
@@ -337,6 +347,7 @@
       "rigId": "rightShin",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 1450,
       "triangleCount": 2806
     },
@@ -350,6 +361,7 @@
       "rigId": "rightUpperArm",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 2233,
       "triangleCount": 3784
     },
@@ -364,6 +376,7 @@
       "rigId": "rightForearm",
       "muscleId": null,
       "side": null,
+      "movementGroup": null,
       "sourceVertexCount": 888,
       "triangleCount": 1506
     },
@@ -395,6 +408,7 @@
       "rigId": null,
       "muscleId": "pecSternal",
       "side": "left",
+      "movementGroup": "chest",
       "sourceVertexCount": 3519,
       "triangleCount": 5536
     },
@@ -426,8 +440,137 @@
       "rigId": null,
       "muscleId": "pecSternal",
       "side": "right",
+      "movementGroup": "chest",
       "sourceVertexCount": 3517,
       "triangleCount": 5536
+    },
+    {
+      "name": "left_sideDelts",
+      "sourceNames": [
+        "acromial part of left deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "acromial part of left deltoid",
+          "originalName": "acromial part of left deltoid",
+          "fmaId": "FMA34683",
+          "bpId": "BP9075",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "sideDelts",
+      "sourceVertexCount": 918,
+      "triangleCount": 1300
+    },
+    {
+      "name": "right_sideDelts",
+      "sourceNames": [
+        "acromial part of right deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "acromial part of right deltoid",
+          "originalName": "acromial part of right deltoid",
+          "fmaId": "FMA34682",
+          "bpId": "BP7571",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "sideDelts",
+      "sourceVertexCount": 916,
+      "triangleCount": 1300
+    },
+    {
+      "name": "left_upperBack",
+      "sourceNames": [
+        "ascending part of left trapezius",
+        "descending part of left trapezius",
+        "transverse part of left trapezius"
+      ],
+      "sourceMappings": [
+        {
+          "name": "ascending part of left trapezius",
+          "originalName": "ascending part of left trapezius",
+          "fmaId": "FMA33583",
+          "bpId": "BP8225",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "descending part of left trapezius",
+          "originalName": "descending part of left trapezius",
+          "fmaId": "FMA33587",
+          "bpId": "BP8267",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "transverse part of left trapezius",
+          "originalName": "transverse part of left trapezius",
+          "fmaId": "FMA33585",
+          "bpId": "BP8252",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "upperBack",
+      "sourceVertexCount": 7207,
+      "triangleCount": 12000
+    },
+    {
+      "name": "right_upperBack",
+      "sourceNames": [
+        "ascending part of right trapezius",
+        "descending part of right trapezius",
+        "transverse part of right trapezius"
+      ],
+      "sourceMappings": [
+        {
+          "name": "ascending part of right trapezius",
+          "originalName": "ascending part of right trapezius",
+          "fmaId": "FMA33581",
+          "bpId": "BP5638",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "descending part of right trapezius",
+          "originalName": "descending part of right trapezius",
+          "fmaId": "FMA33586",
+          "bpId": "BP5636",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "transverse part of right trapezius",
+          "originalName": "transverse part of right trapezius",
+          "fmaId": "FMA33584",
+          "bpId": "BP5610",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "upperBack",
+      "sourceVertexCount": 7213,
+      "triangleCount": 11998
     },
     {
       "name": "left_anteriorDelt",
@@ -448,6 +591,7 @@
       "rigId": null,
       "muscleId": "anteriorDelt",
       "side": "left",
+      "movementGroup": "frontDelts",
       "sourceVertexCount": 2604,
       "triangleCount": 2206
     },
@@ -470,6 +614,7 @@
       "rigId": null,
       "muscleId": "pecClavicular",
       "side": "left",
+      "movementGroup": "chest",
       "sourceVertexCount": 1495,
       "triangleCount": 1846
     },
@@ -492,6 +637,7 @@
       "rigId": null,
       "muscleId": "anteriorDelt",
       "side": "right",
+      "movementGroup": "frontDelts",
       "sourceVertexCount": 2592,
       "triangleCount": 2206
     },
@@ -514,8 +660,50 @@
       "rigId": null,
       "muscleId": "pecClavicular",
       "side": "right",
+      "movementGroup": "chest",
       "sourceVertexCount": 1492,
       "triangleCount": 1846
+    },
+    {
+      "name": "left_calves",
+      "sourceNames": [
+        "lateral head of left gastrocnemius",
+        "left soleus",
+        "medial head of left gastrocnemius"
+      ],
+      "sourceMappings": [
+        {
+          "name": "lateral head of left gastrocnemius",
+          "originalName": "lateral head of left gastrocnemius",
+          "fmaId": "FMA45961",
+          "bpId": "BP7939",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left soleus",
+          "originalName": "left soleus",
+          "fmaId": "FMA22559",
+          "bpId": "BP8819",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "medial head of left gastrocnemius",
+          "originalName": "medial head of left gastrocnemius",
+          "fmaId": "FMA45958",
+          "bpId": "BP9217",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "calves",
+      "sourceVertexCount": 6126,
+      "triangleCount": 10894
     },
     {
       "name": "left_triceps",
@@ -554,8 +742,50 @@
       "rigId": null,
       "muscleId": "triceps",
       "side": "left",
+      "movementGroup": "triceps",
       "sourceVertexCount": 3402,
       "triangleCount": 5026
+    },
+    {
+      "name": "right_calves",
+      "sourceNames": [
+        "lateral head of right gastrocnemius",
+        "medial head of right gastrocnemius",
+        "right soleus"
+      ],
+      "sourceMappings": [
+        {
+          "name": "lateral head of right gastrocnemius",
+          "originalName": "lateral head of right gastrocnemius",
+          "fmaId": "FMA45960",
+          "bpId": "BP5541",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "medial head of right gastrocnemius",
+          "originalName": "medial head of right gastrocnemius",
+          "fmaId": "FMA45957",
+          "bpId": "BP5539",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right soleus",
+          "originalName": "right soleus",
+          "fmaId": "FMA22558",
+          "bpId": "BP4999",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "calves",
+      "sourceVertexCount": 6126,
+      "triangleCount": 10893
     },
     {
       "name": "right_triceps",
@@ -594,8 +824,511 @@
       "rigId": null,
       "muscleId": "triceps",
       "side": "right",
+      "movementGroup": "triceps",
       "sourceVertexCount": 3403,
       "triangleCount": 5026
+    },
+    {
+      "name": "left_core",
+      "sourceNames": [
+        "left external oblique",
+        "left rectus abdominis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left external oblique",
+          "originalName": "left external oblique",
+          "fmaId": "FMA13337",
+          "bpId": "BP8154",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left rectus abdominis",
+          "originalName": "left rectus abdominis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "core",
+      "sourceVertexCount": 5475,
+      "triangleCount": 8768
+    },
+    {
+      "name": "left_glutes",
+      "sourceNames": [
+        "left gluteus maximus",
+        "left gluteus medius",
+        "left gluteus minimus"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left gluteus maximus",
+          "originalName": "left gluteus maximus",
+          "fmaId": "FMA22329",
+          "bpId": "BP8401",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left gluteus medius",
+          "originalName": "left gluteus medius",
+          "fmaId": "FMA22331",
+          "bpId": "BP9213",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left gluteus minimus",
+          "originalName": "left gluteus minimus",
+          "fmaId": "FMA22333",
+          "bpId": "BP8623",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "glutes",
+      "sourceVertexCount": 6465,
+      "triangleCount": 9731
+    },
+    {
+      "name": "left_quads",
+      "sourceNames": [
+        "left rectus femoris",
+        "left vastus intermedius",
+        "left vastus lateralis",
+        "left vastus medialis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left rectus femoris",
+          "originalName": "left rectus femoris",
+          "fmaId": "FMA38929",
+          "bpId": "BP8094",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left vastus intermedius",
+          "originalName": "left vastus intermedius",
+          "fmaId": "FMA38935",
+          "bpId": "BP9207",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left vastus lateralis",
+          "originalName": "left vastus lateralis",
+          "fmaId": "FMA38931",
+          "bpId": "BP8754",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left vastus medialis",
+          "originalName": "left vastus medialis",
+          "fmaId": "FMA38933",
+          "bpId": "BP9128",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "quads",
+      "sourceVertexCount": 8604,
+      "triangleCount": 15999
+    },
+    {
+      "name": "left_hamstrings",
+      "sourceNames": [
+        "left semimembranosus",
+        "left semitendinosus",
+        "long head of left biceps femoris",
+        "short head of left biceps femoris"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left semimembranosus",
+          "originalName": "left semimembranosus",
+          "fmaId": "FMA22449",
+          "bpId": "BP7829",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left semitendinosus",
+          "originalName": "left semitendinosus",
+          "fmaId": "FMA22359",
+          "bpId": "BP9066",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "long head of left biceps femoris",
+          "originalName": "long head of left biceps femoris",
+          "fmaId": "FMA45889",
+          "bpId": "BP8331",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "short head of left biceps femoris",
+          "originalName": "short head of left biceps femoris",
+          "fmaId": "FMA45892",
+          "bpId": "BP8616",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "hamstrings",
+      "sourceVertexCount": 7203,
+      "triangleCount": 12439
+    },
+    {
+      "name": "left_biceps",
+      "sourceNames": [
+        "long head of left biceps brachii",
+        "short head of left biceps brachii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "long head of left biceps brachii",
+          "originalName": "long head of left biceps brachii",
+          "fmaId": "FMA37687",
+          "bpId": "BP8816",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "short head of left biceps brachii",
+          "originalName": "short head of left biceps brachii",
+          "fmaId": "FMA37685",
+          "bpId": "BP9153",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "biceps",
+      "sourceVertexCount": 2782,
+      "triangleCount": 3282
+    },
+    {
+      "name": "right_biceps",
+      "sourceNames": [
+        "long head of right biceps brachii",
+        "short head of right biceps brachii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "long head of right biceps brachii",
+          "originalName": "long head of right biceps brachii",
+          "fmaId": "FMA37686",
+          "bpId": "BP5566",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "short head of right biceps brachii",
+          "originalName": "short head of right biceps brachii",
+          "fmaId": "FMA37684",
+          "bpId": "BP5558",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "biceps",
+      "sourceVertexCount": 2792,
+      "triangleCount": 3282
+    },
+    {
+      "name": "right_hamstrings",
+      "sourceNames": [
+        "long head of right biceps femoris",
+        "right semimembranosus",
+        "right semitendinosus",
+        "short head of right biceps femoris"
+      ],
+      "sourceMappings": [
+        {
+          "name": "long head of right biceps femoris",
+          "originalName": "long head of right biceps femoris",
+          "fmaId": "FMA45888",
+          "bpId": "BP5575",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right semimembranosus",
+          "originalName": "right semimembranosus",
+          "fmaId": "FMA22448",
+          "bpId": "BP4989",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right semitendinosus",
+          "originalName": "right semitendinosus",
+          "fmaId": "FMA22358",
+          "bpId": "BP4991",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "short head of right biceps femoris",
+          "originalName": "short head of right biceps femoris",
+          "fmaId": "FMA45891",
+          "bpId": "BP5573",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "hamstrings",
+      "sourceVertexCount": 7201,
+      "triangleCount": 12439
+    },
+    {
+      "name": "right_core",
+      "sourceNames": [
+        "right external oblique",
+        "right rectus abdominis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right external oblique",
+          "originalName": "right external oblique",
+          "fmaId": "FMA13336",
+          "bpId": "BP4967",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right rectus abdominis",
+          "originalName": "right rectus abdominis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "core",
+      "sourceVertexCount": 5507,
+      "triangleCount": 8846
+    },
+    {
+      "name": "right_glutes",
+      "sourceNames": [
+        "right gluteus maximus",
+        "right gluteus medius",
+        "right gluteus minimus"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right gluteus maximus",
+          "originalName": "right gluteus maximus",
+          "fmaId": "FMA22328",
+          "bpId": "BP5065",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right gluteus medius",
+          "originalName": "right gluteus medius",
+          "fmaId": "FMA22330",
+          "bpId": "BP5063",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right gluteus minimus",
+          "originalName": "right gluteus minimus",
+          "fmaId": "FMA22332",
+          "bpId": "BP5083",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "glutes",
+      "sourceVertexCount": 6471,
+      "triangleCount": 9731
+    },
+    {
+      "name": "right_quads",
+      "sourceNames": [
+        "right rectus femoris",
+        "right vastus intermedius",
+        "right vastus lateralis",
+        "right vastus medialis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right rectus femoris",
+          "originalName": "right rectus femoris",
+          "fmaId": "FMA38928",
+          "bpId": "BP5598",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right vastus intermedius",
+          "originalName": "right vastus intermedius",
+          "fmaId": "FMA38934",
+          "bpId": "BP5604",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right vastus lateralis",
+          "originalName": "right vastus lateralis",
+          "fmaId": "FMA38930",
+          "bpId": "BP5602",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right vastus medialis",
+          "originalName": "right vastus medialis",
+          "fmaId": "FMA38932",
+          "bpId": "BP5600",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "quads",
+      "sourceVertexCount": 8602,
+      "triangleCount": 15996
+    },
+    {
+      "name": "left_rearDelts",
+      "sourceNames": [
+        "spinal part of left deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "spinal part of left deltoid",
+          "originalName": "spinal part of left deltoid",
+          "fmaId": "FMA34685",
+          "bpId": "BP8151",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "rearDelts",
+      "sourceVertexCount": 1678,
+      "triangleCount": 1900
+    },
+    {
+      "name": "right_rearDelts",
+      "sourceNames": [
+        "spinal part of right deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "spinal part of right deltoid",
+          "originalName": "spinal part of right deltoid",
+          "fmaId": "FMA34684",
+          "bpId": "BP5607",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "rearDelts",
+      "sourceVertexCount": 1665,
+      "triangleCount": 1900
+    },
+    {
+      "name": "left_lats",
+      "sourceNames": [
+        "left latissimus dorsi"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left latissimus dorsi",
+          "originalName": "left latissimus dorsi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "lats",
+      "sourceVertexCount": 2006,
+      "triangleCount": 4000
+    },
+    {
+      "name": "right_lats",
+      "sourceNames": [
+        "right latissimus dorsi"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right latissimus dorsi",
+          "originalName": "right latissimus dorsi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "lats",
+      "sourceVertexCount": 2006,
+      "triangleCount": 4000
     }
   ],
   "transformation": {
@@ -614,6 +1347,412 @@
       0.145,
       -0.52
     ],
-    "notes": "Nonuniform fit to generic engine proportions; rigid bone groups, modeled soft tissue skinning; fixed curled grip; duplicate hyoid removed."
+    "notes": "Nonuniform body fit to generic proportions; rigid per-phalanx finger poses without vertex warping; canonical closed grip; rigid bone groups and modeled soft tissue skinning; duplicate hyoid removed."
+  },
+  "componentLicenses": {
+    "bp3d": "CC BY-SA 2.1 Japan",
+    "z-anatomy": "CC BY-SA 4.0"
+  },
+  "handGrip": {
+    "center": [
+      0,
+      0.055,
+      0.03
+    ],
+    "method": "Rigid per-phalanx joint rotations; opposed thumbs; canonical grip frame aligned to the handle axis",
+    "joints": [
+      {
+        "name": "proximal phalanx of left index finger",
+        "start": [
+          -0.035927632500143615,
+          0.08487709045410156,
+          0.021799985997817097
+        ],
+        "end": [
+          -0.035927632500143615,
+          0.07249539857175073,
+          0.055053672767559333
+        ],
+        "lengthM": 0.035483996077803906
+      },
+      {
+        "name": "middle phalanx of left index finger",
+        "start": [
+          -0.035927632500143615,
+          0.07249539857175073,
+          0.055053672767559333
+        ],
+        "end": [
+          -0.035927632500143615,
+          0.0514865689947191,
+          0.04892609747425844
+        ],
+        "lengthM": 0.021884197476074615
+      },
+      {
+        "name": "distal phalanx of left index finger",
+        "start": [
+          -0.035927632500143615,
+          0.0514865689947191,
+          0.04892609747425844
+        ],
+        "end": [
+          -0.035927632500143615,
+          0.04746134380402217,
+          0.03265747899519167
+        ],
+        "lengthM": 0.01675918807858107
+      },
+      {
+        "name": "proximal phalanx of left middle finger",
+        "start": [
+          -0.013539091812936884,
+          0.08359264413934005,
+          0.022658500069066098
+        ],
+        "end": [
+          -0.013539091812936884,
+          0.06967782335496026,
+          0.060029733032828964
+        ],
+        "lengthM": 0.039877704180321674
+      },
+      {
+        "name": "middle phalanx of left middle finger",
+        "start": [
+          -0.013539091812936884,
+          0.06967782335496026,
+          0.060029733032828964
+        ],
+        "end": [
+          -0.013539091812936884,
+          0.04396020508159176,
+          0.05252876103642982
+        ],
+        "lengthM": 0.02678918570142551
+      },
+      {
+        "name": "distal phalanx of left middle finger",
+        "start": [
+          -0.013539091812936884,
+          0.04396020508159176,
+          0.05252876103642982
+        ],
+        "end": [
+          -0.013539091812936884,
+          0.04015346477669368,
+          0.03714318563746673
+        ],
+        "lengthM": 0.01584951740924984
+      },
+      {
+        "name": "proximal phalanx of left ring finger",
+        "start": [
+          0.005544114685058594,
+          0.07938595581054689,
+          0.023446342904227122
+        ],
+        "end": [
+          0.005544114685058594,
+          0.06640347506427909,
+          0.058313576908489234
+        ],
+        "lengthM": 0.03720576317501345
+      },
+      {
+        "name": "middle phalanx of left ring finger",
+        "start": [
+          0.005544114685058594,
+          0.06640347506427909,
+          0.058313576908489234
+        ],
+        "end": [
+          0.005544114685058594,
+          0.04151316584270459,
+          0.05105390338553001
+        ],
+        "lengthM": 0.0259274054391401
+      },
+      {
+        "name": "distal phalanx of left ring finger",
+        "start": [
+          0.005544114685058594,
+          0.04151316584270459,
+          0.05105390338553001
+        ],
+        "end": [
+          0.005544114685058594,
+          0.03827059531464937,
+          0.03794851416797347
+        ],
+        "lengthM": 0.013500573697923339
+      },
+      {
+        "name": "proximal phalanx of left little finger",
+        "start": [
+          0.02292513076118801,
+          0.0716730028235394,
+          0.02541793425186821
+        ],
+        "end": [
+          0.02292513076118801,
+          0.060815465939809556,
+          0.05457817616817123
+        ],
+        "lengthM": 0.03111600578157277
+      },
+      {
+        "name": "middle phalanx of left little finger",
+        "start": [
+          0.02292513076118801,
+          0.060815465939809556,
+          0.05457817616817123
+        ],
+        "end": [
+          0.02292513076118801,
+          0.041993011646939846,
+          0.049088293666084235
+        ],
+        "lengthM": 0.01960672322173928
+      },
+      {
+        "name": "distal phalanx of left little finger",
+        "start": [
+          0.02292513076118801,
+          0.041993011646939846,
+          0.049088293666084235
+        ],
+        "end": [
+          0.02292513076118801,
+          0.03860802584553674,
+          0.03540730938541336
+        ],
+        "lengthM": 0.014093525455458764
+      },
+      {
+        "name": "proximal phalanx of left thumb",
+        "start": [
+          -0.05405913221571181,
+          0.040208486599392364,
+          0.03285584411621094
+        ],
+        "end": [
+          -0.0296995283345123,
+          0.051281033818119416,
+          0.03977618612791535
+        ],
+        "lengthM": 0.02763842862246064
+      },
+      {
+        "name": "distal phalanx of left thumb",
+        "start": [
+          -0.0296995283345123,
+          0.051281033818119416,
+          0.03977618612791535
+        ],
+        "end": [
+          -0.011165069987838342,
+          0.0458931098801328,
+          0.030293439997058906
+        ],
+        "lengthM": 0.021505309687339866
+      },
+      {
+        "name": "proximal phalanx of right index finger",
+        "start": [
+          0.036469191459760276,
+          0.08468282203151756,
+          0.0214839166092546
+        ],
+        "end": [
+          0.036469191459760276,
+          0.07225737887537512,
+          0.054855106800037176
+        ],
+        "lengthM": 0.03560938039865213
+      },
+      {
+        "name": "middle phalanx of right index finger",
+        "start": [
+          0.036469191459760276,
+          0.07225737887537512,
+          0.054855106800037176
+        ],
+        "end": [
+          0.036469191459760276,
+          0.0512882656334,
+          0.04873911543779443
+        ],
+        "lengthM": 0.021842826293724082
+      },
+      {
+        "name": "distal phalanx of right index finger",
+        "start": [
+          0.036469191459760276,
+          0.0512882656334,
+          0.04873911543779443
+        ],
+        "end": [
+          0.036469191459760276,
+          0.04709604516566527,
+          0.03179555771403324
+        ],
+        "lengthM": 0.017454479676819974
+      },
+      {
+        "name": "proximal phalanx of right middle finger",
+        "start": [
+          0.013853534605444931,
+          0.08360552308617569,
+          0.02330881835193169
+        ],
+        "end": [
+          0.013853534605444931,
+          0.06976480148317613,
+          0.06048104208570197
+        ],
+        "lengthM": 0.039665347493816484
+      },
+      {
+        "name": "middle phalanx of right middle finger",
+        "start": [
+          0.013853534605444931,
+          0.06976480148317613,
+          0.06048104208570197
+        ],
+        "end": [
+          0.013853534605444931,
+          0.044511482415590914,
+          0.053115490690989614
+        ],
+        "lengthM": 0.026305540695401267
+      },
+      {
+        "name": "distal phalanx of right middle finger",
+        "start": [
+          0.013853534605444931,
+          0.044511482415590914,
+          0.053115490690989614
+        ],
+        "end": [
+          0.013853534605444931,
+          0.040658509969783485,
+          0.03754306038918458
+        ],
+        "lengthM": 0.016042006800046152
+      },
+      {
+        "name": "proximal phalanx of right ring finger",
+        "start": [
+          -0.005676515018238741,
+          0.07871194278492646,
+          0.023867485270780673
+        ],
+        "end": [
+          -0.005676515018238741,
+          0.06566424582327282,
+          0.05890987139636476
+        ],
+        "lengthM": 0.03739266266766349
+      },
+      {
+        "name": "middle phalanx of right ring finger",
+        "start": [
+          -0.005676515018238741,
+          0.06566424582327282,
+          0.05890987139636476
+        ],
+        "end": [
+          -0.005676515018238741,
+          0.04070293926559153,
+          0.05162949031704105
+        ],
+        "lengthM": 0.026001360997584683
+      },
+      {
+        "name": "distal phalanx of right ring finger",
+        "start": [
+          -0.005676515018238741,
+          0.04070293926559153,
+          0.05162949031704105
+        ],
+        "end": [
+          -0.005676515018238741,
+          0.037411863866990726,
+          0.03832806058102948
+        ],
+        "lengthM": 0.013702525690591804
+      },
+      {
+        "name": "proximal phalanx of right little finger",
+        "start": [
+          -0.023316966501871747,
+          0.07155501708984376,
+          0.026041283416748048
+        ],
+        "end": [
+          -0.023316966501871747,
+          0.06074152107209006,
+          0.05508324415014367
+        ],
+        "lengthM": 0.03098979153473073
+      },
+      {
+        "name": "middle phalanx of right little finger",
+        "start": [
+          -0.023316966501871747,
+          0.06074152107209006,
+          0.05508324415014367
+        ],
+        "end": [
+          -0.023316966501871747,
+          0.04186924328402938,
+          0.049578829795292635
+        ],
+        "lengthM": 0.01965862269589655
+      },
+      {
+        "name": "distal phalanx of right little finger",
+        "start": [
+          -0.023316966501871747,
+          0.04186924328402938,
+          0.049578829795292635
+        ],
+        "end": [
+          -0.023316966501871747,
+          0.03858377958901495,
+          0.03630008069460931
+        ],
+        "lengthM": 0.013679161135470116
+      },
+      {
+        "name": "proximal phalanx of right thumb",
+        "start": [
+          0.05360238786177202,
+          0.04018234114213423,
+          0.03304715971513228
+        ],
+        "end": [
+          0.02896328287634306,
+          0.051381934317329216,
+          0.04004690544962915
+        ],
+        "lengthM": 0.02795555082842174
+      },
+      {
+        "name": "distal phalanx of right thumb",
+        "start": [
+          0.02896328287634306,
+          0.051381934317329216,
+          0.04004690544962915
+        ],
+        "end": [
+          0.010273472625825304,
+          0.0459488499421787,
+          0.03048467694936425
+        ],
+        "lengthM": 0.021685562637827536
+      }
+    ]
   }
 }

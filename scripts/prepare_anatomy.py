@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extract/merge BodyParts3D anatomical meshes from the pinned BodyExplorer GLBs.
 No external Python packages. Re-run with the three upstream files in the input directory.
-Derived assets retain CC BY-SA 2.1 Japan. See public/models/ATTRIBUTION.md.
+Component licenses are retained. See public/models/ATTRIBUTION.md.
 """
 import json, struct, pathlib, math, sys, hashlib
 from collections import defaultdict
@@ -40,43 +40,83 @@ def muscle_id(name):
  if 'clavicular part' in name and 'deltoid' in name:return 'anteriorDelt'
  if 'triceps brachii' in name:return 'triceps'
  return None
+def movement_id(name):
+ mid=muscle_id(name)
+ if mid:return {'pecClavicular':'chest','pecSternal':'chest','anteriorDelt':'frontDelts','triceps':'triceps'}[mid]
+ for text,group in [('acromial part','sideDelts'),('spinal part','rearDelts'),('trapezius','upperBack'),('latissimus','lats'),('biceps brachii','biceps'),('gluteus','glutes'),('vastus','quads'),('rectus femoris','quads'),('biceps femoris','hamstrings'),('semitendinosus','hamstrings'),('semimembranosus','hamstrings'),('gastrocnemius','calves'),('soleus','calves'),('rectus abdominis','core'),('external oblique','core')]:
+  if text in name:return group
+ return None
+def add(a,b):return [a[i]+b[i] for i in range(3)]
+def sub(a,b):return [a[i]-b[i] for i in range(3)]
+def mul(a,k):return [x*k for x in a]
+def dot(a,b):return sum(a[i]*b[i] for i in range(3))
+def cross(a,b):return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]
+def unit(a):return mul(a,1/(math.sqrt(dot(a,a)) or 1))
+def mean(rows):return [sum(p[i] for p in rows)/len(rows) for i in range(3)]
+def hand_local(p,side):return [-(p[0]-side*253)*.001,(805-p[2])*.001,-(p[1]+118)*.001]
+def endpoints(pos):
+ low=min(p[1] for p in pos);high=max(p[1] for p in pos);band=(high-low)*.16
+ return mean([p for p in pos if p[1]<=low+band]),mean([p for p in pos if p[1]>=high-band])
+def rigid_bone(pos,start,end,target,direction):
+ # Rodrigues rotation preserves the surface and all distances within a phalanx.
+ a=unit(sub(end,start));b=unit(direction);v=cross(a,b);c=dot(a,b)
+ def rotate(p):
+  q=sub(p,start);return add(target,add(add(mul(q,c),cross(v,q)),mul(v,dot(v,q)/(1+c))))
+ return [rotate(p) for p in pos]
+def make_grips(d,b):
+ result={};landmarks=[]
+ for side,label in [(1,'left'),(-1,'right')]:
+  wrist=transform([side*253,-118,805])
+  for finger in ['index finger','middle finger','ring finger','little finger','thumb']:
+   target=None
+   for j,part in enumerate(['proximal','middle','distal'] if finger!='thumb' else ['proximal','distal']):
+    name=f'{part} phalanx of {label} {finger}'
+    mesh=next(m for m in d['meshes'] if m['name']==name)
+    local=[hand_local(p,side) for p in accessor(d,b,mesh['primitives'][0]['attributes']['POSITION'])]
+    start,end=endpoints(local)
+    if target is None:target=start
+    direction=([side*.88,.4,.25] if j==0 else [side*.86,-.25,-.44]) if finger=='thumb' else [[0,-.35,.94],[0,-.96,-.28],[0,-.24,-.97]][j]
+    posed=rigid_bone(local,start,end,target,direction)
+    result[name]=[add(p,wrist) for p in posed]
+    length=math.sqrt(dot(sub(end,start),sub(end,start)))
+    next_target=add(target,mul(unit(direction),length))
+    landmarks.append({'name':name,'start':target,'end':next_target,'lengthM':length})
+    target=next_target
+ return result,landmarks
 mapping={m['name']:m for m in json.loads((INPUT/'mesh_mapping.json').read_text())}
 groups=defaultdict(lambda:{'positions':[],'normals':[],'indices':[],'sourceNames':[],'sourceMappings':[]})
 counts={'bones':0,'muscles':0}
 for kind in ['skeleton','anatomy']:
  d,b=read_glb(kind)
+ if kind=='skeleton':grips,grip_landmarks=make_grips(d,b)
  for m in d['meshes']:
-  name=m['name'];mid=muscle_id(name) if kind=='anatomy' else None
-  if kind=='anatomy' and not mid:continue
+  name=m['name'];mid=muscle_id(name) if kind=='anatomy' else None;mgid=movement_id(name) if kind=='anatomy' else None
+  if kind=='anatomy' and not mgid:continue
   if name=='hyoid bone (2)':continue # duplicate identical source structure
-  if kind=='anatomy':assert mapping[name]['source']=='bp3d','Review license for new source'
+  if kind=='anatomy':assert mapping[name]['source'] in ['bp3d','z-anatomy'],'Review license for new source'
   side='left' if 'left' in name else 'right'
-  key=bone_group(name) if kind=='skeleton' else side+'_'+mid
+  key=bone_group(name) if kind=='skeleton' else side+'_'+(mid or mgid)
   g=groups[key];g['type']='bone' if kind=='skeleton' else 'muscle';g['rigId']=key if kind=='skeleton' else None;g['muscleId']=mid;g['side']=side if kind=='anatomy' else None
+  g['movementGroup']=mgid
   p=m['primitives'][0];pos=accessor(d,b,p['attributes']['POSITION']);norms=accessor(d,b,p['attributes']['NORMAL']);idx=accessor(d,b,p['indices']);start=len(g['positions'])
-  for v in pos:
-   # Curl finger surfaces into a fixed grip pose before skinning. Keep the
-   # distal phalanges spaced along a continuous arc instead of collapsing
-   # them to one z plane (which produces visibly broken hands).
-   if kind=='skeleton' and key.endswith('Hand') and ('finger' in name or 'thumb' in name):
-    depth=max(0,750-v[2]);radius=35.0;max_theta=1.2;arc_len=radius*max_theta
-    if depth:
-     theta=min(max_theta,depth/radius);arc_depth=min(depth,arc_len);remain=max(0,depth-arc_len)
-     y_bend=radius*(1-math.cos(theta)) + remain*math.sin(max_theta)
-     z_bend=radius*math.sin(theta) + remain*math.cos(max_theta)
-     v=[v[0],v[1]+y_bend,750-z_bend]
-   g['positions'].append(transform(v))
+  if name in grips:g['positions'].extend(grips[name])
+  elif kind=='skeleton' and key.endswith('Hand'):
+   wrist=transform([(1 if side=='left' else -1)*253,-118,805])
+   g['positions'].extend(add(wrist,hand_local(v,1 if side=='left' else -1)) for v in pos)
+  else:g['positions'].extend(transform(v) for v in pos)
   g['normals'].extend(normal(n) for n in norms);g['indices'].extend(i+start for i in idx);g['sourceNames'].append(name)
   if kind=='anatomy':g['sourceMappings'].append(mapping[name])
   counts['bones' if kind=='skeleton' else 'muscles']+=1
-out={'asset':{'version':'2.0','generator':'LiftLab anatomical extraction; BodyParts3D via BodyExplorer','copyright':'BodyParts3D © The Database Center for Life Science. CC BY-SA 2.1 Japan.'},'scene':0,'scenes':[{'nodes':[]}],'nodes':[],'meshes':[],'accessors':[],'bufferViews':[],'buffers':[{'byteLength':0}]}
+out={'asset':{'version':'2.0','generator':'LiftLab anatomical extraction; BodyParts3D and Z-Anatomy via BodyExplorer','copyright':'BodyParts3D © The Database Center for Life Science, CC BY-SA 2.1 Japan. Z-Anatomy supplementary muscles, CC BY-SA 4.0. See ATTRIBUTION.md and manifest component licenses.'},'scene':0,'scenes':[{'nodes':[]}],'nodes':[],'meshes':[],'accessors':[],'bufferViews':[],'buffers':[{'byteLength':0}]}
 binary=bytearray()
 def emit(values,fmt,size,typ,target):
  while len(binary)%4:binary.append(0)
  offset=len(binary);flat=[x for v in values for x in v] if size>1 else values;binary.extend(struct.pack('<'+fmt*len(flat),*flat));view=len(out['bufferViews']);out['bufferViews'].append({'buffer':0,'byteOffset':offset,'byteLength':len(binary)-offset,'target':target});acc={'bufferView':view,'componentType':5126 if fmt=='f' else 5125,'count':len(values),'type':typ}
  if typ=='VEC3':acc['min']=[min(v[i] for v in values) for i in range(3)];acc['max']=[max(v[i] for v in values) for i in range(3)]
  index=len(out['accessors']);out['accessors'].append(acc);return index
-manifest={'sourceRepository':'https://github.com/JohanBellander/BodyExplorer','commit':'7d04bf3c4de2bd9cb234dd51d7e6857c099afafd','upstreamBlobSha1':EXPECTED,'license':'CC BY-SA 2.1 Japan','counts':counts,'groups':[],'transformation':{'scale':SCALE,'sourceShoulderMm':[160,-75,1310],'targetShoulderM':[.21,.145,-.52],'notes':'Nonuniform fit to generic engine proportions; rigid bone groups, modeled soft tissue skinning; fixed curled grip; duplicate hyoid removed.'}}
+manifest={'sourceRepository':'https://github.com/JohanBellander/BodyExplorer','commit':'7d04bf3c4de2bd9cb234dd51d7e6857c099afafd','upstreamBlobSha1':EXPECTED,'license':'Per-component: CC BY-SA 2.1 Japan (bp3d); CC BY-SA 4.0 (z-anatomy)','counts':counts,'groups':[],'transformation':{'scale':SCALE,'sourceShoulderMm':[160,-75,1310],'targetShoulderM':[.21,.145,-.52],'notes':'Nonuniform body fit to generic proportions; rigid per-phalanx finger poses without vertex warping; canonical closed grip; rigid bone groups and modeled soft tissue skinning; duplicate hyoid removed.'}}
+manifest['componentLicenses']={'bp3d':'CC BY-SA 2.1 Japan','z-anatomy':'CC BY-SA 4.0'}
+manifest['handGrip']={'center':[0,.055,.030],'method':'Rigid per-phalanx joint rotations; opposed thumbs; canonical grip frame aligned to the handle axis','joints':grip_landmarks}
 for key,g in groups.items():
  attrs={'POSITION':emit(g['positions'],'f',3,'VEC3',34962),'NORMAL':emit(g['normals'],'f',3,'VEC3',34962)};indices=emit(g['indices'],'I',1,'SCALAR',34963)
  meta={k:v for k,v in g.items() if k not in ['positions','normals','indices']};meta['sourceVertexCount']=len(g['positions']);meta['triangleCount']=len(g['indices'])//3

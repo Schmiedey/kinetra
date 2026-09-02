@@ -7,8 +7,12 @@ import Methodology, { Research } from './components/Methodology';
 import ExplainChanges from './components/ExplainChanges';
 import { AnimationClock } from './components/Transport';
 import { registerLiftLabTools } from './lib/webmcp';
+import { useLibrary, exportLibrary } from './movements/useLibrary';
+const MovementLibrary = lazy(() => import('./movements/MovementLibrary'));
+const Workout = lazy(() => import('./movements/Workout'));
 const Compare = lazy(() => import('./components/Compare'));
 export default function App() {
+  const library = useLibrary();
   const tab = useSimulationStore((s) => s.tab),
     setTab = useSimulationStore((s) => s.setTab),
     saveToSlot = useSimulationStore((s) => s.saveToSlot);
@@ -45,14 +49,20 @@ export default function App() {
     <div className="app">
       <AnimationClock />
       <header className="topbar">
-        <a className="brand" href="#sandbox" onClick={() => setTab('Sandbox')}>
+        <a
+          className="brand"
+          href="#movements"
+          onClick={() => setTab('Movements')}
+        >
           <Activity />
           <b>
             LiftLab<span>®</span>
           </b>
         </a>
         <nav aria-label="Main navigation">
-          {(['Sandbox', 'Compare', 'Research'] as const).map((t) => (
+          {(
+            ['Movements', 'Workout', 'Sandbox', 'Compare', 'Research'] as const
+          ).map((t) => (
             <button
               key={t}
               className={tab === t ? 'active' : ''}
@@ -62,13 +72,13 @@ export default function App() {
               }}
               aria-current={tab === t ? 'page' : undefined}
             >
-              {t}
+              {t === 'Sandbox' ? 'Bench lab' : t}
             </button>
           ))}
         </nav>
         <div className="topbar-end">
           <span className="version">
-            BENCH LAB <i /> v0.1
+            MOVEMENT LAB <i /> v0.2
           </span>
           <Button
             variant="ghost"
@@ -80,6 +90,33 @@ export default function App() {
           </Button>
         </div>
       </header>
+      {(tab === 'Movements' || tab === 'Workout') && (
+        <output className="library-save-status">
+          <span className={library.error ? 'save-error' : ''}>
+            {library.error || library.status}
+          </span>
+          {library.error && (
+            <>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() =>
+                  library.ready ? library.retry() : window.location.reload()
+                }
+              >
+                Retry
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => exportLibrary(library.data)}
+              >
+                Export current changes
+              </Button>
+            </>
+          )}
+        </output>
+      )}
       {tab === 'Sandbox' && (
         <div className="workspace-title">
           <div>
@@ -126,7 +163,19 @@ export default function App() {
           </div>
         </div>
       )}
-      {tab === 'Sandbox' ? (
+      {tab === 'Movements' || tab === 'Workout' ? (
+        <Suspense
+          fallback={
+            <div className="page-loading">Opening your movement workspace…</div>
+          }
+        >
+          {tab === 'Movements' ? (
+            <MovementLibrary library={library} />
+          ) : (
+            <Workout library={library} />
+          )}
+        </Suspense>
+      ) : tab === 'Sandbox' ? (
         <Sandbox
           onMethodology={() => setMethodology(true)}
           onExplain={() => setExplain(true)}
@@ -141,7 +190,7 @@ export default function App() {
         <Research />
       )}
       <footer className="page-footer">
-        <span>LIFTLAB / BENCH PRESS V0.1</span>
+        <span>LIFTLAB / MOVEMENT LAB V0.2</span>
         <span>
           Calculated mechanics. Modeled muscle behavior.{' '}
           <button onClick={() => setMethodology(true)}>

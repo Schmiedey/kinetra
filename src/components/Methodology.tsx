@@ -80,7 +80,8 @@ export function MethodologyContent() {
       <h3>04 / Anatomical geometry</h3>
       <p>
         The skeleton uses 200 unique BodyParts3D bone meshes, sourced through
-        the open BodyExplorer GitHub repository. Fourteen muscle meshes provide
+        the open BodyExplorer GitHub repository. The movement library includes
+        62 muscle meshes from BodyParts3D and Z-Anatomy. Fourteen press meshes provide
         the actual bilateral pec subdivisions, anterior deltoid and triceps
         heads. The atlas is fitted to the generic engine proportions and posed
         using rigid bone transforms and blended soft-tissue deformation. Shape
@@ -111,6 +112,7 @@ export function MethodologyContent() {
         </a>
       </p>
       <h3>05 / Scope & limits</h3>
+      <p>The movement library uses simplified pattern illustrations and assigned primary/supporting muscle roles. Its highlights are not EMG measurements or calculated activation. Custom movements inherit their chosen pattern; they do not create a new validated biomechanics model. The formulas above apply only to the detailed Bench lab.</p>
       <p>
         Reps record the set context; they do not multiply the score. This
         version does not model fatigue, set duration, session or weekly volume,
