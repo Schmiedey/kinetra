@@ -42,6 +42,9 @@ export const sourceLandmarks = (side: 1 | -1) => ({
   ankle: fit(side * 75, -80, 0),
 });
 const vector = (p: Vec3) => new Vector3(...p);
+// The source hand mesh's wrist landmark is proximal to the palm center. Keep
+// that registration distance when attaching it to the simulated bar target.
+export const handRootOffsetM = 0.06;
 export function segmentMatrix(a: Vec3, b: Vec3, scale = 1) {
   const direction = vector(b).sub(vector(a)).normalize();
   return new Matrix4().compose(
@@ -90,7 +93,7 @@ export function poseMatrices(
       hand = positive ? j.rightHand : j.leftHand;
     const foreDirection = vector(hand).sub(vector(elbow)).normalize();
     const wrist = vector(hand)
-      .addScaledVector(foreDirection, -0.035)
+      .addScaledVector(foreDirection, -handRootOffsetM)
       .toArray() as Vec3;
     const hip = bodyToWorld(s.hip, config.benchAngleDeg),
       knee: Vec3 = [side * 0.195, 0.445, 0.83],

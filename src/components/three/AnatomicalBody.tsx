@@ -146,7 +146,7 @@ export default function AnatomicalBody({
   frame: SimulationFrame;
   mode: VisualizationMode;
 }) {
-  const gltf = useGLTF('/models/liftlab-anatomy.glb');
+  const gltf = useGLTF('/models/liftlab-anatomy.glb?v=4');
   const rig = useMemo(() => buildAnatomy(gltf.scene), [gltf.scene]);
   const selected = useSimulationStore((s) => s.selectedMuscle),
     opacity = useSimulationStore((s) => s.muscleOpacity),
@@ -185,4 +185,4 @@ export default function AnatomicalBody({
   return <primitive object={rig.group} onClick={pick} dispose={null} />;
 }
 if (typeof window !== 'undefined')
-  useGLTF.preload('/models/liftlab-anatomy.glb');
+  useGLTF.preload('/models/liftlab-anatomy.glb?v=4');
