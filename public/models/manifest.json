@@ -1,0 +1,619 @@
+{
+  "sourceRepository": "https://github.com/JohanBellander/BodyExplorer",
+  "commit": "7d04bf3c4de2bd9cb234dd51d7e6857c099afafd",
+  "upstreamBlobSha1": {
+    "skeleton": "46e5ccc6f02e26727246aa78106dedb6f6d65da3",
+    "anatomy": "a112885444785a9dd93c5753b46ac790e6e036b3"
+  },
+  "license": "CC BY-SA 2.1 Japan",
+  "counts": {
+    "bones": 200,
+    "muscles": 14
+  },
+  "groups": [
+    {
+      "name": "torso",
+      "sourceNames": [
+        "atlas",
+        "axis",
+        "body of sternum",
+        "eighth thoracic vertebra",
+        "eleventh thoracic vertebra",
+        "ethmoid",
+        "fifth cervical vertebra",
+        "fifth lumbar vertebra",
+        "fifth thoracic vertebra",
+        "first lumbar vertebra",
+        "first thoracic vertebra",
+        "fourth cervical vertebra",
+        "fourth lumbar vertebra",
+        "fourth thoracic vertebra",
+        "frontal bone",
+        "hyoid bone",
+        "left clavicle",
+        "left eighth rib",
+        "left eleventh rib",
+        "left fifth rib",
+        "left first rib",
+        "left fourth rib",
+        "left hip bone",
+        "left lacrimal bone",
+        "left maxilla",
+        "left nasal bone",
+        "left ninth rib",
+        "left palatine bone",
+        "left parietal bone",
+        "left scapula",
+        "left second rib",
+        "left seventh rib",
+        "left sixth rib",
+        "left temporal bone",
+        "left tenth rib",
+        "left third rib",
+        "left twelfth rib",
+        "left zygomatic bone",
+        "mandible",
+        "manubrium",
+        "ninth thoracic vertebra",
+        "occipital bone",
+        "right clavicle",
+        "right eighth rib",
+        "right eleventh rib",
+        "right fifth rib",
+        "right first rib",
+        "right fourth rib",
+        "right hip bone",
+        "right lacrimal bone",
+        "right maxilla",
+        "right nasal bone",
+        "right ninth rib",
+        "right palatine bone",
+        "right parietal bone",
+        "right scapula",
+        "right second rib",
+        "right seventh rib",
+        "right sixth rib",
+        "right temporal bone",
+        "right tenth rib",
+        "right third rib",
+        "right twelfth rib",
+        "right zygomatic bone",
+        "second lumbar vertebra",
+        "second thoracic vertebra",
+        "seventh cervical vertebra",
+        "seventh thoracic vertebra",
+        "sixth cervical vertebra",
+        "sixth thoracic vertebra",
+        "sphenoid bone",
+        "tenth thoracic vertebra",
+        "third cervical vertebra",
+        "third lumbar vertebra",
+        "third thoracic vertebra",
+        "twelfth thoracic vertebra",
+        "vomer",
+        "xiphoid process"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "torso",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 233670,
+      "triangleCount": 427184
+    },
+    {
+      "name": "leftFoot",
+      "sourceNames": [
+        "distal phalanx of left big toe",
+        "distal phalanx of left fourth toe",
+        "distal phalanx of left little toe",
+        "distal phalanx of left second toe",
+        "distal phalanx of left third toe",
+        "left calcaneus",
+        "left cuboid bone",
+        "left fifth metatarsal bone",
+        "left first metatarsal bone",
+        "left fourth metatarsal bone",
+        "left intermediate cuneiform bone",
+        "left lateral cuneiform bone",
+        "left medial cuneiform bone",
+        "left second metatarsal bone",
+        "left talus",
+        "left third metatarsal bone",
+        "middle phalanx of left fourth toe",
+        "middle phalanx of left little toe",
+        "middle phalanx of left second toe",
+        "middle phalanx of left third toe",
+        "navicular bone of left foot",
+        "proximal phalanx of left big toe",
+        "proximal phalanx of left fourth toe",
+        "proximal phalanx of left little toe",
+        "proximal phalanx of left second toe",
+        "proximal phalanx of left third toe",
+        "sesamoid bone of left foot",
+        "sesamoid bone of left foot (2)"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "leftFoot",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 9240,
+      "triangleCount": 15650
+    },
+    {
+      "name": "leftHand",
+      "sourceNames": [
+        "distal phalanx of left index finger",
+        "distal phalanx of left little finger",
+        "distal phalanx of left middle finger",
+        "distal phalanx of left ring finger",
+        "distal phalanx of left thumb",
+        "left capitate",
+        "left fifth metacarpal bone",
+        "left first metacarpal bone",
+        "left fourth metacarpal bone",
+        "left hamate",
+        "left lunate",
+        "left pisiform",
+        "left scaphoid",
+        "left second metacarpal bone",
+        "left third metacarpal bone",
+        "left trapezium",
+        "left trapezoid",
+        "middle phalanx of left index finger",
+        "middle phalanx of left little finger",
+        "middle phalanx of left middle finger",
+        "middle phalanx of left ring finger",
+        "proximal phalanx of left index finger",
+        "proximal phalanx of left little finger",
+        "proximal phalanx of left middle finger",
+        "proximal phalanx of left ring finger",
+        "proximal phalanx of left thumb"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "leftHand",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 5957,
+      "triangleCount": 9922
+    },
+    {
+      "name": "rightFoot",
+      "sourceNames": [
+        "distal phalanx of right big toe",
+        "distal phalanx of right fourth toe",
+        "distal phalanx of right little toe",
+        "distal phalanx of right second toe",
+        "distal phalanx of right third toe",
+        "middle phalanx of right fourth toe",
+        "middle phalanx of right little toe",
+        "middle phalanx of right second toe",
+        "middle phalanx of right third toe",
+        "navicular bone of right foot",
+        "proximal phalanx of right big toe",
+        "proximal phalanx of right fourth toe",
+        "proximal phalanx of right little toe",
+        "proximal phalanx of right second toe",
+        "proximal phalanx of right third toe",
+        "right calcaneus",
+        "right cuboid bone",
+        "right fifth metatarsal bone",
+        "right first metatarsal bone",
+        "right fourth metatarsal bone",
+        "right intermediate cuneiform bone",
+        "right lateral cuneiform bone",
+        "right medial cuneiform bone",
+        "right second metatarsal bone",
+        "right talus",
+        "right third metatarsal bone",
+        "sesamoid bone of right foot",
+        "sesamoid bone of right foot (2)"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "rightFoot",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 9329,
+      "triangleCount": 15160
+    },
+    {
+      "name": "rightHand",
+      "sourceNames": [
+        "distal phalanx of right index finger",
+        "distal phalanx of right little finger",
+        "distal phalanx of right middle finger",
+        "distal phalanx of right ring finger",
+        "distal phalanx of right thumb",
+        "middle phalanx of right index finger",
+        "middle phalanx of right little finger",
+        "middle phalanx of right middle finger",
+        "middle phalanx of right ring finger",
+        "proximal phalanx of right index finger",
+        "proximal phalanx of right little finger",
+        "proximal phalanx of right middle finger",
+        "proximal phalanx of right ring finger",
+        "proximal phalanx of right thumb",
+        "right capitate",
+        "right fifth metacarpal bone",
+        "right first metacarpal bone",
+        "right fourth metacarpal bone",
+        "right hamate",
+        "right lunate",
+        "right pisiform",
+        "right scaphoid",
+        "right second metacarpal bone",
+        "right third metacarpal bone",
+        "right trapezium",
+        "right trapezoid"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "rightHand",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 6055,
+      "triangleCount": 9552
+    },
+    {
+      "name": "leftThigh",
+      "sourceNames": [
+        "left femur",
+        "left patella"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "leftThigh",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 1803,
+      "triangleCount": 3514
+    },
+    {
+      "name": "leftShin",
+      "sourceNames": [
+        "left fibula",
+        "left tibia"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "leftShin",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 1457,
+      "triangleCount": 2816
+    },
+    {
+      "name": "leftUpperArm",
+      "sourceNames": [
+        "left humerus"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "leftUpperArm",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 2073,
+      "triangleCount": 3844
+    },
+    {
+      "name": "leftForearm",
+      "sourceNames": [
+        "left radius",
+        "left ulna"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "leftForearm",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 864,
+      "triangleCount": 1456
+    },
+    {
+      "name": "rightThigh",
+      "sourceNames": [
+        "right femur",
+        "right patella"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "rightThigh",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 1752,
+      "triangleCount": 3408
+    },
+    {
+      "name": "rightShin",
+      "sourceNames": [
+        "right fibula",
+        "right tibia"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "rightShin",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 1450,
+      "triangleCount": 2806
+    },
+    {
+      "name": "rightUpperArm",
+      "sourceNames": [
+        "right humerus"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "rightUpperArm",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 2233,
+      "triangleCount": 3784
+    },
+    {
+      "name": "rightForearm",
+      "sourceNames": [
+        "right radius",
+        "right ulna"
+      ],
+      "sourceMappings": [],
+      "type": "bone",
+      "rigId": "rightForearm",
+      "muscleId": null,
+      "side": null,
+      "sourceVertexCount": 888,
+      "triangleCount": 1506
+    },
+    {
+      "name": "left_pecSternal",
+      "sourceNames": [
+        "abdominal part of left pectoralis major",
+        "sternocostal part of left pectoralis major"
+      ],
+      "sourceMappings": [
+        {
+          "name": "abdominal part of left pectoralis major",
+          "originalName": "abdominal part of left pectoralis major",
+          "fmaId": "FMA45875",
+          "bpId": "BP7862",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "sternocostal part of left pectoralis major",
+          "originalName": "sternocostal part of left pectoralis major",
+          "fmaId": "FMA79980",
+          "bpId": "BP8323",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "pecSternal",
+      "side": "left",
+      "sourceVertexCount": 3519,
+      "triangleCount": 5536
+    },
+    {
+      "name": "right_pecSternal",
+      "sourceNames": [
+        "abdominal part of right pectoralis major",
+        "sternocostal part of right pectoralis major"
+      ],
+      "sourceMappings": [
+        {
+          "name": "abdominal part of right pectoralis major",
+          "originalName": "abdominal part of right pectoralis major",
+          "fmaId": "FMA45874",
+          "bpId": "BP5615",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "sternocostal part of right pectoralis major",
+          "originalName": "sternocostal part of right pectoralis major",
+          "fmaId": "FMA79979",
+          "bpId": "BP5613",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "pecSternal",
+      "side": "right",
+      "sourceVertexCount": 3517,
+      "triangleCount": 5536
+    },
+    {
+      "name": "left_anteriorDelt",
+      "sourceNames": [
+        "clavicular part of left deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "clavicular part of left deltoid",
+          "originalName": "clavicular part of left deltoid",
+          "fmaId": "FMA34681",
+          "bpId": "BP8259",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "anteriorDelt",
+      "side": "left",
+      "sourceVertexCount": 2604,
+      "triangleCount": 2206
+    },
+    {
+      "name": "left_pecClavicular",
+      "sourceNames": [
+        "clavicular part of left pectoralis major"
+      ],
+      "sourceMappings": [
+        {
+          "name": "clavicular part of left pectoralis major",
+          "originalName": "clavicular part of left pectoralis major",
+          "fmaId": "FMA34691",
+          "bpId": "BP9095",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "pecClavicular",
+      "side": "left",
+      "sourceVertexCount": 1495,
+      "triangleCount": 1846
+    },
+    {
+      "name": "right_anteriorDelt",
+      "sourceNames": [
+        "clavicular part of right deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "clavicular part of right deltoid",
+          "originalName": "clavicular part of right deltoid",
+          "fmaId": "FMA34680",
+          "bpId": "BP7573",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "anteriorDelt",
+      "side": "right",
+      "sourceVertexCount": 2592,
+      "triangleCount": 2206
+    },
+    {
+      "name": "right_pecClavicular",
+      "sourceNames": [
+        "clavicular part of right pectoralis major"
+      ],
+      "sourceMappings": [
+        {
+          "name": "clavicular part of right pectoralis major",
+          "originalName": "clavicular part of right pectoralis major",
+          "fmaId": "FMA34690",
+          "bpId": "BP5582",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "pecClavicular",
+      "side": "right",
+      "sourceVertexCount": 1492,
+      "triangleCount": 1846
+    },
+    {
+      "name": "left_triceps",
+      "sourceNames": [
+        "lateral head of left triceps brachii",
+        "long head of left triceps brachii",
+        "medial head of left triceps brachii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "lateral head of left triceps brachii",
+          "originalName": "lateral head of left triceps brachii",
+          "fmaId": "FMA37698",
+          "bpId": "BP8525",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "long head of left triceps brachii",
+          "originalName": "long head of left triceps brachii",
+          "fmaId": "FMA37700",
+          "bpId": "BP8344",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "medial head of left triceps brachii",
+          "originalName": "medial head of left triceps brachii",
+          "fmaId": "FMA37696",
+          "bpId": "BP8257",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "triceps",
+      "side": "left",
+      "sourceVertexCount": 3402,
+      "triangleCount": 5026
+    },
+    {
+      "name": "right_triceps",
+      "sourceNames": [
+        "lateral head of right triceps brachii",
+        "long head of right triceps brachii",
+        "medial head of right triceps brachii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "lateral head of right triceps brachii",
+          "originalName": "lateral head of right triceps brachii",
+          "fmaId": "FMA37697",
+          "bpId": "BP5550",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "long head of right triceps brachii",
+          "originalName": "long head of right triceps brachii",
+          "fmaId": "FMA37699",
+          "bpId": "BP5564",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "medial head of right triceps brachii",
+          "originalName": "medial head of right triceps brachii",
+          "fmaId": "FMA37695",
+          "bpId": "BP5562",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": "triceps",
+      "side": "right",
+      "sourceVertexCount": 3403,
+      "triangleCount": 5026
+    }
+  ],
+  "transformation": {
+    "scale": [
+      0.0013124999999999999,
+      0.001,
+      0.0010833333333333333
+    ],
+    "sourceShoulderMm": [
+      160,
+      -75,
+      1310
+    ],
+    "targetShoulderM": [
+      0.21,
+      0.145,
+      -0.52
+    ],
+    "notes": "Nonuniform fit to generic engine proportions; rigid bone groups, modeled soft tissue skinning; fixed curled grip; duplicate hyoid removed."
+  }
+}
