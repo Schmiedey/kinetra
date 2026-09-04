@@ -54,14 +54,35 @@ export function angleControl(
   )
     return { label: 'Torso angle', min: 20, max: 75 };
   if (m.pattern === 'Squat')
-    return { label: 'Torso lean adjustment', min: -20, max: 45 };
+    return { label: 'Torso lean', min: -20, max: 45 };
   if (m.pattern === 'Hinge')
-    return { label: 'Torso angle offset', min: -20, max: 20 };
+    return { label: 'Torso angle', min: -20, max: 20 };
   if (m.pattern === 'Shoulder raise')
     return { label: 'Raise plane', min: 0, max: 90 };
   if (m.pattern === 'Elbow extension')
     return { label: 'Upper arm angle', min: 0, max: 90 };
+  if (m.pattern === 'Vertical press')
+    return { label: 'Bar path lean', min: -15, max: 20 };
   return null;
+}
+export function widthControl(m: Movement): { label: string; min: number; max: number } {
+  const upper = [
+    'Horizontal press',
+    'Vertical press',
+    'Horizontal pull',
+    'Vertical pull',
+    'Elbow flexion',
+    'Elbow extension',
+    'Shoulder raise',
+  ].includes(m.pattern);
+  return {
+    label: upper ? 'Grip width' : 'Stance width',
+    min: 0.6,
+    max: 1.6,
+  };
+}
+export function gripAngleControl(m: Movement): boolean {
+  return m.pattern !== 'Core' && m.equipment !== 'Machine';
 }
 export interface Movement {
   id: string;
@@ -75,6 +96,7 @@ export interface Movement {
   angle: number;
   range: number;
   stance: number;
+  gripAngle?: number;
   custom?: boolean;
 }
 const entry = (
@@ -98,6 +120,7 @@ const entry = (
   angle,
   range: 100,
   stance: 1,
+  gripAngle: 0,
 });
 const press = [
   'Keep a closed grip around the handle.',
@@ -634,7 +657,9 @@ export function validMovement(v: unknown): v is Movement {
     m.range <= 100 &&
     Number.isFinite(m.stance) &&
     m.stance >= 0.6 &&
-    m.stance <= 1.6
+    m.stance <= 1.6 &&
+    (m.gripAngle === undefined ||
+      (Number.isFinite(m.gripAngle) && Math.abs(m.gripAngle) <= 90))
   );
 }
 export function validLibrary(v: unknown): v is LibraryData {

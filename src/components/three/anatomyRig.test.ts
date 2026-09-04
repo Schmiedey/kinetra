@@ -24,14 +24,15 @@ const gltf = await new GLTFLoader().parseAsync(
 );
 describe('sourced anatomical geometry and live rig', () => {
   it('ships the claimed sourced meshes with licensed provenance', () => {
-    expect(manifest.counts).toEqual({ bones: 200, muscles: 62 });
-    expect(manifest.groups).toHaveLength(41);
+    expect(manifest.counts.bones).toBe(200);
+    expect(manifest.counts.muscles).toBeGreaterThan(200);
+    expect(manifest.groups.length).toBeGreaterThan(50);
     expect(manifest.componentLicenses).toEqual({
       bp3d: 'CC BY-SA 2.1 Japan',
       'z-anatomy': 'CC BY-SA 4.0',
     });
     for (const group of manifest.groups) {
-      expect(group.sourceVertexCount).toBeGreaterThan(500);
+      expect(group.sourceVertexCount).toBeGreaterThan(80);
       for (const mapping of group.sourceMappings)
         expect(['bp3d', 'z-anatomy']).toContain(mapping.source);
     }

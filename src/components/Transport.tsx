@@ -3,15 +3,20 @@ import { Pause, Play, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { useSimulationStore } from '../store/useSimulationStore';
+import { useLabStore } from '../store/useLabStore';
 export function AnimationClock() {
-  const playing = useSimulationStore((s) => s.playing);
+  const benchPlaying = useSimulationStore((s) => s.playing);
+  const labPlaying = useLabStore((s) => s.playing);
+  const playing = benchPlaying || labPlaying;
   useEffect(() => {
     if (!playing) return;
     let id = 0,
       previous = performance.now();
     const loop = (now: number) => {
-      useSimulationStore.getState().tick((now - previous) / 1000);
+      const dt = (now - previous) / 1000;
       previous = now;
+      useSimulationStore.getState().tick(dt);
+      useLabStore.getState().tick(dt);
       id = requestAnimationFrame(loop);
     };
     id = requestAnimationFrame(loop);

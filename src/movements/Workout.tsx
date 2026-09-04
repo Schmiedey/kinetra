@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Plus,
   Download,
@@ -7,12 +7,16 @@ import {
   ArrowUp,
   ArrowDown,
   Trash2,
+  FlaskConical,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { exportLibrary, type Library } from './useLibrary';
-import { validLibrary, type WorkoutItem } from './catalog';
+import { validLibrary, muscleGroups, type WorkoutItem } from './catalog';
 import { useSimulationStore } from '../store/useSimulationStore';
+import { useLabStore } from '../store/useLabStore';
+import { simulateSession } from './simulateMovement';
+import { tissueIds } from '../engine/tissueLoad';
 export default function Workout({ library }: { library: Library }) {
   const { data, update } = library;
   const file = useRef<HTMLInputElement>(null);
@@ -28,6 +32,10 @@ export default function Workout({ library }: { library: Library }) {
     const id = setInterval(tick, 500);
     return () => clearInterval(id);
   }, [restUntil]);
+  const session = useMemo(
+    () => simulateSession(data.workout),
+    [data.workout],
+  );
   const patch = (id: string, values: Partial<WorkoutItem>) =>
     update((d) => ({
       ...d,
@@ -87,17 +95,16 @@ export default function Workout({ library }: { library: Library }) {
     setNotice('Session saved to history. Your plan is ready to repeat.');
   }
   return (
-    <main className="movement-page workout-page">
-      <div className="movement-heading">
+    <main className="workout-page">
+      <div className="workout-heading">
         <div>
-          <span className="eyebrow">FROM EXPLORATION TO TRAINING</span>
-          <h1>Your workout, your way.</h1>
-          <p>Plan the session. Log each set. Keep a record.</p>
+          <h1>Session</h1>
+          <p>Load on the bar, then the tissue stack that session produces.</p>
         </div>
         <Button
           onClick={() => useSimulationStore.getState().setTab('Movements')}
         >
-          <Plus size={16} /> Add movements
+          <Plus size={16} /> Lab
         </Button>
       </div>
       <div className="workout-summary">
@@ -144,15 +151,37 @@ export default function Workout({ library }: { library: Library }) {
           )}
         </div>
       </div>
+      {data.workout.length > 0 && (
+        <section className="workout-session" aria-label="Session tissue load">
+          <h2>
+            Session tissue stack · {Math.round(session.volumeKg)} kg volume ·
+            peak {session.peakImpactBw.toFixed(1)} BW
+          </h2>
+          <div className="session-tissues">
+            {tissueIds
+              .map((id) => ({ id, v: session.demand[id] }))
+              .filter((row) => row.v > 0.05)
+              .sort((a, b) => b.v - a.v)
+              .map((row) => (
+                <div key={row.id}>
+                  <span>{muscleGroups[row.id]}</span>
+                  <i>
+                    <b style={{ width: `${Math.round(row.v * 100)}%` }} />
+                  </i>
+                  <em>{Math.round(row.v * 100)}</em>
+                </div>
+              ))}
+          </div>
+        </section>
+      )}
       {!data.workout.length && (
         <section className="workout-empty">
-          <span className="eyebrow">A FRESH START</span>
-          <h2>What are you training today?</h2>
-          <p>Add movements from the library or create your own variation.</p>
+          <h2>Empty rack</h2>
+          <p>Add a movement from the lab with its current load.</p>
           <Button
             onClick={() => useSimulationStore.getState().setTab('Movements')}
           >
-            Explore movements <Plus size={15} />
+            Open lab <Plus size={15} />
           </Button>
         </section>
       )}
@@ -173,6 +202,17 @@ export default function Workout({ library }: { library: Library }) {
                   </p>
                 </div>
                 <div className="workout-order">
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    aria-label={`Open ${item.movement.name} in the lab`}
+                    onClick={() => {
+                      useLabStore.getState().open(item.movement, item.load);
+                      useSimulationStore.getState().setTab('Movements');
+                    }}
+                  >
+                    <FlaskConical size={14} />
+                  </Button>
                   <Button
                     variant="ghost"
                     size="icon-sm"
@@ -316,7 +356,6 @@ export default function Workout({ library }: { library: Library }) {
       <section className="workout-history">
         <div className="movement-detail-title">
           <div>
-            <span className="eyebrow">YOUR TRAINING RECORD</span>
             <h2>Recent sessions</h2>
           </div>
           <span>Last 30 sessions</span>
@@ -382,10 +421,9 @@ export default function Workout({ library }: { library: Library }) {
       </section>
       <section className="library-backup">
         <div>
-          <h3>Your library travels with you.</h3>
+          <h3>Library backup</h3>
           <p>
-            Saved on the server for this browser’s private library ID. Export a
-            backup to move to another browser or keep a copy before clearing
+            Saved for this browser’s private library ID. Export before clearing
             cookies.
           </p>
         </div>

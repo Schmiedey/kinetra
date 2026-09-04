@@ -8,7 +8,7 @@
   "license": "Per-component: CC BY-SA 2.1 Japan (bp3d); CC BY-SA 4.0 (z-anatomy)",
   "counts": {
     "bones": 200,
-    "muscles": 62
+    "muscles": 280
   },
   "groups": [
     {
@@ -445,9 +445,282 @@
       "triangleCount": 5536
     },
     {
+      "name": "left_feet",
+      "sourceNames": [
+        "abductor digiti minimi of left foot",
+        "left abductor hallucis",
+        "left flexor digitorum brevis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "abductor digiti minimi of left foot",
+          "originalName": "abductor digiti minimi of left foot",
+          "fmaId": "FMA37464",
+          "bpId": "BP9182",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left abductor hallucis",
+          "originalName": "left abductor hallucis",
+          "fmaId": "FMA37460",
+          "bpId": "BP9193",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor digitorum brevis",
+          "originalName": "left flexor digitorum brevis",
+          "fmaId": "FMA37462",
+          "bpId": "BP9215",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "feet",
+      "sourceVertexCount": 4943,
+      "triangleCount": 4780
+    },
+    {
+      "name": "left_hands",
+      "sourceNames": [
+        "abductor digiti minimi of left hand",
+        "flexor digiti minimi brevis of left hand",
+        "left abductor pollicis brevis",
+        "left flexor pollicis brevis",
+        "left opponens pollicis",
+        "oblique head of left adductor pollicis",
+        "opponens digiti minimi of left hand",
+        "superficial head of left flexor pollicis brevis",
+        "transverse head of left adductor pollicis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "abductor digiti minimi of left hand",
+          "originalName": "abductor digiti minimi of left hand",
+          "fmaId": "FMA37397",
+          "bpId": "BP8737",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "flexor digiti minimi brevis of left hand",
+          "originalName": "flexor digiti minimi brevis of left hand",
+          "fmaId": "FMA37399",
+          "bpId": "BP8516",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left abductor pollicis brevis",
+          "originalName": "left abductor pollicis brevis",
+          "fmaId": "FMA37387",
+          "bpId": "BP8706",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor pollicis brevis",
+          "originalName": "left flexor pollicis brevis",
+          "fmaId": "FMA37389",
+          "bpId": "BP7575",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left opponens pollicis",
+          "originalName": "left opponens pollicis",
+          "fmaId": "FMA37391",
+          "bpId": "BP8596",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "oblique head of left adductor pollicis",
+          "originalName": "oblique head of left adductor pollicis",
+          "fmaId": "FMA46122",
+          "bpId": "BP8248",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "opponens digiti minimi of left hand",
+          "originalName": "opponens digiti minimi of left hand",
+          "fmaId": "FMA37401",
+          "bpId": "BP8204",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "superficial head of left flexor pollicis brevis",
+          "originalName": "superficial head of left flexor pollicis brevis",
+          "fmaId": "FMA65199",
+          "bpId": "BP8722",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "transverse head of left adductor pollicis",
+          "originalName": "transverse head of left adductor pollicis",
+          "fmaId": "FMA46124",
+          "bpId": "BP8885",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "hands",
+      "sourceVertexCount": 6349,
+      "triangleCount": 5872
+    },
+    {
+      "name": "right_feet",
+      "sourceNames": [
+        "abductor digiti minimi of right foot",
+        "right abductor hallucis",
+        "right flexor digitorum brevis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "abductor digiti minimi of right foot",
+          "originalName": "abductor digiti minimi of right foot",
+          "fmaId": "FMA37463",
+          "bpId": "BP5056",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right abductor hallucis",
+          "originalName": "right abductor hallucis",
+          "fmaId": "FMA37459",
+          "bpId": "BP5054",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor digitorum brevis",
+          "originalName": "right flexor digitorum brevis",
+          "fmaId": "FMA37461",
+          "bpId": "BP5048",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "feet",
+      "sourceVertexCount": 4934,
+      "triangleCount": 4780
+    },
+    {
+      "name": "right_hands",
+      "sourceNames": [
+        "abductor digiti minimi of right hand",
+        "flexor digiti minimi brevis of right hand",
+        "oblique head of right adductor pollicis",
+        "opponens digiti minimi of right hand",
+        "right abductor pollicis brevis",
+        "right flexor pollicis brevis",
+        "right opponens pollicis",
+        "superficial head of right flexor pollicis brevis",
+        "transverse head of right adductor pollicis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "abductor digiti minimi of right hand",
+          "originalName": "abductor digiti minimi of right hand",
+          "fmaId": "FMA37396",
+          "bpId": "BP7569",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "flexor digiti minimi brevis of right hand",
+          "originalName": "flexor digiti minimi brevis of right hand",
+          "fmaId": "FMA37398",
+          "bpId": "BP4858",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "oblique head of right adductor pollicis",
+          "originalName": "oblique head of right adductor pollicis",
+          "fmaId": "FMA46121",
+          "bpId": "BP5560",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "opponens digiti minimi of right hand",
+          "originalName": "opponens digiti minimi of right hand",
+          "fmaId": "FMA37400",
+          "bpId": "BP4860",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right abductor pollicis brevis",
+          "originalName": "right abductor pollicis brevis",
+          "fmaId": "FMA37386",
+          "bpId": "BP4855",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor pollicis brevis",
+          "originalName": "right flexor pollicis brevis",
+          "fmaId": "FMA37388",
+          "bpId": "BP8958",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right opponens pollicis",
+          "originalName": "right opponens pollicis",
+          "fmaId": "FMA37390",
+          "bpId": "BP4853",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "superficial head of right flexor pollicis brevis",
+          "originalName": "superficial head of right flexor pollicis brevis",
+          "fmaId": "FMA65198",
+          "bpId": "BP5556",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "transverse head of right adductor pollicis",
+          "originalName": "transverse head of right adductor pollicis",
+          "fmaId": "FMA46123",
+          "bpId": "BP5543",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "hands",
+      "sourceVertexCount": 6359,
+      "triangleCount": 5872
+    },
+    {
       "name": "left_sideDelts",
       "sourceNames": [
-        "acromial part of left deltoid"
+        "acromial part of left deltoid",
+        "left supraspinatus"
       ],
       "sourceMappings": [
         {
@@ -457,6 +730,14 @@
           "bpId": "BP9075",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "left supraspinatus",
+          "originalName": "left supraspinatus",
+          "fmaId": "FMA32545",
+          "bpId": "BP8376",
+          "isTendon": false,
+          "source": "bp3d"
         }
       ],
       "type": "muscle",
@@ -464,13 +745,14 @@
       "muscleId": null,
       "side": "left",
       "movementGroup": "sideDelts",
-      "sourceVertexCount": 918,
-      "triangleCount": 1300
+      "sourceVertexCount": 1760,
+      "triangleCount": 2178
     },
     {
       "name": "right_sideDelts",
       "sourceNames": [
-        "acromial part of right deltoid"
+        "acromial part of right deltoid",
+        "right supraspinatus"
       ],
       "sourceMappings": [
         {
@@ -480,6 +762,14 @@
           "bpId": "BP7571",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "right supraspinatus",
+          "originalName": "right supraspinatus",
+          "fmaId": "FMA32544",
+          "bpId": "BP4791",
+          "isTendon": false,
+          "source": "bp3d"
         }
       ],
       "type": "muscle",
@@ -487,14 +777,16 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "sideDelts",
-      "sourceVertexCount": 916,
-      "triangleCount": 1300
+      "sourceVertexCount": 1759,
+      "triangleCount": 2178
     },
     {
       "name": "left_upperBack",
       "sourceNames": [
         "ascending part of left trapezius",
         "descending part of left trapezius",
+        "left rhomboid major",
+        "left rhomboid minor",
         "transverse part of left trapezius"
       ],
       "sourceMappings": [
@@ -515,6 +807,22 @@
           "source": "bp3d"
         },
         {
+          "name": "left rhomboid major",
+          "originalName": "left rhomboid major",
+          "fmaId": "FMA13382",
+          "bpId": "BP9245",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left rhomboid minor",
+          "originalName": "left rhomboid minor",
+          "fmaId": "FMA13384",
+          "bpId": "BP8585",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
           "name": "transverse part of left trapezius",
           "originalName": "transverse part of left trapezius",
           "fmaId": "FMA33585",
@@ -528,14 +836,16 @@
       "muscleId": null,
       "side": "left",
       "movementGroup": "upperBack",
-      "sourceVertexCount": 7207,
-      "triangleCount": 12000
+      "sourceVertexCount": 11176,
+      "triangleCount": 18205
     },
     {
       "name": "right_upperBack",
       "sourceNames": [
         "ascending part of right trapezius",
         "descending part of right trapezius",
+        "right rhomboid major",
+        "right rhomboid minor",
         "transverse part of right trapezius"
       ],
       "sourceMappings": [
@@ -556,6 +866,22 @@
           "source": "bp3d"
         },
         {
+          "name": "right rhomboid major",
+          "originalName": "right rhomboid major",
+          "fmaId": "FMA13381",
+          "bpId": "BP4780",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right rhomboid minor",
+          "originalName": "right rhomboid minor",
+          "fmaId": "FMA13383",
+          "bpId": "BP4784",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
           "name": "transverse part of right trapezius",
           "originalName": "transverse part of right trapezius",
           "fmaId": "FMA33584",
@@ -569,8 +895,8 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "upperBack",
-      "sourceVertexCount": 7213,
-      "triangleCount": 11998
+      "sourceVertexCount": 11184,
+      "triangleCount": 18204
     },
     {
       "name": "left_anteriorDelt",
@@ -665,10 +991,475 @@
       "triangleCount": 1846
     },
     {
+      "name": "left_forearms",
+      "sourceNames": [
+        "humeral head of left flexor carpi ulnaris",
+        "humeral head of left pronator teres",
+        "left abductor pollicis longus",
+        "left brachioradialis",
+        "left extensor carpi radialis brevis",
+        "left extensor carpi radialis longus",
+        "left extensor carpi ulnaris",
+        "left extensor carpi ulnaris (2)",
+        "left extensor digiti minimi",
+        "left extensor digitorum",
+        "left extensor digitorum longus",
+        "left extensor indicis",
+        "left extensor pollicis brevis",
+        "left extensor pollicis longus",
+        "left flexor carpi radialis",
+        "left flexor digitorum profundus",
+        "left flexor digitorum superficialis",
+        "left flexor digitorum superficialis (2)",
+        "left flexor pollicis longus",
+        "left palmaris longus",
+        "left pronator quadratus",
+        "left supinator",
+        "ulnar head of left flexor carpi ulnaris",
+        "ulnar head of left pronator teres"
+      ],
+      "sourceMappings": [
+        {
+          "name": "humeral head of left flexor carpi ulnaris",
+          "originalName": "humeral head of left flexor carpi ulnaris",
+          "fmaId": "FMA38618",
+          "bpId": "BP8144",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "humeral head of left pronator teres",
+          "originalName": "humeral head of left pronator teres",
+          "fmaId": "FMA38561",
+          "bpId": "BP8015",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left abductor pollicis longus",
+          "originalName": "left abductor pollicis longus",
+          "fmaId": "FMA38517",
+          "bpId": "BP9144",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left brachioradialis",
+          "originalName": "left brachioradialis",
+          "fmaId": "FMA38487",
+          "bpId": "BP8244",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor carpi radialis brevis",
+          "originalName": "left extensor carpi radialis brevis",
+          "fmaId": "FMA38499",
+          "bpId": "BP9287",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor carpi radialis longus",
+          "originalName": "left extensor carpi radialis longus",
+          "fmaId": "FMA38496",
+          "bpId": "BP9280",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor carpi ulnaris",
+          "originalName": "left extensor carpi ulnaris",
+          "fmaId": "FMA38508",
+          "bpId": "BP7970",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor carpi ulnaris (2)",
+          "originalName": "left extensor carpi ulnaris",
+          "fmaId": "FMA38508",
+          "bpId": "BP7970",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor digiti minimi",
+          "originalName": "left extensor digiti minimi",
+          "fmaId": "FMA38505",
+          "bpId": "BP8489",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor digitorum",
+          "originalName": "left extensor digitorum",
+          "fmaId": "FMA38502",
+          "bpId": "BP8560",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor digitorum longus",
+          "originalName": "left extensor digitorum longus",
+          "fmaId": "FMA22549",
+          "bpId": "BP8162",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor indicis",
+          "originalName": "left extensor indicis",
+          "fmaId": "FMA38526",
+          "bpId": "BP8779",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor pollicis brevis",
+          "originalName": "left extensor pollicis brevis",
+          "fmaId": "FMA38520",
+          "bpId": "BP9253",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left extensor pollicis longus",
+          "originalName": "left extensor pollicis longus",
+          "fmaId": "FMA38523",
+          "bpId": "BP8191",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor carpi radialis",
+          "originalName": "left flexor carpi radialis",
+          "fmaId": "FMA38461",
+          "bpId": "BP8940",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor digitorum profundus",
+          "originalName": "left flexor digitorum profundus",
+          "fmaId": "FMA38480",
+          "bpId": "BP7826",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor digitorum superficialis",
+          "originalName": "left flexor digitorum superficialis",
+          "fmaId": "FMA38471",
+          "bpId": "BP8284",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor digitorum superficialis (2)",
+          "originalName": "left flexor digitorum superficialis",
+          "fmaId": "FMA38471",
+          "bpId": "BP8284",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left flexor pollicis longus",
+          "originalName": "left flexor pollicis longus",
+          "fmaId": "FMA38484",
+          "bpId": "BP9106",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left palmaris longus",
+          "originalName": "left palmaris longus",
+          "fmaId": "FMA38464",
+          "bpId": "BP7781",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left pronator quadratus",
+          "originalName": "left pronator quadratus",
+          "fmaId": "FMA38455",
+          "bpId": "BP7957",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left supinator",
+          "originalName": "left supinator",
+          "fmaId": "FMA38514",
+          "bpId": "BP8499",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "ulnar head of left flexor carpi ulnaris",
+          "originalName": "ulnar head of left flexor carpi ulnaris",
+          "fmaId": "FMA38620",
+          "bpId": "BP8540",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "ulnar head of left pronator teres",
+          "originalName": "ulnar head of left pronator teres",
+          "fmaId": "FMA38563",
+          "bpId": "BP9043",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "forearms",
+      "sourceVertexCount": 40378,
+      "triangleCount": 53801
+    },
+    {
+      "name": "right_forearms",
+      "sourceNames": [
+        "humeral head of right flexor carpi ulnaris",
+        "humeral head of right pronator teres",
+        "right abductor pollicis longus",
+        "right brachioradialis",
+        "right extensor carpi radialis brevis",
+        "right extensor carpi radialis longus",
+        "right extensor carpi ulnaris",
+        "right extensor carpi ulnaris (2)",
+        "right extensor digiti minimi",
+        "right extensor digitorum",
+        "right extensor digitorum longus",
+        "right extensor indicis",
+        "right extensor pollicis brevis",
+        "right extensor pollicis longus",
+        "right flexor carpi radialis",
+        "right flexor digitorum profundus",
+        "right flexor digitorum superficialis",
+        "right flexor digitorum superficialis (2)",
+        "right flexor pollicis longus",
+        "right palmaris longus",
+        "right pronator quadratus",
+        "right supinator",
+        "ulnar head of right flexor carpi ulnaris",
+        "ulnar head of right pronator teres"
+      ],
+      "sourceMappings": [
+        {
+          "name": "humeral head of right flexor carpi ulnaris",
+          "originalName": "humeral head of right flexor carpi ulnaris",
+          "fmaId": "FMA38617",
+          "bpId": "BP5570",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "humeral head of right pronator teres",
+          "originalName": "humeral head of right pronator teres",
+          "fmaId": "FMA38560",
+          "bpId": "BP5568",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right abductor pollicis longus",
+          "originalName": "right abductor pollicis longus",
+          "fmaId": "FMA38516",
+          "bpId": "BP4820",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right brachioradialis",
+          "originalName": "right brachioradialis",
+          "fmaId": "FMA38486",
+          "bpId": "BP4833",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor carpi radialis brevis",
+          "originalName": "right extensor carpi radialis brevis",
+          "fmaId": "FMA38498",
+          "bpId": "BP4823",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor carpi radialis longus",
+          "originalName": "right extensor carpi radialis longus",
+          "fmaId": "FMA38495",
+          "bpId": "BP4831",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor carpi ulnaris",
+          "originalName": "right extensor carpi ulnaris",
+          "fmaId": "FMA38507",
+          "bpId": "BP4829",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor carpi ulnaris (2)",
+          "originalName": "right extensor carpi ulnaris",
+          "fmaId": "FMA38507",
+          "bpId": "BP4829",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor digiti minimi",
+          "originalName": "right extensor digiti minimi",
+          "fmaId": "FMA38504",
+          "bpId": "BP4825",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor digitorum",
+          "originalName": "right extensor digitorum",
+          "fmaId": "FMA38501",
+          "bpId": "BP4827",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor digitorum longus",
+          "originalName": "right extensor digitorum longus",
+          "fmaId": "FMA22548",
+          "bpId": "BP5024",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor indicis",
+          "originalName": "right extensor indicis",
+          "fmaId": "FMA38525",
+          "bpId": "BP4812",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor pollicis brevis",
+          "originalName": "right extensor pollicis brevis",
+          "fmaId": "FMA38519",
+          "bpId": "BP4818",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right extensor pollicis longus",
+          "originalName": "right extensor pollicis longus",
+          "fmaId": "FMA38522",
+          "bpId": "BP4816",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor carpi radialis",
+          "originalName": "right flexor carpi radialis",
+          "fmaId": "FMA38460",
+          "bpId": "BP4841",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor digitorum profundus",
+          "originalName": "right flexor digitorum profundus",
+          "fmaId": "FMA38479",
+          "bpId": "BP4848",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor digitorum superficialis",
+          "originalName": "right flexor digitorum superficialis",
+          "fmaId": "FMA38470",
+          "bpId": "BP4837",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor digitorum superficialis (2)",
+          "originalName": "right flexor digitorum superficialis",
+          "fmaId": "FMA38470",
+          "bpId": "BP4837",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right flexor pollicis longus",
+          "originalName": "right flexor pollicis longus",
+          "fmaId": "FMA38482",
+          "bpId": "BP4844",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right palmaris longus",
+          "originalName": "right palmaris longus",
+          "fmaId": "FMA38463",
+          "bpId": "BP4839",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right pronator quadratus",
+          "originalName": "right pronator quadratus",
+          "fmaId": "FMA38454",
+          "bpId": "BP4846",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right supinator",
+          "originalName": "right supinator",
+          "fmaId": "FMA38513",
+          "bpId": "BP4814",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "ulnar head of right flexor carpi ulnaris",
+          "originalName": "ulnar head of right flexor carpi ulnaris",
+          "fmaId": "FMA38619",
+          "bpId": "BP5554",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "ulnar head of right pronator teres",
+          "originalName": "ulnar head of right pronator teres",
+          "fmaId": "FMA38562",
+          "bpId": "BP5552",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "forearms",
+      "sourceVertexCount": 40330,
+      "triangleCount": 53800
+    },
+    {
       "name": "left_calves",
       "sourceNames": [
         "lateral head of left gastrocnemius",
+        "left fibularis brevis",
+        "left fibularis longus",
+        "left fibularis tertius",
         "left soleus",
+        "left tibialis anterior",
+        "left tibialis posterior",
         "medial head of left gastrocnemius"
       ],
       "sourceMappings": [
@@ -681,10 +1472,50 @@
           "source": "bp3d"
         },
         {
+          "name": "left fibularis brevis",
+          "originalName": "left fibularis brevis",
+          "fmaId": "FMA22555",
+          "bpId": "BP8977",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left fibularis longus",
+          "originalName": "left fibularis longus",
+          "fmaId": "FMA22553",
+          "bpId": "BP8846",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left fibularis tertius",
+          "originalName": "left fibularis tertius",
+          "fmaId": "FMA22551",
+          "bpId": "BP9228",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
           "name": "left soleus",
           "originalName": "left soleus",
           "fmaId": "FMA22559",
           "bpId": "BP8819",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left tibialis anterior",
+          "originalName": "left tibialis anterior",
+          "fmaId": "FMA22545",
+          "bpId": "BP8720",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left tibialis posterior",
+          "originalName": "left tibialis posterior",
+          "fmaId": "FMA65019",
+          "bpId": "BP9159",
           "isTendon": false,
           "source": "bp3d"
         },
@@ -702,13 +1533,14 @@
       "muscleId": null,
       "side": "left",
       "movementGroup": "calves",
-      "sourceVertexCount": 6126,
-      "triangleCount": 10894
+      "sourceVertexCount": 16864,
+      "triangleCount": 24446
     },
     {
       "name": "left_triceps",
       "sourceNames": [
         "lateral head of left triceps brachii",
+        "left anconeus",
         "long head of left triceps brachii",
         "medial head of left triceps brachii"
       ],
@@ -718,6 +1550,14 @@
           "originalName": "lateral head of left triceps brachii",
           "fmaId": "FMA37698",
           "bpId": "BP8525",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left anconeus",
+          "originalName": "left anconeus",
+          "fmaId": "FMA37706",
+          "bpId": "BP8962",
           "isTendon": false,
           "source": "bp3d"
         },
@@ -743,15 +1583,20 @@
       "muscleId": "triceps",
       "side": "left",
       "movementGroup": "triceps",
-      "sourceVertexCount": 3402,
-      "triangleCount": 5026
+      "sourceVertexCount": 4508,
+      "triangleCount": 6304
     },
     {
       "name": "right_calves",
       "sourceNames": [
         "lateral head of right gastrocnemius",
         "medial head of right gastrocnemius",
-        "right soleus"
+        "right fibularis brevis",
+        "right fibularis longus",
+        "right fibularis tertius",
+        "right soleus",
+        "right tibialis anterior",
+        "right tibialis posterior"
       ],
       "sourceMappings": [
         {
@@ -771,10 +1616,50 @@
           "source": "bp3d"
         },
         {
+          "name": "right fibularis brevis",
+          "originalName": "right fibularis brevis",
+          "fmaId": "FMA22554",
+          "bpId": "BP5015",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right fibularis longus",
+          "originalName": "right fibularis longus",
+          "fmaId": "FMA22552",
+          "bpId": "BP5013",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right fibularis tertius",
+          "originalName": "right fibularis tertius",
+          "fmaId": "FMA22550",
+          "bpId": "BP5020",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
           "name": "right soleus",
           "originalName": "right soleus",
           "fmaId": "FMA22558",
           "bpId": "BP4999",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right tibialis anterior",
+          "originalName": "right tibialis anterior",
+          "fmaId": "FMA22544",
+          "bpId": "BP5018",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right tibialis posterior",
+          "originalName": "right tibialis posterior",
+          "fmaId": "FMA65018",
+          "bpId": "BP5004",
           "isTendon": false,
           "source": "bp3d"
         }
@@ -784,15 +1669,16 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "calves",
-      "sourceVertexCount": 6126,
-      "triangleCount": 10893
+      "sourceVertexCount": 16861,
+      "triangleCount": 24445
     },
     {
       "name": "right_triceps",
       "sourceNames": [
         "lateral head of right triceps brachii",
         "long head of right triceps brachii",
-        "medial head of right triceps brachii"
+        "medial head of right triceps brachii",
+        "right anconeus"
       ],
       "sourceMappings": [
         {
@@ -818,6 +1704,14 @@
           "bpId": "BP5562",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "right anconeus",
+          "originalName": "right anconeus",
+          "fmaId": "FMA37705",
+          "bpId": "BP4802",
+          "isTendon": false,
+          "source": "bp3d"
         }
       ],
       "type": "muscle",
@@ -825,14 +1719,146 @@
       "muscleId": "triceps",
       "side": "right",
       "movementGroup": "triceps",
-      "sourceVertexCount": 3403,
-      "triangleCount": 5026
+      "sourceVertexCount": 4508,
+      "triangleCount": 6304
+    },
+    {
+      "name": "left_adductors",
+      "sourceNames": [
+        "left adductor brevis",
+        "left adductor longus",
+        "left adductor magnus",
+        "left adductor minimus",
+        "left gracilis",
+        "left pectineus"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left adductor brevis",
+          "originalName": "left adductor brevis",
+          "fmaId": "FMA22454",
+          "bpId": "BP9099",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left adductor longus",
+          "originalName": "left adductor longus",
+          "fmaId": "FMA22457",
+          "bpId": "BP8604",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left adductor magnus",
+          "originalName": "left adductor magnus",
+          "fmaId": "FMA22460",
+          "bpId": "BP8972",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left adductor minimus",
+          "originalName": "left adductor minimus",
+          "fmaId": "FMA43887",
+          "bpId": "BP8832",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left gracilis",
+          "originalName": "left gracilis",
+          "fmaId": "FMA43884",
+          "bpId": "BP8926",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left pectineus",
+          "originalName": "left pectineus",
+          "fmaId": "FMA22451",
+          "bpId": "BP8998",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "adductors",
+      "sourceVertexCount": 9730,
+      "triangleCount": 14589
+    },
+    {
+      "name": "left_biceps",
+      "sourceNames": [
+        "left brachialis",
+        "left coracobrachialis",
+        "long head of left biceps brachii",
+        "short head of left biceps brachii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left brachialis",
+          "originalName": "left brachialis",
+          "fmaId": "FMA37669",
+          "bpId": "BP8684",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left coracobrachialis",
+          "originalName": "left coracobrachialis",
+          "fmaId": "FMA37666",
+          "bpId": "BP9055",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "long head of left biceps brachii",
+          "originalName": "long head of left biceps brachii",
+          "fmaId": "FMA37687",
+          "bpId": "BP8816",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "short head of left biceps brachii",
+          "originalName": "short head of left biceps brachii",
+          "fmaId": "FMA37685",
+          "bpId": "BP9153",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "biceps",
+      "sourceVertexCount": 4486,
+      "triangleCount": 5472
     },
     {
       "name": "left_core",
       "sourceNames": [
         "left external oblique",
-        "left rectus abdominis"
+        "left iliocostalis cervicis",
+        "left iliocostalis lumborum",
+        "left iliocostalis thoracis",
+        "left longissimus thoracis",
+        "left psoas major",
+        "left semispinalis cervicis",
+        "left semispinalis thoracis",
+        "left spinalis thoracis",
+        "left rectus abdominis",
+        "left internal oblique",
+        "left transversus abdominis",
+        "left quadratus lumborum",
+        "left multifidus cervicis",
+        "left multifidus thoracis",
+        "left multifidus lumborum"
       ],
       "sourceMappings": [
         {
@@ -844,8 +1870,120 @@
           "source": "bp3d"
         },
         {
+          "name": "left iliocostalis cervicis",
+          "originalName": "left iliocostalis cervicis",
+          "fmaId": "FMA22745",
+          "bpId": "BP8048",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left iliocostalis lumborum",
+          "originalName": "left iliocostalis lumborum",
+          "fmaId": "FMA22741",
+          "bpId": "BP8937",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left iliocostalis thoracis",
+          "originalName": "left iliocostalis thoracis",
+          "fmaId": "FMA22743",
+          "bpId": "BP8748",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left longissimus thoracis",
+          "originalName": "left longissimus thoracis",
+          "fmaId": "FMA22753",
+          "bpId": "BP8985",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left psoas major",
+          "originalName": "left psoas major",
+          "fmaId": "FMA22343",
+          "bpId": "BP8373",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left semispinalis cervicis",
+          "originalName": "left semispinalis cervicis",
+          "fmaId": "FMA22875",
+          "bpId": "BP8930",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left semispinalis thoracis",
+          "originalName": "left semispinalis thoracis",
+          "fmaId": "FMA22873",
+          "bpId": "BP8316",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left spinalis thoracis",
+          "originalName": "left spinalis thoracis",
+          "fmaId": "FMA22780",
+          "bpId": "BP8979",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
           "name": "left rectus abdominis",
           "originalName": "left rectus abdominis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left internal oblique",
+          "originalName": "left internal oblique",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left transversus abdominis",
+          "originalName": "left transversus abdominis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left quadratus lumborum",
+          "originalName": "left quadratus lumborum",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left multifidus cervicis",
+          "originalName": "left multifidus cervicis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left multifidus thoracis",
+          "originalName": "left multifidus thoracis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left multifidus lumborum",
+          "originalName": "left multifidus lumborum",
           "fmaId": "",
           "bpId": "",
           "isTendon": false,
@@ -857,15 +1995,16 @@
       "muscleId": null,
       "side": "left",
       "movementGroup": "core",
-      "sourceVertexCount": 5475,
-      "triangleCount": 8768
+      "sourceVertexCount": 36109,
+      "triangleCount": 58186
     },
     {
       "name": "left_glutes",
       "sourceNames": [
         "left gluteus maximus",
         "left gluteus medius",
-        "left gluteus minimus"
+        "left gluteus minimus",
+        "left iliacus"
       ],
       "sourceMappings": [
         {
@@ -891,6 +2030,14 @@
           "bpId": "BP8623",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "left iliacus",
+          "originalName": "left iliacus",
+          "fmaId": "FMA22323",
+          "bpId": "BP8312",
+          "isTendon": false,
+          "source": "bp3d"
         }
       ],
       "type": "muscle",
@@ -898,47 +2045,38 @@
       "muscleId": null,
       "side": "left",
       "movementGroup": "glutes",
-      "sourceVertexCount": 6465,
-      "triangleCount": 9731
+      "sourceVertexCount": 8917,
+      "triangleCount": 12593
     },
     {
-      "name": "left_quads",
+      "name": "left_rearDelts",
       "sourceNames": [
-        "left rectus femoris",
-        "left vastus intermedius",
-        "left vastus lateralis",
-        "left vastus medialis"
+        "left infraspinatus muscle",
+        "left teres minor",
+        "spinal part of left deltoid"
       ],
       "sourceMappings": [
         {
-          "name": "left rectus femoris",
-          "originalName": "left rectus femoris",
-          "fmaId": "FMA38929",
-          "bpId": "BP8094",
+          "name": "left infraspinatus muscle",
+          "originalName": "left infraspinatus muscle",
+          "fmaId": "FMA32548",
+          "bpId": "BP8965",
           "isTendon": false,
           "source": "bp3d"
         },
         {
-          "name": "left vastus intermedius",
-          "originalName": "left vastus intermedius",
-          "fmaId": "FMA38935",
-          "bpId": "BP9207",
+          "name": "left teres minor",
+          "originalName": "left teres minor",
+          "fmaId": "FMA32554",
+          "bpId": "BP9197",
           "isTendon": false,
           "source": "bp3d"
         },
         {
-          "name": "left vastus lateralis",
-          "originalName": "left vastus lateralis",
-          "fmaId": "FMA38931",
-          "bpId": "BP8754",
-          "isTendon": false,
-          "source": "bp3d"
-        },
-        {
-          "name": "left vastus medialis",
-          "originalName": "left vastus medialis",
-          "fmaId": "FMA38933",
-          "bpId": "BP9128",
+          "name": "spinal part of left deltoid",
+          "originalName": "spinal part of left deltoid",
+          "fmaId": "FMA34685",
+          "bpId": "BP8151",
           "isTendon": false,
           "source": "bp3d"
         }
@@ -947,19 +2085,191 @@
       "rigId": null,
       "muscleId": null,
       "side": "left",
-      "movementGroup": "quads",
-      "sourceVertexCount": 8604,
-      "triangleCount": 15999
+      "movementGroup": "rearDelts",
+      "sourceVertexCount": 2807,
+      "triangleCount": 3272
+    },
+    {
+      "name": "left_neck",
+      "sourceNames": [
+        "left levator scapulae",
+        "left longissimus capitis",
+        "left longus capitis",
+        "left platysma",
+        "left scalenus anterior",
+        "left scalenus medius",
+        "left scalenus posterior",
+        "left semispinalis capitis",
+        "left splenius capitis",
+        "left splenius cervicis",
+        "left sternocleidomastoid",
+        "vertical intermediate part of left longus colli"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left levator scapulae",
+          "originalName": "left levator scapulae",
+          "fmaId": "FMA32541",
+          "bpId": "BP8746",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left longissimus capitis",
+          "originalName": "left longissimus capitis",
+          "fmaId": "FMA22756",
+          "bpId": "BP9081",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left longus capitis",
+          "originalName": "left longus capitis",
+          "fmaId": "FMA46310",
+          "bpId": "BP7581",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left platysma",
+          "originalName": "left platysma",
+          "fmaId": "FMA45740",
+          "bpId": "BP7577",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left scalenus anterior",
+          "originalName": "left scalenus anterior",
+          "fmaId": "FMA13393",
+          "bpId": "BP7590",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left scalenus medius",
+          "originalName": "left scalenus medius",
+          "fmaId": "FMA13391",
+          "bpId": "BP7591",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left scalenus posterior",
+          "originalName": "left scalenus posterior",
+          "fmaId": "FMA13389",
+          "bpId": "BP4876",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left semispinalis capitis",
+          "originalName": "left semispinalis capitis",
+          "fmaId": "FMA22877",
+          "bpId": "BP8700",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left splenius capitis",
+          "originalName": "left splenius capitis",
+          "fmaId": "FMA22729",
+          "bpId": "BP8022",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left splenius cervicis",
+          "originalName": "left splenius cervicis",
+          "fmaId": "FMA22727",
+          "bpId": "BP8241",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left sternocleidomastoid",
+          "originalName": "left sternocleidomastoid",
+          "fmaId": "FMA13409",
+          "bpId": "BP4910",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "vertical intermediate part of left longus colli",
+          "originalName": "vertical intermediate part of left longus colli",
+          "fmaId": "FMA46286",
+          "bpId": "BP5593",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "neck",
+      "sourceVertexCount": 25855,
+      "triangleCount": 40423
+    },
+    {
+      "name": "left_chest",
+      "sourceNames": [
+        "left pectoralis minor",
+        "left serratus anterior",
+        "left subscapularis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left pectoralis minor",
+          "originalName": "left pectoralis minor",
+          "fmaId": "FMA13376",
+          "bpId": "BP9038",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left serratus anterior",
+          "originalName": "left serratus anterior",
+          "fmaId": "FMA13399",
+          "bpId": "BP8760",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left subscapularis",
+          "originalName": "left subscapularis",
+          "fmaId": "FMA13415",
+          "bpId": "BP8214",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "chest",
+      "sourceVertexCount": 7863,
+      "triangleCount": 10090
     },
     {
       "name": "left_hamstrings",
       "sourceNames": [
+        "left popliteus",
         "left semimembranosus",
         "left semitendinosus",
         "long head of left biceps femoris",
         "short head of left biceps femoris"
       ],
       "sourceMappings": [
+        {
+          "name": "left popliteus",
+          "originalName": "left popliteus",
+          "fmaId": "FMA22592",
+          "bpId": "BP9241",
+          "isTendon": false,
+          "source": "bp3d"
+        },
         {
           "name": "left semimembranosus",
           "originalName": "left semimembranosus",
@@ -998,45 +2308,115 @@
       "muscleId": null,
       "side": "left",
       "movementGroup": "hamstrings",
-      "sourceVertexCount": 7203,
-      "triangleCount": 12439
+      "sourceVertexCount": 7792,
+      "triangleCount": 13297
     },
     {
-      "name": "left_biceps",
+      "name": "left_quads",
       "sourceNames": [
-        "long head of left biceps brachii",
-        "short head of left biceps brachii"
+        "left rectus femoris",
+        "left sartorius",
+        "left vastus intermedius",
+        "left vastus lateralis",
+        "left vastus medialis",
+        "left iliotibial tract"
       ],
       "sourceMappings": [
         {
-          "name": "long head of left biceps brachii",
-          "originalName": "long head of left biceps brachii",
-          "fmaId": "FMA37687",
-          "bpId": "BP8816",
+          "name": "left rectus femoris",
+          "originalName": "left rectus femoris",
+          "fmaId": "FMA38929",
+          "bpId": "BP8094",
           "isTendon": false,
           "source": "bp3d"
         },
         {
-          "name": "short head of left biceps brachii",
-          "originalName": "short head of left biceps brachii",
-          "fmaId": "FMA37685",
-          "bpId": "BP9153",
+          "name": "left sartorius",
+          "originalName": "left sartorius",
+          "fmaId": "FMA22355",
+          "bpId": "BP8876",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "left vastus intermedius",
+          "originalName": "left vastus intermedius",
+          "fmaId": "FMA38935",
+          "bpId": "BP9207",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left vastus lateralis",
+          "originalName": "left vastus lateralis",
+          "fmaId": "FMA38931",
+          "bpId": "BP8754",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left vastus medialis",
+          "originalName": "left vastus medialis",
+          "fmaId": "FMA38933",
+          "bpId": "BP9128",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left iliotibial tract",
+          "originalName": "left iliotibial tract",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": true,
+          "source": "z-anatomy"
         }
       ],
       "type": "muscle",
       "rigId": null,
       "muscleId": null,
       "side": "left",
-      "movementGroup": "biceps",
-      "sourceVertexCount": 2782,
-      "triangleCount": 3282
+      "movementGroup": "quads",
+      "sourceVertexCount": 13238,
+      "triangleCount": 23443
+    },
+    {
+      "name": "left_lats",
+      "sourceNames": [
+        "left teres major",
+        "left latissimus dorsi"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left teres major",
+          "originalName": "left teres major",
+          "fmaId": "FMA32552",
+          "bpId": "BP8287",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "left latissimus dorsi",
+          "originalName": "left latissimus dorsi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "lats",
+      "sourceVertexCount": 3058,
+      "triangleCount": 5042
     },
     {
       "name": "right_biceps",
       "sourceNames": [
         "long head of right biceps brachii",
+        "right brachialis",
+        "right coracobrachialis",
         "short head of right biceps brachii"
       ],
       "sourceMappings": [
@@ -1045,6 +2425,22 @@
           "originalName": "long head of right biceps brachii",
           "fmaId": "FMA37686",
           "bpId": "BP5566",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right brachialis",
+          "originalName": "right brachialis",
+          "fmaId": "FMA37668",
+          "bpId": "BP4807",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right coracobrachialis",
+          "originalName": "right coracobrachialis",
+          "fmaId": "FMA37665",
+          "bpId": "BP4805",
           "isTendon": false,
           "source": "bp3d"
         },
@@ -1062,13 +2458,14 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "biceps",
-      "sourceVertexCount": 2792,
-      "triangleCount": 3282
+      "sourceVertexCount": 4508,
+      "triangleCount": 5472
     },
     {
       "name": "right_hamstrings",
       "sourceNames": [
         "long head of right biceps femoris",
+        "right popliteus",
         "right semimembranosus",
         "right semitendinosus",
         "short head of right biceps femoris"
@@ -1079,6 +2476,14 @@
           "originalName": "long head of right biceps femoris",
           "fmaId": "FMA45888",
           "bpId": "BP5575",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right popliteus",
+          "originalName": "right popliteus",
+          "fmaId": "FMA22591",
+          "bpId": "BP5006",
           "isTendon": false,
           "source": "bp3d"
         },
@@ -1112,14 +2517,97 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "hamstrings",
-      "sourceVertexCount": 7201,
-      "triangleCount": 12439
+      "sourceVertexCount": 7789,
+      "triangleCount": 13297
+    },
+    {
+      "name": "right_adductors",
+      "sourceNames": [
+        "right adductor brevis",
+        "right adductor longus",
+        "right adductor magnus",
+        "right adductor minimus",
+        "right gracilis",
+        "right pectineus"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right adductor brevis",
+          "originalName": "right adductor brevis",
+          "fmaId": "FMA22452",
+          "bpId": "BP4986",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right adductor longus",
+          "originalName": "right adductor longus",
+          "fmaId": "FMA22456",
+          "bpId": "BP4984",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right adductor magnus",
+          "originalName": "right adductor magnus",
+          "fmaId": "FMA22459",
+          "bpId": "BP4982",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right adductor minimus",
+          "originalName": "right adductor minimus",
+          "fmaId": "FMA43886",
+          "bpId": "BP4980",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right gracilis",
+          "originalName": "right gracilis",
+          "fmaId": "FMA43883",
+          "bpId": "BP4976",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right pectineus",
+          "originalName": "right pectineus",
+          "fmaId": "FMA22450",
+          "bpId": "BP4978",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "adductors",
+      "sourceVertexCount": 9736,
+      "triangleCount": 14590
     },
     {
       "name": "right_core",
       "sourceNames": [
         "right external oblique",
-        "right rectus abdominis"
+        "right iliocostalis cervicis",
+        "right iliocostalis lumborum",
+        "right iliocostalis thoracis",
+        "right longissimus thoracis",
+        "right psoas major",
+        "right semispinalis cervicis",
+        "right semispinalis thoracis",
+        "right spinalis thoracis",
+        "spinalis",
+        "right rectus abdominis",
+        "right internal oblique",
+        "right transversus abdominis",
+        "right quadratus lumborum",
+        "right multifidus cervicis",
+        "right multifidus thoracis",
+        "right multifidus lumborum"
       ],
       "sourceMappings": [
         {
@@ -1131,8 +2619,128 @@
           "source": "bp3d"
         },
         {
+          "name": "right iliocostalis cervicis",
+          "originalName": "right iliocostalis cervicis",
+          "fmaId": "FMA22744",
+          "bpId": "BP4755",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right iliocostalis lumborum",
+          "originalName": "right iliocostalis lumborum",
+          "fmaId": "FMA22740",
+          "bpId": "BP4753",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right iliocostalis thoracis",
+          "originalName": "right iliocostalis thoracis",
+          "fmaId": "FMA22742",
+          "bpId": "BP4751",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right longissimus thoracis",
+          "originalName": "right longissimus thoracis",
+          "fmaId": "FMA22751",
+          "bpId": "BP4744",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right psoas major",
+          "originalName": "right psoas major",
+          "fmaId": "FMA22342",
+          "bpId": "BP4701",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right semispinalis cervicis",
+          "originalName": "right semispinalis cervicis",
+          "fmaId": "FMA22874",
+          "bpId": "BP4715",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right semispinalis thoracis",
+          "originalName": "right semispinalis thoracis",
+          "fmaId": "FMA22872",
+          "bpId": "BP4713",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right spinalis thoracis",
+          "originalName": "right spinalis thoracis",
+          "fmaId": "FMA22779",
+          "bpId": "BP4763",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "spinalis",
+          "originalName": "spinalis",
+          "fmaId": "FMA77179",
+          "bpId": "BP8423",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
           "name": "right rectus abdominis",
           "originalName": "right rectus abdominis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right internal oblique",
+          "originalName": "right internal oblique",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right transversus abdominis",
+          "originalName": "right transversus abdominis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right quadratus lumborum",
+          "originalName": "right quadratus lumborum",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right multifidus cervicis",
+          "originalName": "right multifidus cervicis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right multifidus thoracis",
+          "originalName": "right multifidus thoracis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right multifidus lumborum",
+          "originalName": "right multifidus lumborum",
           "fmaId": "",
           "bpId": "",
           "isTendon": false,
@@ -1144,15 +2752,16 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "core",
-      "sourceVertexCount": 5507,
-      "triangleCount": 8846
+      "sourceVertexCount": 37277,
+      "triangleCount": 59459
     },
     {
       "name": "right_glutes",
       "sourceNames": [
         "right gluteus maximus",
         "right gluteus medius",
-        "right gluteus minimus"
+        "right gluteus minimus",
+        "right iliacus"
       ],
       "sourceMappings": [
         {
@@ -1178,6 +2787,14 @@
           "bpId": "BP5083",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "right iliacus",
+          "originalName": "right iliacus",
+          "fmaId": "FMA22322",
+          "bpId": "BP5085",
+          "isTendon": false,
+          "source": "bp3d"
         }
       ],
       "type": "muscle",
@@ -1185,16 +2802,213 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "glutes",
-      "sourceVertexCount": 6471,
-      "triangleCount": 9731
+      "sourceVertexCount": 8918,
+      "triangleCount": 12593
+    },
+    {
+      "name": "right_rearDelts",
+      "sourceNames": [
+        "right infraspinatus muscle",
+        "right teres minor",
+        "spinal part of right deltoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right infraspinatus muscle",
+          "originalName": "right infraspinatus muscle",
+          "fmaId": "FMA32547",
+          "bpId": "BP4797",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right teres minor",
+          "originalName": "right teres minor",
+          "fmaId": "FMA32553",
+          "bpId": "BP4793",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "spinal part of right deltoid",
+          "originalName": "spinal part of right deltoid",
+          "fmaId": "FMA34684",
+          "bpId": "BP5607",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "rearDelts",
+      "sourceVertexCount": 2800,
+      "triangleCount": 3272
+    },
+    {
+      "name": "right_neck",
+      "sourceNames": [
+        "right levator scapulae",
+        "right longissimus capitis",
+        "right longus capitis",
+        "right platysma",
+        "right scalenus anterior",
+        "right scalenus medius",
+        "right scalenus posterior",
+        "right semispinalis capitis",
+        "right splenius capitis",
+        "right splenius cervicis",
+        "right sternocleidomastoid"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right levator scapulae",
+          "originalName": "right levator scapulae",
+          "fmaId": "FMA32540",
+          "bpId": "BP4786",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right longissimus capitis",
+          "originalName": "right longissimus capitis",
+          "fmaId": "FMA22754",
+          "bpId": "BP4748",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right longus capitis",
+          "originalName": "right longus capitis",
+          "fmaId": "FMA46309",
+          "bpId": "BP4703",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right platysma",
+          "originalName": "right platysma",
+          "fmaId": "FMA45739",
+          "bpId": "BP4912",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right scalenus anterior",
+          "originalName": "right scalenus anterior",
+          "fmaId": "FMA13392",
+          "bpId": "BP4880",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right scalenus medius",
+          "originalName": "right scalenus medius",
+          "fmaId": "FMA13390",
+          "bpId": "BP4878",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right scalenus posterior",
+          "originalName": "right scalenus posterior",
+          "fmaId": "FMA13388",
+          "bpId": "BP4875",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right semispinalis capitis",
+          "originalName": "right semispinalis capitis",
+          "fmaId": "FMA22876",
+          "bpId": "BP4717",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right splenius capitis",
+          "originalName": "right splenius capitis",
+          "fmaId": "FMA22728",
+          "bpId": "BP4758",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right splenius cervicis",
+          "originalName": "right splenius cervicis",
+          "fmaId": "FMA22726",
+          "bpId": "BP4760",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right sternocleidomastoid",
+          "originalName": "right sternocleidomastoid",
+          "fmaId": "FMA13408",
+          "bpId": "BP4909",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "neck",
+      "sourceVertexCount": 24342,
+      "triangleCount": 37536
+    },
+    {
+      "name": "right_chest",
+      "sourceNames": [
+        "right pectoralis minor",
+        "right serratus anterior",
+        "right subscapularis"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right pectoralis minor",
+          "originalName": "right pectoralis minor",
+          "fmaId": "FMA13375",
+          "bpId": "BP4775",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right serratus anterior",
+          "originalName": "right serratus anterior",
+          "fmaId": "FMA13398",
+          "bpId": "BP4782",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right subscapularis",
+          "originalName": "right subscapularis",
+          "fmaId": "FMA13414",
+          "bpId": "BP4795",
+          "isTendon": false,
+          "source": "bp3d"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "chest",
+      "sourceVertexCount": 7885,
+      "triangleCount": 10092
     },
     {
       "name": "right_quads",
       "sourceNames": [
         "right rectus femoris",
+        "right sartorius",
         "right vastus intermedius",
         "right vastus lateralis",
-        "right vastus medialis"
+        "right vastus medialis",
+        "right iliotibial tract"
       ],
       "sourceMappings": [
         {
@@ -1202,6 +3016,14 @@
           "originalName": "right rectus femoris",
           "fmaId": "FMA38928",
           "bpId": "BP5598",
+          "isTendon": false,
+          "source": "bp3d"
+        },
+        {
+          "name": "right sartorius",
+          "originalName": "right sartorius",
+          "fmaId": "FMA22354",
+          "bpId": "BP4994",
           "isTendon": false,
           "source": "bp3d"
         },
@@ -1228,6 +3050,14 @@
           "bpId": "BP5600",
           "isTendon": false,
           "source": "bp3d"
+        },
+        {
+          "name": "right iliotibial tract",
+          "originalName": "right iliotibial tract",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": true,
+          "source": "z-anatomy"
         }
       ],
       "type": "muscle",
@@ -1235,84 +3065,24 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "quads",
-      "sourceVertexCount": 8602,
-      "triangleCount": 15996
-    },
-    {
-      "name": "left_rearDelts",
-      "sourceNames": [
-        "spinal part of left deltoid"
-      ],
-      "sourceMappings": [
-        {
-          "name": "spinal part of left deltoid",
-          "originalName": "spinal part of left deltoid",
-          "fmaId": "FMA34685",
-          "bpId": "BP8151",
-          "isTendon": false,
-          "source": "bp3d"
-        }
-      ],
-      "type": "muscle",
-      "rigId": null,
-      "muscleId": null,
-      "side": "left",
-      "movementGroup": "rearDelts",
-      "sourceVertexCount": 1678,
-      "triangleCount": 1900
-    },
-    {
-      "name": "right_rearDelts",
-      "sourceNames": [
-        "spinal part of right deltoid"
-      ],
-      "sourceMappings": [
-        {
-          "name": "spinal part of right deltoid",
-          "originalName": "spinal part of right deltoid",
-          "fmaId": "FMA34684",
-          "bpId": "BP5607",
-          "isTendon": false,
-          "source": "bp3d"
-        }
-      ],
-      "type": "muscle",
-      "rigId": null,
-      "muscleId": null,
-      "side": "right",
-      "movementGroup": "rearDelts",
-      "sourceVertexCount": 1665,
-      "triangleCount": 1900
-    },
-    {
-      "name": "left_lats",
-      "sourceNames": [
-        "left latissimus dorsi"
-      ],
-      "sourceMappings": [
-        {
-          "name": "left latissimus dorsi",
-          "originalName": "left latissimus dorsi",
-          "fmaId": "",
-          "bpId": "",
-          "isTendon": false,
-          "source": "z-anatomy"
-        }
-      ],
-      "type": "muscle",
-      "rigId": null,
-      "muscleId": null,
-      "side": "left",
-      "movementGroup": "lats",
-      "sourceVertexCount": 2006,
-      "triangleCount": 4000
+      "sourceVertexCount": 13233,
+      "triangleCount": 23440
     },
     {
       "name": "right_lats",
       "sourceNames": [
+        "right teres major",
         "right latissimus dorsi"
       ],
       "sourceMappings": [
+        {
+          "name": "right teres major",
+          "originalName": "right teres major",
+          "fmaId": "FMA32551",
+          "bpId": "BP4789",
+          "isTendon": false,
+          "source": "bp3d"
+        },
         {
           "name": "right latissimus dorsi",
           "originalName": "right latissimus dorsi",
@@ -1327,8 +3097,396 @@
       "muscleId": null,
       "side": "right",
       "movementGroup": "lats",
-      "sourceVertexCount": 2006,
-      "triangleCount": 4000
+      "sourceVertexCount": 3050,
+      "triangleCount": 5042
+    },
+    {
+      "name": "left_face",
+      "sourceNames": [
+        "left superficial part of masseter",
+        "left deep part of masseter",
+        "left temporalis",
+        "left medial pterygoid",
+        "left inferior head of lateral pterygoid",
+        "left superior head of lateral pterygoid",
+        "left frontalis",
+        "left orbital part of orbicularis oculi",
+        "left palpebral part of orbicularis oculi",
+        "left orbicularis oris",
+        "left zygomaticus major",
+        "left zygomaticus minor",
+        "left levator labii superioris",
+        "left depressor labii inferioris",
+        "left depressor anguli oris",
+        "left risorius",
+        "left mentalis",
+        "left procerus",
+        "left nasalis",
+        "left corrugator supercilii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "left superficial part of masseter",
+          "originalName": "left superficial part of masseter",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left deep part of masseter",
+          "originalName": "left deep part of masseter",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left temporalis",
+          "originalName": "left temporalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left medial pterygoid",
+          "originalName": "left medial pterygoid",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left inferior head of lateral pterygoid",
+          "originalName": "left inferior head of lateral pterygoid",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left superior head of lateral pterygoid",
+          "originalName": "left superior head of lateral pterygoid",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left frontalis",
+          "originalName": "left frontalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left orbital part of orbicularis oculi",
+          "originalName": "left orbital part of orbicularis oculi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left palpebral part of orbicularis oculi",
+          "originalName": "left palpebral part of orbicularis oculi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left orbicularis oris",
+          "originalName": "left orbicularis oris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left zygomaticus major",
+          "originalName": "left zygomaticus major",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left zygomaticus minor",
+          "originalName": "left zygomaticus minor",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left levator labii superioris",
+          "originalName": "left levator labii superioris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left depressor labii inferioris",
+          "originalName": "left depressor labii inferioris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left depressor anguli oris",
+          "originalName": "left depressor anguli oris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left risorius",
+          "originalName": "left risorius",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left mentalis",
+          "originalName": "left mentalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left procerus",
+          "originalName": "left procerus",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left nasalis",
+          "originalName": "left nasalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "left corrugator supercilii",
+          "originalName": "left corrugator supercilii",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "left",
+      "movementGroup": "face",
+      "sourceVertexCount": 11025,
+      "triangleCount": 22028
+    },
+    {
+      "name": "right_face",
+      "sourceNames": [
+        "right superficial part of masseter",
+        "right deep part of masseter",
+        "right temporalis",
+        "right medial pterygoid",
+        "right inferior head of lateral pterygoid",
+        "right superior head of lateral pterygoid",
+        "right frontalis",
+        "right orbital part of orbicularis oculi",
+        "right palpebral part of orbicularis oculi",
+        "right orbicularis oris",
+        "right zygomaticus major",
+        "right zygomaticus minor",
+        "right levator labii superioris",
+        "right depressor labii inferioris",
+        "right depressor anguli oris",
+        "right risorius",
+        "right mentalis",
+        "right procerus",
+        "right nasalis",
+        "right corrugator supercilii"
+      ],
+      "sourceMappings": [
+        {
+          "name": "right superficial part of masseter",
+          "originalName": "right superficial part of masseter",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right deep part of masseter",
+          "originalName": "right deep part of masseter",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right temporalis",
+          "originalName": "right temporalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right medial pterygoid",
+          "originalName": "right medial pterygoid",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right inferior head of lateral pterygoid",
+          "originalName": "right inferior head of lateral pterygoid",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right superior head of lateral pterygoid",
+          "originalName": "right superior head of lateral pterygoid",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right frontalis",
+          "originalName": "right frontalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right orbital part of orbicularis oculi",
+          "originalName": "right orbital part of orbicularis oculi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right palpebral part of orbicularis oculi",
+          "originalName": "right palpebral part of orbicularis oculi",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right orbicularis oris",
+          "originalName": "right orbicularis oris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right zygomaticus major",
+          "originalName": "right zygomaticus major",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right zygomaticus minor",
+          "originalName": "right zygomaticus minor",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right levator labii superioris",
+          "originalName": "right levator labii superioris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right depressor labii inferioris",
+          "originalName": "right depressor labii inferioris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right depressor anguli oris",
+          "originalName": "right depressor anguli oris",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right risorius",
+          "originalName": "right risorius",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right mentalis",
+          "originalName": "right mentalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right procerus",
+          "originalName": "right procerus",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right nasalis",
+          "originalName": "right nasalis",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        },
+        {
+          "name": "right corrugator supercilii",
+          "originalName": "right corrugator supercilii",
+          "fmaId": "",
+          "bpId": "",
+          "isTendon": false,
+          "source": "z-anatomy"
+        }
+      ],
+      "type": "muscle",
+      "rigId": null,
+      "muscleId": null,
+      "side": "right",
+      "movementGroup": "face",
+      "sourceVertexCount": 11025,
+      "triangleCount": 22028
     }
   ],
   "transformation": {

@@ -8,7 +8,7 @@ import {
   emptyLibrary,
 } from './catalog';
 import { movementPose } from './motion';
-import { analyzeMovement } from './lab';
+import { solveMovementFrame } from './simulateMovement';
 import { gripCenter } from '../components/three/anatomyRig';
 describe('movement library', () => {
   it('covers every pattern with valid editable templates', () => {
@@ -39,6 +39,18 @@ describe('movement library', () => {
             ).toBeLessThan(1e-6);
         }
   });
+  it('twists the hands around the handle without leaving the grip center', () => {
+    const original = catalog.find((m) => m.id === 'bench')!;
+    const pose = movementPose({ ...original, gripAngle: 40 }, 0.4);
+    const flat = movementPose({ ...original, gripAngle: 0 }, 0.4);
+    expect(
+      gripCenter
+        .clone()
+        .applyMatrix4(pose.matrices[9])
+        .distanceTo(new Vector3(...pose.hands[0])),
+    ).toBeLessThan(1e-6);
+    expect(pose.matrices[9].elements).not.toEqual(flat.matrices[9].elements);
+  });
   it('uses bench support only for press and hip-thrust poses', () => {
     expect(
       movementPose(
@@ -65,17 +77,13 @@ describe('movement library', () => {
       ).bench,
     ).toBe(false);
   });
-  it('produces finite detailed-pose readings for every movement and rep position', () => {
+  it('produces finite load readings for every movement and rep position', () => {
     for (const movement of catalog)
       for (const progress of [0, 0.5, 1]) {
-        const reading = analyzeMovement(movement, progress);
-        expect(
-          Object.values(reading)
-            .filter((value) => typeof value === 'number')
-            .every(Number.isFinite),
-          movement.name,
-        ).toBe(true);
-        expect(reading.phasePercent).toBe(Math.round(progress * 100));
+        const frame = solveMovementFrame(movement, progress, 40, 78);
+        expect(Number.isFinite(frame.peakMomentNm), movement.name).toBe(true);
+        expect(Number.isFinite(frame.impactBw), movement.name).toBe(true);
+        expect(frame.progress).toBeCloseTo(progress);
       }
   });
   it('rejects corrupt imports and preserves complete custom movement snapshots', () => {

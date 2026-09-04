@@ -18,7 +18,7 @@ The four supplementary latissimus dorsi and rectus abdominis meshes use the upst
 ## Changes made by LiftLab
 
 - Retained 200 unique bone meshes (one duplicate hyoid mesh was removed).
-- Selected 62 muscle meshes covering chest, all three deltoid regions, triceps, biceps, lats, trapezius, abdominals, glutes, quadriceps, hamstrings and calves. The Bench lab displays its 14 modeled press muscles.
+- Selected 280 unique muscle meshes covering the previous press/pull/leg set plus neck, face, forearms, hands, rotator cuff, adductors, and other body-completing tissue. Pelvic floor, viscera, eye extraocular muscles, and fascia sheets are omitted. The Bench lab still scores its 14 modeled press muscles.
 - Merged bone meshes by articulated segment and muscles by modeled region and side.
 - Transformed millimeter coordinates and fitted them to the generic simulation body proportions.
 - Posed each finger phalanx with a rigid joint rotation, opposed the thumbs, and aligned a canonical grip center with the handle; applied dynamic rigid-bone / blended soft-tissue deformation.

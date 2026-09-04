@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useEffectEvent, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import {
   Search,
   Plus,
@@ -7,6 +7,7 @@ import {
   Pause,
   ArrowRight,
   Trash2,
+  Download,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,54 +29,28 @@ import {
   type Equipment,
   validMovement,
   angleControl,
+  widthControl,
+  gripAngleControl,
 } from './catalog';
 import type { Library } from './useLibrary';
 import { useSimulationStore } from '../store/useSimulationStore';
-import { analyzeMovement } from './lab';
+import { useLabStore } from '../store/useLabStore';
+import { solveMovementFrame } from './simulateMovement';
+import {
+  jointIds,
+  tissueIds,
+  type JointId,
+} from '../engine/tissueLoad';
 const MovementScene = lazy(() => import('./MovementScene'));
 
-function DetailedMovementLab({
-  movement,
-  progress,
-}: {
-  movement: Movement;
-  progress: number;
-}) {
-  const reading = analyzeMovement(movement, progress);
-  const rows = [
-    ['Rep position', `${reading.phasePercent}%`],
-    ['Elbow flexion', `${reading.elbowFlexionDeg}°`],
-    ['Knee flexion', `${reading.kneeFlexionDeg}°`],
-    ['Foot / stance width', `${reading.stanceWidthCm} cm`],
-  ];
-  return (
-    <section
-      className="detailed-movement-lab"
-      aria-label="Detailed movement lab"
-    >
-      <div className="detailed-movement-lab-heading">
-        <div>
-          <span className="eyebrow">DETAILED MOVEMENT LAB</span>
-          <h3>Live pose geometry</h3>
-        </div>
-        <span>{reading.setup}</span>
-      </div>
-      <div className="detailed-movement-readings">
-        {rows.map(([label, value]) => (
-          <div key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </div>
-        ))}
-      </div>
-      <p>
-        These readings update with the playhead, range, angle and stance
-        controls. They describe the generic articulated pose used in this
-        preview, not a measurement of your body or an injury assessment.
-      </p>
-    </section>
-  );
-}
+const jointLabel: Record<JointId, string> = {
+  shoulder: 'Shoulder',
+  elbow: 'Elbow',
+  hip: 'Hip',
+  knee: 'Knee',
+  ankle: 'Ankle',
+};
+
 export function RangeControl({
   label,
   value,
@@ -114,6 +89,24 @@ export function RangeControl({
     </label>
   );
 }
+
+function Spark({ frames, id }: { frames: { demand: Record<GroupId, number> }[]; id: GroupId }) {
+  const w = 220,
+    h = 36;
+  const pts = frames
+    .map((f, i) => {
+      const x = (i / (frames.length - 1)) * w;
+      const y = h - 3 - f.demand[id] * (h - 6);
+      return `${x},${y}`;
+    })
+    .join(' ');
+  return (
+    <svg className="lab-spark" viewBox={`0 0 ${w} ${h}`} aria-hidden>
+      <polyline fill="none" stroke="currentColor" strokeWidth="1.6" points={pts} />
+    </svg>
+  );
+}
+
 function Editor({
   initial,
   onClose,
@@ -148,8 +141,8 @@ function Editor({
           {initial.custom ? 'Edit movement' : 'Create your movement'}
         </DialogTitle>
         <DialogDescription>
-          Start from a movement pattern, then set your variation and muscle
-          emphasis.
+          Pattern and equipment set the load case. Muscle tags are labels, not
+          the moment model.
         </DialogDescription>
         <form
           onSubmit={(e) => {
@@ -242,7 +235,7 @@ function Editor({
             onChange={(range) => setDraft({ ...draft, range })}
           />
           <RangeControl
-            label="Grip / stance multiplier"
+            label={widthControl(draft).label}
             value={draft.stance}
             min={0.6}
             max={1.6}
@@ -250,8 +243,18 @@ function Editor({
             suffix="×"
             onChange={(stance) => setDraft({ ...draft, stance })}
           />
+          {gripAngleControl(draft) && (
+            <RangeControl
+              label="Grip angle"
+              value={draft.gripAngle ?? 0}
+              min={-90}
+              max={90}
+              suffix="°"
+              onChange={(gripAngle) => setDraft({ ...draft, gripAngle })}
+            />
+          )}
           <label>
-            Coaching cues · one per line
+            Cues · one per line
             <textarea
               rows={3}
               maxLength={1800}
@@ -282,52 +285,32 @@ function Editor({
     </Dialog>
   );
 }
+
 export default function MovementLibrary({ library }: { library: Library }) {
   const [query, setQuery] = useState(''),
     [pattern, setPattern] = useState('All patterns'),
     [equipment, setEquipment] = useState('All equipment'),
     [scope, setScope] = useState('All'),
-    [selectedId, setSelectedId] = useState('bench');
-  const all = [...catalog, ...library.data.custom];
-  const original = all.find((m) => m.id === selectedId) ?? catalog[0];
-  const [settings, setSettings] = useState({
-      angle: original.angle,
-      range: original.range,
-      stance: original.stance,
-    }),
-    [progress, setProgress] = useState(0.35),
-    [playing, setPlaying] = useState(false),
-    [view, setView] = useState('3D'),
-    [bones, setBones] = useState(true),
-    [selectedGroup, setSelectedGroup] = useState<GroupId | null>(null),
     [editor, setEditor] = useState<Movement | null>(null),
     [notice, setNotice] = useState('');
-  const movement = { ...original, ...settings };
+  const movement = useLabStore((s) => s.movement),
+    loadKg = useLabStore((s) => s.loadKg),
+    bodyMassKg = useLabStore((s) => s.bodyMassKg),
+    progress = useLabStore((s) => s.progress),
+    playing = useLabStore((s) => s.playing),
+    bones = useLabStore((s) => s.bones),
+    view = useLabStore((s) => s.view),
+    selectedGroup = useLabStore((s) => s.selectedGroup),
+    sim = useLabStore((s) => s.sim);
+  const all = [...catalog, ...library.data.custom];
+  const original = all.find((m) => m.id === movement.id) ?? movement;
   const angle = angleControl(movement);
-  const readProgress = useEffectEvent(() => progress);
-  useEffect(() => {
-    if (!playing) return;
-    let last = performance.now(),
-      phase = readProgress(),
-      dir = 1;
-    let frame: number;
-    const tick = (now: number) => {
-      phase += Math.min(0.05, (now - last) / 1000) * 0.35 * dir;
-      last = now;
-      if (phase >= 1) {
-        phase = 1;
-        dir = -1;
-      }
-      if (phase <= 0) {
-        phase = 0;
-        dir = 1;
-      }
-      setProgress(phase);
-      frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [playing]);
+  const width = widthControl(movement);
+  const live = solveMovementFrame(movement, progress, loadKg, bodyMassKg);
+  const ranked = tissueIds
+    .map((id) => ({ id, live: live.demand[id], peak: sim.peakDemand[id] }))
+    .filter((row) => row.peak > 0.04)
+    .sort((a, b) => b.live - a.live);
   const matches = all.filter(
     (m) =>
       (pattern === 'All patterns' || m.pattern === pattern) &&
@@ -338,18 +321,11 @@ export default function MovementLibrary({ library }: { library: Library }) {
         .toLowerCase()
         .includes(query.toLowerCase()),
   );
-  const select = (m: Movement) => {
-    setSelectedId(m.id);
-    setSettings({ angle: m.angle, range: m.range, stance: m.stance });
-    setProgress(0.35);
-    setPlaying(false);
-    setSelectedGroup(null);
-    setNotice('');
-  };
   const favorite = library.data.favorites.includes(original.id);
+
   function addWorkout() {
     if (library.data.workout.length >= 40) {
-      setNotice('Your workout can contain up to 40 movements.');
+      setNotice('Your session can contain up to 40 movements.');
       return;
     }
     library.update((d) => ({
@@ -363,16 +339,17 @@ export default function MovementLibrary({ library }: { library: Library }) {
           reps:
             movement.pattern === 'Core' || movement.pattern === 'Carry'
               ? 30
-              : 10,
-          load: 0,
+              : 8,
+          load: loadKg,
           rest: 90,
           completed: 0,
           notes: '',
         },
       ],
     }));
-    setNotice('Added to your workout. Set the load and log sets in Workout.');
+    setNotice(`Queued at ${loadKg} kg. Open Session to prescribe sets.`);
   }
+
   const create = (clone: boolean) => {
     setEditor(
       clone
@@ -391,337 +368,454 @@ export default function MovementLibrary({ library }: { library: Library }) {
           },
     );
   };
+
   return (
-    <main className="movement-page">
-      <div className="movement-heading">
-        <div>
-          <span className="eyebrow">BUILD A BETTER SESSION</span>
-          <h1>Find your next movement.</h1>
-          <p>Explore the anatomy. Make it yours. Put it to work.</p>
+    <main className="lab">
+      <aside className="lab-catalog">
+        <div className="lab-search">
+          <Search size={14} />
+          <Input
+            aria-label="Search movements"
+            placeholder="Movement or tissue"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
-        <Button disabled={!library.ready} onClick={() => create(false)}>
-          <Plus size={16} /> New movement
+        <div className="lab-filters">
+          <select
+            aria-label="Filter movement pattern"
+            value={pattern}
+            onChange={(e) => setPattern(e.target.value)}
+          >
+            <option>All patterns</option>
+            {patterns.map((p) => (
+              <option key={p}>{p}</option>
+            ))}
+          </select>
+          <select
+            aria-label="Filter equipment"
+            value={equipment}
+            onChange={(e) => setEquipment(e.target.value)}
+          >
+            <option>All equipment</option>
+            {equipmentOptions.map((p) => (
+              <option key={p}>{p}</option>
+            ))}
+          </select>
+        </div>
+        <div className="lab-scopes">
+          {['All', 'Favorites', 'Mine'].map((s) => (
+            <button
+              key={s}
+              className={
+                (s === 'Mine' ? scope === 'My movements' : scope === s)
+                  ? 'on'
+                  : ''
+              }
+              onClick={() => setScope(s === 'Mine' ? 'My movements' : s)}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+        <div className="lab-count">{matches.length}</div>
+        <div className="lab-list">
+          {matches.map((m) => (
+            <button
+              key={m.id}
+              className={m.id === original.id ? 'on' : ''}
+              onClick={() => useLabStore.getState().open(m)}
+            >
+              <em>{m.pattern}</em>
+              <strong>{m.name}</strong>
+              <span>{m.equipment}</span>
+            </button>
+          ))}
+        </div>
+        <Button
+          variant="outline"
+          disabled={!library.ready}
+          onClick={() => create(false)}
+        >
+          <Plus size={14} /> Custom
         </Button>
-      </div>
-      <div className="movement-layout">
-        <aside className="movement-browser">
-          <div className="movement-search">
-            <Search size={16} />
-            <Input
-              aria-label="Search movements"
-              placeholder="Search a movement or muscle…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+      </aside>
+
+      <section className="lab-stage">
+        <div className="lab-viewport">
+          <div className="lab-view-tools">
+            <span>
+              {original.equipment} · {original.pattern}
+            </span>
+            <div>
+              {(['3D', 'Front', 'Side', 'Back'] as const).map((v) => (
+                <button
+                  key={v}
+                  className={view === v ? 'on' : ''}
+                  onClick={() => useLabStore.getState().setView(v)}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
+          </div>
+          <Suspense fallback={<div className="page-loading">Loading anatomy…</div>}>
+            <MovementScene
+              movement={movement}
+              progress={progress}
+              bones={bones}
+              selected={selectedGroup}
+              view={view}
+              demand={live.demand}
+              forces={live.forces}
             />
+          </Suspense>
+          <div className="lab-hud">
+            <div>
+              <span>Load</span>
+              <b>
+                {loadKg.toFixed(0)}
+                <small> kg</small>
+              </b>
+            </div>
+            <div>
+              <span>{jointLabel[live.peakMomentJoint]}</span>
+              <b>
+                {Math.round(live.peakMomentNm)}
+                <small> Nm</small>
+              </b>
+            </div>
+            <div>
+              <span>Impact</span>
+              <b>
+                {live.impactBw.toFixed(1)}
+                <small> BW</small>
+              </b>
+            </div>
+            <div>
+              <span>Tissue</span>
+              <b>{muscleGroups[sim.hottest]}</b>
+            </div>
           </div>
-          <div className="movement-filters">
-            <select
-              aria-label="Filter movement pattern"
-              value={pattern}
-              onChange={(e) => setPattern(e.target.value)}
-            >
-              <option>All patterns</option>
-              {patterns.map((p) => (
-                <option key={p}>{p}</option>
-              ))}
-            </select>
-            <select
-              aria-label="Filter equipment"
-              value={equipment}
-              onChange={(e) => setEquipment(e.target.value)}
-            >
-              <option>All equipment</option>
-              {equipmentOptions.map((p) => (
-                <option key={p}>{p}</option>
-              ))}
-            </select>
-          </div>
-          <div className="movement-tabs">
-            {['All', 'Favorites', 'My movements'].map((s) => (
+          <button
+            className={'lab-bone-toggle' + (bones ? ' on' : '')}
+            onClick={() => useLabStore.getState().setBones(!bones)}
+          >
+            Skeleton {bones ? 'on' : 'off'}
+          </button>
+        </div>
+
+        <div className="lab-transport">
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label={playing ? 'Pause' : 'Play'}
+            onClick={() => useLabStore.getState().setPlaying(!playing)}
+          >
+            {playing ? <Pause size={16} /> : <Play size={16} />}
+          </Button>
+          <input
+            aria-label="Rep position"
+            type="range"
+            min={0}
+            max={1}
+            step={0.005}
+            value={progress}
+            onChange={(e) =>
+              useLabStore.getState().setProgress(Number(e.target.value))
+            }
+          />
+          <span>{Math.round(progress * 100)}</span>
+        </div>
+
+        <div className="lab-load">
+          <span>External load</span>
+          <div className="lab-stepper">
+            {[-10, -2.5, 2.5, 10].map((step) => (
               <button
-                key={s}
-                className={scope === s ? 'active' : ''}
-                onClick={() => setScope(s)}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-          <div className="movement-count">
-            {matches.length} movements <span>{patterns.length} patterns</span>
-          </div>
-          <div className="movement-list">
-            {matches.map((m) => (
-              <button
-                className={
-                  'movement-card ' + (m.id === original.id ? 'active' : '')
+                key={step}
+                type="button"
+                onClick={() =>
+                  useLabStore.getState().setLoad(Math.max(0, loadKg + step))
                 }
-                key={m.id}
-                onClick={() => select(m)}
               >
-                <span className="movement-card-top">
-                  {m.pattern}
-                  {library.data.favorites.includes(m.id) && (
-                    <Star size={12} fill="currentColor" />
-                  )}
-                  {m.custom && <i>YOURS</i>}
-                </span>
-                <strong>{m.name}</strong>
-                <span>
-                  {m.equipment} <b>·</b>{' '}
-                  {m.primary.map((g) => muscleGroups[g]).join(' / ')}
-                </span>
+                {step > 0 ? `+${step}` : step}
               </button>
             ))}
-            {!matches.length && (
-              <div className="movement-empty">
-                <p>No movements match these filters.</p>
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setQuery('');
-                    setPattern('All patterns');
-                    setEquipment('All equipment');
-                    setScope('All');
-                  }}
-                >
-                  Clear filters
-                </Button>
-              </div>
-            )}
-          </div>
-        </aside>
-        <section className="movement-detail">
-          <div className="movement-detail-title">
-            <div>
-              <span className="eyebrow">
-                {original.equipment} /{' '}
-                {original.custom ? 'YOUR VARIATION' : 'MOVEMENT LIBRARY'}
-              </span>
-              <h2>{original.name}</h2>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              disabled={!library.ready}
-              aria-label={favorite ? 'Remove favorite' : 'Add favorite'}
-              aria-pressed={favorite}
-              onClick={() =>
-                library.update((d) => ({
-                  ...d,
-                  favorites: favorite
-                    ? d.favorites.filter((id) => id !== original.id)
-                    : [...d.favorites, original.id],
-                }))
-              }
-            >
-              <Star fill={favorite ? 'currentColor' : 'none'} />
-            </Button>
-          </div>
-          <div className="movement-viewport">
-            <div className="movement-view-tools">
-              <span>Pattern preview · {original.pattern}</span>
-              <div>
-                {['3D', 'Front', 'Side', 'Back'].map((v) => (
-                  <button
-                    key={v}
-                    className={view === v ? 'active' : ''}
-                    onClick={() => setView(v)}
-                  >
-                    {v}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <Suspense
-              fallback={
-                <div className="page-loading">Loading anatomical model…</div>
-              }
-            >
-              <MovementScene
-                movement={movement}
-                progress={progress}
-                bones={bones}
-                selected={selectedGroup}
-                view={view}
-              />
-            </Suspense>
-            <div className="movement-view-bottom">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={bones}
-                  onChange={(e) => setBones(e.target.checked)}
-                />{' '}
-                Skeleton
-              </label>
-              <span>Drag to orbit · scroll to zoom</span>
-            </div>
-          </div>
-          <div className="movement-transport">
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label={playing ? 'Pause movement' : 'Play movement'}
-              onClick={() => setPlaying(!playing)}
-            >
-              {playing ? <Pause size={16} /> : <Play size={16} />}
-            </Button>
-            <input
-              aria-label="Movement position"
-              type="range"
+            <Input
+              aria-label="External load in kilograms"
+              type="number"
               min={0}
-              max={1}
-              step={0.005}
-              value={progress}
-              onChange={(e) => {
-                setPlaying(false);
-                setProgress(Number(e.target.value));
-              }}
+              max={500}
+              step={0.5}
+              value={loadKg}
+              onChange={(e) =>
+                useLabStore.getState().setLoad(Number(e.target.value) || 0)
+              }
             />
-            <span>{Math.round(progress * 100)}%</span>
+            <b>kg</b>
           </div>
-          <div className="movement-adjustments">
-            {angle && (
-              <RangeControl
-                label={angle.label}
-                value={settings.angle}
-                min={angle.min}
-                max={angle.max}
-                suffix="°"
-                onChange={(angle) => setSettings({ ...settings, angle })}
-              />
+          {movement.equipment === 'Bodyweight' && (
+            <p>Body mass is the moving load. Added mass is a vest or belt.</p>
+          )}
+        </div>
+
+        <div className="lab-setup">
+          {angle && (
+            <RangeControl
+              label={angle.label}
+              value={movement.angle}
+              min={angle.min}
+              max={angle.max}
+              suffix="°"
+              onChange={(angle) =>
+                useLabStore.getState().setSettings({ angle })
+              }
+            />
+          )}
+          <RangeControl
+            label="ROM"
+            value={movement.range}
+            min={20}
+            max={100}
+            suffix="%"
+            onChange={(range) => useLabStore.getState().setSettings({ range })}
+          />
+          <RangeControl
+            label={width.label}
+            value={movement.stance}
+            min={width.min}
+            max={width.max}
+            step={0.05}
+            suffix="×"
+            onChange={(stance) =>
+              useLabStore.getState().setSettings({ stance })
+            }
+          />
+          {gripAngleControl(movement) && (
+            <RangeControl
+              label="Grip angle"
+              value={movement.gripAngle ?? 0}
+              min={-90}
+              max={90}
+              suffix="°"
+              onChange={(gripAngle) =>
+                useLabStore.getState().setSettings({ gripAngle })
+              }
+            />
+          )}
+        </div>
+
+        <div className="lab-actions">
+          <Button disabled={!library.ready} onClick={addWorkout}>
+            <Plus size={15} /> Add to session
+          </Button>
+          <Button
+            variant="outline"
+            disabled={!library.ready}
+            onClick={() => create(true)}
+          >
+            Save variation
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            disabled={!library.ready}
+            aria-label={favorite ? 'Remove favorite' : 'Add favorite'}
+            onClick={() =>
+              library.update((d) => ({
+                ...d,
+                favorites: favorite
+                  ? d.favorites.filter((id) => id !== original.id)
+                  : [...d.favorites, original.id],
+              }))
+            }
+          >
+            <Star fill={favorite ? 'currentColor' : 'none'} />
+          </Button>
+          {original.custom && (
+            <>
+              <Button
+                variant="ghost"
+                onClick={() => setEditor({ ...movement, custom: true })}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="ghost"
+                aria-label="Delete custom movement"
+                onClick={() => {
+                  if (window.confirm(`Delete ${original.name}?`)) {
+                    library.update((d) => ({
+                      ...d,
+                      custom: d.custom.filter((m) => m.id !== original.id),
+                      favorites: d.favorites.filter((id) => id !== original.id),
+                    }));
+                    useLabStore.getState().open(catalog[0]);
+                  }
+                }}
+              >
+                <Trash2 size={15} />
+              </Button>
+            </>
+          )}
+          {original.pattern === 'Horizontal press' &&
+            original.equipment !== 'Bodyweight' && (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  useSimulationStore.getState().updateConfig({
+                    benchAngleDeg: movement.angle,
+                    romPercent: movement.range,
+                    gripWidthRatio: 1.6 * movement.stance,
+                    loadKg,
+                  });
+                  useSimulationStore.getState().setTab('Sandbox');
+                }}
+              >
+                4-muscle bench <ArrowRight size={14} />
+              </Button>
             )}
-            <RangeControl
-              label="Range of motion"
-              value={settings.range}
-              min={20}
-              max={100}
-              suffix="%"
-              onChange={(range) => setSettings({ ...settings, range })}
-            />
-            <RangeControl
-              label="Grip / stance"
-              value={settings.stance}
-              min={0.6}
-              max={1.6}
-              step={0.05}
-              suffix="×"
-              onChange={(stance) => setSettings({ ...settings, stance })}
-            />
-          </div>
-          <DetailedMovementLab movement={movement} progress={progress} />
-          <div className="movement-anatomy">
-            <div>
-              <span className="eyebrow">ILLUSTRATIVE MUSCLE EMPHASIS</span>
-              <div className="movement-muscles">
-                {original.primary.map((g) => (
-                  <button
-                    key={g}
-                    className={
-                      'primary ' + (selectedGroup === g ? 'selected' : '')
-                    }
-                    onClick={() =>
-                      setSelectedGroup(selectedGroup === g ? null : g)
-                    }
-                  >
-                    {muscleGroups[g]}
-                    <small>Primary</small>
-                  </button>
-                ))}
-                {original.secondary.map((g) => (
-                  <button
-                    key={g}
-                    className={selectedGroup === g ? 'selected' : ''}
-                    onClick={() =>
-                      setSelectedGroup(selectedGroup === g ? null : g)
-                    }
-                  >
-                    {muscleGroups[g]}
-                    <small>Supporting</small>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <p>
-              Real anatomical meshes, simplified movement patterns. Colors show
-              assigned muscle roles, not measured activation. Setup controls
-              affect supported parts of each pattern; variants may share a
-              preview.
-            </p>
-          </div>
-          <div className="movement-cues">
-            <h3>Movement cues</h3>
-            <ol>
-              {original.cues.filter(Boolean).map((cue, i) => (
-                <li key={i}>{cue}</li>
-              ))}
-            </ol>
-            {original.notes && <p>{original.notes}</p>}
-          </div>
-          <div className="movement-actions">
-            <Button disabled={!library.ready} onClick={addWorkout}>
-              <Plus size={15} /> Add to workout
-            </Button>
-            <Button
-              variant="outline"
-              disabled={!library.ready}
-              onClick={() => create(true)}
+          <Button
+            variant="ghost"
+            onClick={() => {
+              const blob = new Blob(
+                [
+                  JSON.stringify(
+                    {
+                      model: 'LiftLab tissue-load v0.2',
+                      movement,
+                      loadKg,
+                      bodyMassKg,
+                      peakMoments: sim.peakMoments,
+                      meanDemand: sim.meanDemand,
+                      peakImpactN: sim.peakImpactN,
+                      notice:
+                        'Static inverse-dynamics estimates. Not measured joint contact or EMG.',
+                    },
+                    null,
+                    2,
+                  ),
+                ],
+                { type: 'application/json' },
+              );
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `${original.id}-load.json`;
+              a.click();
+              setTimeout(() => URL.revokeObjectURL(url), 500);
+            }}
+          >
+            <Download size={14} />
+          </Button>
+        </div>
+        {notice && <output className="movement-notice">{notice}</output>}
+      </section>
+
+      <aside className="lab-data">
+        <header>
+          <h1>{original.name}</h1>
+          <p>
+            {live.peakMomentJoint} {Math.round(live.peakMomentNm)} Nm · hottest{' '}
+            {muscleGroups[sim.hottest]} · {sim.strongestRegion}
+          </p>
+        </header>
+
+        <section>
+          <h2>Joint moment</h2>
+          {jointIds.map((j) => (
+            <button
+              key={j}
+              className={'lab-bar' + (j === live.peakMomentJoint ? ' peak' : '')}
+              type="button"
             >
-              Save variation
-            </Button>
-            {original.custom && (
-              <>
-                <Button
-                  variant="ghost"
-                  onClick={() => setEditor({ ...movement, custom: true })}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="ghost"
-                  aria-label="Delete custom movement"
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        `Delete ${original.name}? Workout entries keep their own copy.`,
-                      )
-                    ) {
-                      library.update((d) => ({
-                        ...d,
-                        custom: d.custom.filter((m) => m.id !== original.id),
-                        favorites: d.favorites.filter(
-                          (id) => id !== original.id,
-                        ),
-                      }));
-                      select(catalog[0]);
-                    }
+              <span>{jointLabel[j]}</span>
+              <i>
+                <b
+                  style={{
+                    width: `${Math.min(100, (live.moments.peak[j] / Math.max(sim.peakMoments[live.peakMomentJoint], 1)) * 100)}%`,
                   }}
-                >
-                  <Trash2 size={15} />
-                </Button>
-              </>
-            )}
-            {original.pattern === 'Horizontal press' &&
-              original.equipment !== 'Bodyweight' && (
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    useSimulationStore.getState().updateConfig({
-                      benchAngleDeg: settings.angle,
-                      romPercent: settings.range,
-                      gripWidthRatio: 1.6 * settings.stance,
-                    });
-                    useSimulationStore.getState().setTab('Sandbox');
-                  }}
-                >
-                  Calculated bench mechanics <ArrowRight size={14} />
-                </Button>
-              )}
-          </div>
-          {notice && <output className="movement-notice">{notice}</output>}
+                />
+              </i>
+              <em>{Math.round(live.moments.peak[j])}</em>
+            </button>
+          ))}
         </section>
-      </div>
+
+        <section>
+          <h2>Tissue load</h2>
+          <Spark frames={sim.frames} id={sim.hottest} />
+          <div className="lab-tissues">
+            {ranked.map((row) => (
+              <button
+                key={row.id}
+                type="button"
+                className={selectedGroup === row.id ? 'on' : ''}
+                onClick={() =>
+                  useLabStore
+                    .getState()
+                    .setGroup(selectedGroup === row.id ? null : row.id)
+                }
+              >
+                <span>{muscleGroups[row.id]}</span>
+                <i>
+                  <b style={{ width: `${Math.min(100, row.live * 100)}%` }} />
+                  <s style={{ left: `${Math.min(100, row.peak * 100)}%` }} />
+                </i>
+                <em>{Math.round(row.live * 100)}</em>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="lab-impact">
+          <h2>Impact</h2>
+          <dl>
+            <div>
+              <dt>Peak compression</dt>
+              <dd>{(live.impactN / 1000).toFixed(2)} kN</dd>
+            </div>
+            <div>
+              <dt>Bodyweights</dt>
+              <dd>{live.impactBw.toFixed(2)} BW</dd>
+            </div>
+            <div>
+              <dt>Ground reaction</dt>
+              <dd>
+                {live.groundReactionN
+                  ? `${(live.groundReactionN / 1000).toFixed(2)} kN`
+                  : '—'}
+              </dd>
+            </div>
+            <div>
+              <dt>Body mass</dt>
+              <dd>
+                <Input
+                  aria-label="Body mass in kilograms"
+                  type="number"
+                  min={40}
+                  max={180}
+                  step={1}
+                  value={bodyMassKg}
+                  onChange={(e) =>
+                    useLabStore
+                      .getState()
+                      .setBodyMass(Number(e.target.value) || 78)
+                  }
+                />
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <p className="lab-note">
+          Color is modeled demand from current joint moments, not EMG.
+          Arrows are external load and ground reaction. Compression uses |F| plus
+          moment / 5 cm as a muscle-force proxy.
+        </p>
+      </aside>
+
       {editor && (
         <Editor
           key={editor.id}
@@ -742,7 +836,7 @@ export default function MovementLibrary({ library }: { library: Library }) {
                 ? d.custom.map((x) => (x.id === m.id ? m : x))
                 : [...d.custom, m],
             }));
-            select(m);
+            useLabStore.getState().open(m);
             setEditor(null);
           }}
         />

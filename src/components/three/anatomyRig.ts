@@ -49,6 +49,7 @@ export function gripMatrix(
   hand: Vec3,
   elbow: Vec3,
   axis = new Vector3(1, 0, 0),
+  twistRad = 0,
 ) {
   const y = vector(hand).sub(vector(elbow));
   y.addScaledVector(axis, -y.dot(axis));
@@ -56,6 +57,8 @@ export function gripMatrix(
   y.normalize();
   const z = new Vector3().crossVectors(axis, y).normalize();
   const matrix = new Matrix4().makeBasis(axis, y, z);
+  if (twistRad)
+    matrix.multiply(new Matrix4().makeRotationX(twistRad));
   const offset = gripCenter.clone().applyMatrix4(matrix);
   return matrix.setPosition(vector(hand).sub(offset));
 }
@@ -82,6 +85,7 @@ export function bindMatrices(): Matrix4[] {
 export function poseMatrices(
   config: BenchConfig,
   frame: SimulationFrame,
+  twistRad = 0,
 ): Matrix4[] {
   const torso = new Matrix4().compose(
     vector(benchOrigin),
@@ -100,7 +104,7 @@ export function poseMatrices(
     const shoulder = positive ? j.rightShoulder : j.leftShoulder,
       elbow = positive ? j.rightElbow : j.leftElbow,
       hand = positive ? j.rightHand : j.leftHand;
-    const handPose = gripMatrix(hand, elbow);
+    const handPose = gripMatrix(hand, elbow, new Vector3(1, 0, 0), twistRad);
     const wrist = new Vector3()
       .setFromMatrixPosition(handPose)
       .toArray() as Vec3;

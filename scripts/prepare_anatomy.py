@@ -40,10 +40,55 @@ def muscle_id(name):
  if 'clavicular part' in name and 'deltoid' in name:return 'anteriorDelt'
  if 'triceps brachii' in name:return 'triceps'
  return None
+def skip_anatomy(name):
+ if any(x in name for x in ['sphincter','diaphragm','interosseous membrane','retinaculum','cartilage','crico','thyro-arytenoid','arytenoid','tendinous arch','long plantar ligament','median cricothyroid']):
+  return True
+ if any(x in name for x in ['inferior rectus','lateral rectus','medial rectus','superior rectus','inferior oblique','superior oblique','levator palpebrae','levator veli','tensor veli']):
+  return True
+ if any(x in name for x in ['lumbrical','plantar interosseous','dorsal interossei','palmar interossei','levatores costarum','intertransversarii','interspinales','interspinalis']):
+  return True
+ if 'fascia' in name or name.endswith('tendon') or 'calcaneal tendon' in name:
+  return True
+ return False
 def movement_id(name):
+ if skip_anatomy(name):return None
  mid=muscle_id(name)
  if mid:return {'pecClavicular':'chest','pecSternal':'chest','anteriorDelt':'frontDelts','triceps':'triceps'}[mid]
- for text,group in [('acromial part','sideDelts'),('spinal part','rearDelts'),('trapezius','upperBack'),('latissimus','lats'),('biceps brachii','biceps'),('gluteus','glutes'),('vastus','quads'),('rectus femoris','quads'),('biceps femoris','hamstrings'),('semitendinosus','hamstrings'),('semimembranosus','hamstrings'),('gastrocnemius','calves'),('soleus','calves'),('rectus abdominis','core'),('external oblique','core')]:
+ for text,group in [
+  ('acromial part','sideDelts'),('spinal part','rearDelts'),('trapezius','upperBack'),('latissimus','lats'),
+  ('biceps brachii','biceps'),('gluteus','glutes'),('vastus','quads'),('rectus femoris','quads'),
+  ('biceps femoris','hamstrings'),('semitendinosus','hamstrings'),('semimembranosus','hamstrings'),
+  ('gastrocnemius','calves'),('soleus','calves'),('rectus abdominis','core'),('external oblique','core'),
+  ('internal oblique','core'),('transversus abdominis','core'),('quadratus lumborum','core'),
+  ('serratus anterior','chest'),('pectoralis minor','chest'),
+  ('rhomboid','upperBack'),('infraspinatus','rearDelts'),('teres minor','rearDelts'),
+  ('teres major','lats'),('supraspinatus','sideDelts'),('subscapularis','chest'),
+  ('sternocleidomastoid','neck'),('platysma','neck'),('scalenus','neck'),('splenius','neck'),
+  ('longus capitis','neck'),('longus colli','neck'),('levator scapulae','neck'),
+  ('semispinalis capitis','neck'),('longissimus capitis','neck'),
+  ('brachioradialis','forearms'),('flexor carpi','forearms'),('extensor carpi','forearms'),
+  ('extensor digitorum','forearms'),('flexor digitorum profundus','forearms'),
+  ('flexor digitorum superficialis','forearms'),('pronator','forearms'),('supinator','forearms'),
+  ('palmaris','forearms'),('flexor pollicis longus','forearms'),('extensor pollicis','forearms'),
+  ('abductor pollicis longus','forearms'),('extensor indicis','forearms'),('extensor digiti minimi','forearms'),
+  ('anconeus','triceps'),('brachialis','biceps'),('coracobrachialis','frontDelts'),
+  ('adductor brevis','adductors'),('adductor longus','adductors'),('adductor magnus','adductors'),
+  ('adductor minimus','adductors'),('gracilis','adductors'),('pectineus','adductors'),
+  ('tibialis','calves'),('fibularis','calves'),('popliteus','hamstrings'),
+  ('sartorius','quads'),('tensor fasciae','quads'),('iliotibial','quads'),
+  ('iliacus','glutes'),('psoas','core'),
+  ('masseter','face'),('temporalis','face'),('pterygoid','face'),('frontalis','face'),
+  ('orbicularis','face'),('zygomaticus','face'),('levator labii','face'),('depressor','face'),
+  ('mentalis','face'),('risorius','face'),('nasalis','face'),('procerus','face'),('corrugator','face'),
+  ('abductor pollicis brevis','hands'),('opponens pollicis','hands'),('flexor pollicis brevis','hands'),
+  ('adductor pollicis','hands'),('abductor digiti minimi of left hand','hands'),
+  ('abductor digiti minimi of right hand','hands'),('flexor digiti minimi brevis of left hand','hands'),
+  ('flexor digiti minimi brevis of right hand','hands'),('opponens digiti minimi of left hand','hands'),
+  ('opponens digiti minimi of right hand','hands'),
+  ('abductor hallucis','feet'),('flexor digitorum brevis','feet'),('abductor digiti minimi of left foot','feet'),
+  ('abductor digiti minimi of right foot','feet'),
+  ('multifidus','core'),('iliocostalis','core'),('longissimus thoracis','core'),('spinalis','core')
+ ]:
   if text in name:return group
  return None
 def add(a,b):return [a[i]+b[i] for i in range(3)]
@@ -91,13 +136,15 @@ for kind in ['skeleton','anatomy']:
  if kind=='skeleton':grips,grip_landmarks=make_grips(d,b)
  for m in d['meshes']:
   name=m['name'];mid=muscle_id(name) if kind=='anatomy' else None;mgid=movement_id(name) if kind=='anatomy' else None
-  if kind=='anatomy' and not mgid:continue
+  if kind=='anatomy' and (skip_anatomy(name) or not mgid):continue
   if name=='hyoid bone (2)':continue # duplicate identical source structure
   if kind=='anatomy':assert mapping[name]['source'] in ['bp3d','z-anatomy'],'Review license for new source'
   side='left' if 'left' in name else 'right'
   key=bone_group(name) if kind=='skeleton' else side+'_'+(mid or mgid)
-  g=groups[key];g['type']='bone' if kind=='skeleton' else 'muscle';g['rigId']=key if kind=='skeleton' else None;g['muscleId']=mid;g['side']=side if kind=='anatomy' else None
-  g['movementGroup']=mgid
+  g=groups[key];g['type']='bone' if kind=='skeleton' else 'muscle';g['rigId']=key if kind=='skeleton' else None
+  if mid is not None or 'muscleId' not in g:g['muscleId']=mid
+  g['side']=side if kind=='anatomy' else None
+  if mgid is not None or 'movementGroup' not in g:g['movementGroup']=mgid
   p=m['primitives'][0];pos=accessor(d,b,p['attributes']['POSITION']);norms=accessor(d,b,p['attributes']['NORMAL']);idx=accessor(d,b,p['indices']);start=len(g['positions'])
   if name in grips:g['positions'].extend(grips[name])
   elif kind=='skeleton' and key.endswith('Hand'):

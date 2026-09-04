@@ -11,6 +11,15 @@ import { useLibrary, exportLibrary } from './movements/useLibrary';
 const MovementLibrary = lazy(() => import('./movements/MovementLibrary'));
 const Workout = lazy(() => import('./movements/Workout'));
 const Compare = lazy(() => import('./components/Compare'));
+
+const tabs = [
+  ['Movements', 'Lab'],
+  ['Workout', 'Session'],
+  ['Sandbox', 'Bench'],
+  ['Compare', 'Compare'],
+  ['Research', 'Notes'],
+] as const;
+
 export default function App() {
   const library = useLibrary();
   const tab = useSimulationStore((s) => s.tab),
@@ -51,7 +60,7 @@ export default function App() {
       <header className="topbar">
         <a
           className="brand"
-          href="#movements"
+          href="#lab"
           onClick={() => setTab('Movements')}
         >
           <Activity />
@@ -60,25 +69,23 @@ export default function App() {
           </b>
         </a>
         <nav aria-label="Main navigation">
-          {(
-            ['Movements', 'Workout', 'Sandbox', 'Compare', 'Research'] as const
-          ).map((t) => (
+          {tabs.map(([id, label]) => (
             <button
-              key={t}
-              className={tab === t ? 'active' : ''}
+              key={id}
+              className={tab === id ? 'active' : ''}
               onClick={() => {
-                setTab(t);
+                setTab(id);
                 setSaveMenu(false);
               }}
-              aria-current={tab === t ? 'page' : undefined}
+              aria-current={tab === id ? 'page' : undefined}
             >
-              {t === 'Sandbox' ? 'Bench lab' : t}
+              {label}
             </button>
           ))}
         </nav>
         <div className="topbar-end">
           <span className="version">
-            MOVEMENT LAB <i /> v0.2
+            LOAD LAB <i /> v0.2
           </span>
           <Button
             variant="ghost"
@@ -111,7 +118,7 @@ export default function App() {
                 size="sm"
                 onClick={() => exportLibrary(library.data)}
               >
-                Export current changes
+                Export
               </Button>
             </>
           )}
@@ -120,12 +127,12 @@ export default function App() {
       {tab === 'Sandbox' && (
         <div className="workspace-title">
           <div>
-            <span className="eyebrow">EXPLORE THE MECHANICS</span>
-            <h1>Every angle changes the lift.</h1>
+            <span className="eyebrow">4-MUSCLE BENCH MODEL</span>
+            <h1>Barbell bench mechanics</h1>
           </div>
           <div className="workspace-actions">
             <span className="status">
-              <i /> Live simulation
+              <i /> Live
             </span>
             <Button
               variant="ghost"
@@ -164,11 +171,7 @@ export default function App() {
         </div>
       )}
       {tab === 'Movements' || tab === 'Workout' ? (
-        <Suspense
-          fallback={
-            <div className="page-loading">Opening your movement workspace…</div>
-          }
-        >
+        <Suspense fallback={<div className="page-loading">Opening lab…</div>}>
           {tab === 'Movements' ? (
             <MovementLibrary library={library} />
           ) : (
@@ -181,23 +184,21 @@ export default function App() {
           onExplain={() => setExplain(true)}
         />
       ) : tab === 'Compare' ? (
-        <Suspense
-          fallback={<div className="page-loading">Opening comparison lab…</div>}
-        >
+        <Suspense fallback={<div className="page-loading">Opening compare…</div>}>
           <Compare onMethodology={() => setMethodology(true)} />
         </Suspense>
       ) : (
         <Research />
       )}
-      <footer className="page-footer">
-        <span>LIFTLAB / MOVEMENT LAB V0.2</span>
-        <span>
-          Calculated mechanics. Modeled muscle behavior.{' '}
-          <button onClick={() => setMethodology(true)}>
-            Know the difference ↗
-          </button>
-        </span>
-      </footer>
+      {tab !== 'Movements' && (
+        <footer className="page-footer">
+          <span>LiftLab / load lab v0.2</span>
+          <span>
+            Static r × F moments.{' '}
+            <button onClick={() => setMethodology(true)}>Model limits</button>
+          </span>
+        </footer>
+      )}
       <Methodology open={methodology} onClose={() => setMethodology(false)} />
       <ExplainChanges open={explain} onClose={() => setExplain(false)} />
     </div>

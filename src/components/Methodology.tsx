@@ -10,12 +10,15 @@ import { calibration } from '../data/calibration';
 export function MethodologyContent() {
   return (
     <div className="methodology-content">
-      <span className="eyebrow">TRANSPARENT BY DESIGN</span>
-      <h2>Know what the numbers mean.</h2>
+      <span className="eyebrow">MODEL LIMITS</span>
+      <h2>What the numbers are.</h2>
       <p>
-        LiftLab is a comparative biomechanics model. Every value comes from the
-        same deterministic simulation. Scores are not measurements of muscle
-        growth.
+        The Lab runs a static inverse-dynamics pass on every movement: external
+        load (or ground reaction) applied at the hands or feet, joint moments
+        from |r × F|, tissue demand from those moments, and an impact estimate
+        of |F| plus moment / 5 cm. The 4-muscle Bench tab is a tighter model of
+        one lift. None of this is EMG, joint contact from imaging, or a
+        hypertrophy prediction.
       </p>
       <div className="confidence-table">
         {[
@@ -40,6 +43,15 @@ export function MethodologyContent() {
           </div>
         ))}
       </div>
+      <h3>00 / Whole-library load lab</h3>
+      <p>
+        Standing lifts use ground reaction of body mass plus external load at
+        the forefoot. Presses, pulls and isolation apply the load at the hands
+        or ankles. Cables pull along an approximate line of action. Bands scale
+        with rep position. Muscle color is demand allocated from the current
+        joint moments, not assigned roles. Peak compression is a proxy, not a
+        bone-on-bone measurement.
+      </p>
       <h3>01 / External mechanics</h3>
       <p>
         Gravity = 9.81 m/s². The entered load includes the bar; each arm
@@ -81,7 +93,9 @@ export function MethodologyContent() {
       <p>
         The skeleton uses 200 unique BodyParts3D bone meshes, sourced through
         the open BodyExplorer GitHub repository. The movement library includes
-        62 muscle meshes from BodyParts3D and Z-Anatomy. Fourteen press meshes provide
+        280 muscle meshes from BodyParts3D and Z-Anatomy, including neck, face,
+        forearm, and limb-completing tissue that the first atlas omitted.
+        Fourteen press meshes still provide
         the actual bilateral pec subdivisions, anterior deltoid and triceps
         heads. The atlas is fitted to the generic engine proportions and posed
         using rigid bone transforms and blended soft-tissue deformation. Shape

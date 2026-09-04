@@ -32,6 +32,7 @@ import {
   vertexWeights,
   muscleAppearance,
 } from './anatomyRig';
+import { applyBoneVisibility } from './anatomyVisibility';
 interface Tissue {
   mesh: SkinnedMesh;
   id: MuscleId | null;
@@ -74,17 +75,25 @@ export function buildAnatomy(source: Group) {
       } else if (meta.type === 'muscle') {
         const upper = meta.side === 'left' ? 1 : 7;
         const thigh = meta.side === 'left' ? 4 : 10;
-        const group = meta.movementGroup;
-        const index = ['biceps', 'sideDelts', 'rearDelts'].includes(group)
-          ? upper
-          : ['quads', 'hamstrings'].includes(group)
-            ? thigh
-            : group === 'calves'
-              ? thigh + 1
-              : 0;
-        const blend = group === 'glutes' ? 0.35 : 0;
-        indices.push(index, thigh, 0, 0);
-        weights.push(1 - blend, blend, 0, 0);
+        const group = meta.movementGroup as string;
+        let index = 0,
+          second = 0,
+          w0 = 1,
+          w1 = 0;
+        if (['biceps', 'sideDelts', 'rearDelts'].includes(group)) index = upper;
+        else if (group === 'forearms') index = upper + 1;
+        else if (group === 'hands') index = upper + 2;
+        else if (['quads', 'hamstrings', 'adductors'].includes(group))
+          index = thigh;
+        else if (group === 'calves') index = thigh + 1;
+        else if (group === 'feet') index = thigh + 2;
+        else if (group === 'glutes') {
+          second = thigh;
+          w0 = 0.65;
+          w1 = 0.35;
+        }
+        indices.push(index, second, 0, 0);
+        weights.push(w0, w1, 0, 0);
       } else {
         const index = rigNames.indexOf(meta.rigId);
         if (index < 0)
@@ -143,11 +152,21 @@ function updateAnatomy(
   for (const tissue of rig.tissues) {
     const material = tissue.mesh.material as MeshStandardMaterial;
     if (!tissue.id && tissue.movementGroup) {
-      tissue.mesh.visible = false;
+      material.color.set('#a56b58');
+      material.emissive.set('#000000');
+      material.emissiveIntensity = 0;
+      material.transparent = true;
+      material.opacity = opacity * (selected ? 0.35 : 0.96);
+      material.depthWrite = true;
+      tissue.mesh.visible = opacity > 0.01;
       continue;
     }
     if (!tissue.id) {
-      tissue.mesh.visible = bonesVisible;
+      applyBoneVisibility(
+        tissue.mesh,
+        material,
+        bonesVisible,
+      );
       continue;
     }
     const appearance = muscleAppearance(tissue.id, mode, frame, result);
@@ -170,7 +189,7 @@ export default function AnatomicalBody({
   frame: SimulationFrame;
   mode: VisualizationMode;
 }) {
-  const gltf = useGLTF('/models/liftlab-anatomy.glb?v=5');
+  const gltf = useGLTF('/models/liftlab-anatomy.glb?v=7');
   const rig = useMemo(() => buildAnatomy(gltf.scene), [gltf.scene]);
   const selected = useSimulationStore((s) => s.selectedMuscle),
     opacity = useSimulationStore((s) => s.muscleOpacity),
@@ -209,4 +228,4 @@ export default function AnatomicalBody({
   return <primitive object={rig.group} onClick={pick} dispose={null} />;
 }
 if (typeof window !== 'undefined')
-  useGLTF.preload('/models/liftlab-anatomy.glb?v=5');
+  useGLTF.preload('/models/liftlab-anatomy.glb?v=7');

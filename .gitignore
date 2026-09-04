@@ -28,6 +28,9 @@ yarn-error.log*
 
 # local environment
 .env*
+.serena/
+.openai/*
+!.openai/hosting.json.example
 
 # deployment and generated files
 .vercel

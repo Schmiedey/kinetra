@@ -1,5 +1,5 @@
 import { Matrix4, Quaternion, Vector3 } from 'three';
-import type { Movement, GroupId } from './catalog';
+import type { Movement } from './catalog';
 import type { Vec3, SimulationFrame } from '../engine/types';
 import {
   sourceLandmarks,
@@ -28,7 +28,11 @@ export function movementPose(m: Movement, progress: number) {
     };
     const f = getKinematics(config, progress);
     return {
-      matrices: poseMatrices(config, f as SimulationFrame),
+      matrices: poseMatrices(
+        config,
+        f as SimulationFrame,
+        radians(m.gripAngle ?? 0),
+      ),
       hands: [f.joints.leftHand, f.joints.rightHand] as Vec3[],
       bench: true,
       seated: false,
@@ -135,7 +139,7 @@ export function movementPose(m: Movement, progress: number) {
       target = [
         side * 0.28 * m.stance,
         shoulder[1] + 0.03 + 0.51 * t,
-        shoulder[2] + 0.08,
+        shoulder[2] + 0.08 + m.angle * 0.004,
       ];
     if (m.pattern === 'Vertical pull')
       target = [
@@ -199,7 +203,12 @@ export function movementPose(m: Movement, progress: number) {
       target = solved.hand;
       elbow = solved.elbow;
     }
-    const grip = gripMatrix(target, elbow);
+    const grip = gripMatrix(
+      target,
+      elbow,
+      new Vector3(1, 0, 0),
+      radians(m.gripAngle ?? 0),
+    );
     const wrist = point(new Vector3().setFromMatrixPosition(grip));
     const seg = (a: Vec3, b: Vec3, sa: Vec3, sb: Vec3) =>
       segmentMatrix(a, b, v(a).distanceTo(v(b)) / v(sa).distanceTo(v(sb)));
@@ -224,17 +233,4 @@ export function movementPose(m: Movement, progress: number) {
     bench: m.pattern === 'Hip extension',
     seated,
   };
-}
-export function emphasis(m: Movement, group: string, t: number): number {
-  const primary = m.primary.includes(group as GroupId),
-    secondary = m.secondary.includes(group as GroupId);
-  let value = primary ? 0.82 : secondary ? 0.38 : 0.035;
-  if (m.pattern === 'Horizontal press' && group === 'frontDelts')
-    value += (Math.max(0, m.angle) / 90) * 0.3;
-  if (m.pattern === 'Horizontal press' && group === 'chest')
-    value -= (Math.max(0, m.angle) / 90) * 0.16;
-  return Math.max(
-    0.02,
-    Math.min(1, value * (0.72 + 0.28 * Math.sin(t * Math.PI))),
-  );
 }
