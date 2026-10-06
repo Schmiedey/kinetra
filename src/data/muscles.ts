@@ -12,7 +12,7 @@ export const muscles: {
     name: 'Sternocostal pec',
     short: 'Sternal pec',
     region: 'MID + LOWER CHEST',
-    color: '#d0f991',
+    color: '#99b4f0',
     action: 'Modeled shoulder horizontal adduction.',
   },
   {
@@ -28,7 +28,7 @@ export const muscles: {
     name: 'Anterior deltoid',
     short: 'Front delt',
     region: 'FRONT SHOULDER',
-    color: '#e5ad7a',
+    color: '#7a9be5',
     action: 'Modeled contribution to shoulder flexion.',
   },
   {

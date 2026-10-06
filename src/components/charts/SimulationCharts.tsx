@@ -16,8 +16,8 @@ import { useSimulationStore } from '../../store/useSimulationStore';
 import { muscles } from '../../data/muscles';
 const seriesConfig = Object.fromEntries([
   ...muscles.map((m) => [m.id, { label: m.short, color: m.color }]),
-  ['shoulder', { label: 'Shoulder', color: '#d0f991' }],
-  ['elbow', { label: 'Elbow', color: '#a6b9ee' }],
+  ['shoulder', { label: 'Shoulder', color: '#315fe8' }],
+  ['elbow', { label: 'Elbow', color: '#8460c7' }],
 ]);
 const tabs = [
   'Joint moments',
@@ -26,11 +26,11 @@ const tabs = [
   'Stimulus',
 ] as const;
 const tooltipStyle = {
-  background: '#1d261d',
-  border: '1px solid #3e4c38',
+  background: '#ffffff',
+  border: '1px solid #d3ddeb',
   borderRadius: 6,
   fontSize: 11,
-  color: '#dae6cd',
+  color: '#17223b',
 };
 export default function SimulationCharts({
   onMethodology,
@@ -129,15 +129,15 @@ export default function SimulationCharts({
           <div className="chart-legend">
             {(isMoments
               ? [
-                  { name: 'Shoulder', color: '#d0f991' },
-                  { name: 'Elbow', color: '#a6b9ee' },
+                  { name: 'Shoulder', color: '#315fe8' },
+                  { name: 'Elbow', color: '#8460c7' },
                 ]
               : tab === 'Stimulus'
                 ? [
-                    { name: 'Tension', color: '#d0f991' },
-                    { name: 'Lengthened tension', color: '#a6b9ee' },
-                    { name: 'Effort', color: '#7bc1c3' },
-                    { name: 'Stimulus index', color: '#e5ad7a' },
+                    { name: 'Tension', color: '#315fe8' },
+                    { name: 'Lengthened tension', color: '#8460c7' },
+                    { name: 'Effort', color: '#16898f' },
+                    { name: 'Stimulus index', color: '#b66430' },
                   ]
                 : muscles.map((m) => ({ name: m.short, color: m.color }))
             ).map((m) => (
@@ -176,7 +176,7 @@ export default function SimulationCharts({
               >
                 <CartesianGrid
                   vertical={false}
-                  stroke="#2c382d"
+                  stroke="#dce3ed"
                   strokeDasharray="3 5"
                 />
                 <XAxis
@@ -198,28 +198,28 @@ export default function SimulationCharts({
                 <Bar
                   dataKey="tension"
                   name="Tension"
-                  fill="#d0f991"
+                  fill="#315fe8"
                   radius={[3, 3, 0, 0]}
                   isAnimationActive={false}
                 />
                 <Bar
                   dataKey="length"
                   name="Lengthened tension"
-                  fill="#a6b9ee"
+                  fill="#8460c7"
                   radius={[3, 3, 0, 0]}
                   isAnimationActive={false}
                 />
                 <Bar
                   dataKey="effort"
                   name="Effort"
-                  fill="#7bc1c3"
+                  fill="#16898f"
                   radius={[3, 3, 0, 0]}
                   isAnimationActive={false}
                 />
                 <Bar
                   dataKey="stimulus"
                   name="Stimulus index"
-                  fill="#e5ad7a"
+                  fill="#b66430"
                   radius={[3, 3, 0, 0]}
                   isAnimationActive={false}
                 />
@@ -231,7 +231,7 @@ export default function SimulationCharts({
               >
                 <CartesianGrid
                   vertical={false}
-                  stroke="#2c382d"
+                  stroke="#dce3ed"
                   strokeDasharray="3 5"
                 />
                 <XAxis
@@ -259,13 +259,13 @@ export default function SimulationCharts({
                 />
                 <ReferenceLine
                   x={Math.round(progress * 100)}
-                  stroke="#a9b99a"
+                  stroke="#61718d"
                   strokeDasharray="3 3"
                 />
                 {(isMoments
                   ? [
-                      { id: 'shoulder', name: 'Shoulder', color: '#d0f991' },
-                      { id: 'elbow', name: 'Elbow', color: '#a6b9ee' },
+                      { id: 'shoulder', name: 'Shoulder', color: '#315fe8' },
+                      { id: 'elbow', name: 'Elbow', color: '#8460c7' },
                     ]
                   : muscles
                 ).map((m) => (

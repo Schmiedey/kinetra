@@ -1,13 +1,25 @@
 import type { Plugin } from 'vite';
 import { DatabaseSync } from 'node:sqlite';
-import { mkdirSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import { api, type Database } from './index';
+import { legacyLocalDatabase } from '../src/lib/libraryBackup';
 export function localApi(): Plugin {
   return {
-    name: 'liftlab-local-api',
+    name: 'kinetra-local-api',
     configureServer(server) {
       mkdirSync('.local', { recursive: true });
-      const sqlite = new DatabaseSync('.local/liftlab.sqlite');
+      if (
+        !existsSync('.local/kinetra.sqlite') &&
+        existsSync(legacyLocalDatabase)
+      ) {
+        const previous = new DatabaseSync(legacyLocalDatabase);
+        try {
+          previous.exec("VACUUM INTO '.local/kinetra.sqlite'");
+        } finally {
+          previous.close();
+        }
+      }
+      const sqlite = new DatabaseSync('.local/kinetra.sqlite');
       for (const file of readdirSync('drizzle').filter((f) =>
         f.endsWith('.sql'),
       ))

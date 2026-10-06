@@ -46,7 +46,7 @@ export function readSimulation() {
       'Simplified vertical-force model. Muscle and stimulus values are estimates.',
   };
 }
-export function registerLiftLabTools() {
+export function registerKinetraTools() {
   const context = (document as Document & { modelContext?: ModelContext })
     .modelContext;
   if (!context?.registerTool) return;
@@ -63,7 +63,7 @@ export function registerLiftLabTools() {
   register({
     name: 'configure_bench_simulation',
     description:
-      'Update the visible LiftLab bench configuration and return the recalculated mechanics and comparative estimates.',
+      'Update the visible Kinetra bench configuration and return the recalculated mechanics and comparative estimates.',
     inputSchema: {
       type: 'object',
       properties: Object.fromEntries(

@@ -106,7 +106,7 @@ export function buildAnatomy(source: Group) {
     geometry.setAttribute('skinWeight', new Float32BufferAttribute(weights, 4));
     geometry.computeVertexNormals();
     const material = new MeshStandardMaterial({
-      color: id ? '#788077' : '#c9c9b5',
+      color: id ? '#6d768a' : '#b5bbc9',
       roughness: id ? 0.52 : 0.7,
       metalness: 0,
       side: DoubleSide,
@@ -162,11 +162,7 @@ function updateAnatomy(
       continue;
     }
     if (!tissue.id) {
-      applyBoneVisibility(
-        tissue.mesh,
-        material,
-        bonesVisible,
-      );
+      applyBoneVisibility(tissue.mesh, material, bonesVisible);
       continue;
     }
     const appearance = muscleAppearance(tissue.id, mode, frame, result);
@@ -189,7 +185,7 @@ export default function AnatomicalBody({
   frame: SimulationFrame;
   mode: VisualizationMode;
 }) {
-  const gltf = useGLTF('/models/liftlab-anatomy.glb?v=7');
+  const gltf = useGLTF('/models/kinetra-anatomy.glb?v=7');
   const rig = useMemo(() => buildAnatomy(gltf.scene), [gltf.scene]);
   const selected = useSimulationStore((s) => s.selectedMuscle),
     opacity = useSimulationStore((s) => s.muscleOpacity),
@@ -228,4 +224,4 @@ export default function AnatomicalBody({
   return <primitive object={rig.group} onClick={pick} dispose={null} />;
 }
 if (typeof window !== 'undefined')
-  useGLTF.preload('/models/liftlab-anatomy.glb?v=7');
+  useGLTF.preload('/models/kinetra-anatomy.glb?v=7');

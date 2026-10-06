@@ -6,7 +6,7 @@ Component licenses are retained. See public/models/ATTRIBUTION.md.
 import json, struct, pathlib, math, sys, hashlib
 from collections import defaultdict
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-INPUT=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else '/tmp/liftlab-anatomy')
+INPUT=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else '/tmp/kinetra-anatomy')
 EXPECTED={'skeleton':'46e5ccc6f02e26727246aa78106dedb6f6d65da3','anatomy':'a112885444785a9dd93c5753b46ac790e6e036b3'}
 SCALE=(.21/160,.001,.52/480)
 def transform(p):return [p[0]*SCALE[0],-(p[1]+75)*SCALE[1]+.145,-(p[2]-1310)*SCALE[2]-.52]
@@ -154,7 +154,7 @@ for kind in ['skeleton','anatomy']:
   g['normals'].extend(normal(n) for n in norms);g['indices'].extend(i+start for i in idx);g['sourceNames'].append(name)
   if kind=='anatomy':g['sourceMappings'].append(mapping[name])
   counts['bones' if kind=='skeleton' else 'muscles']+=1
-out={'asset':{'version':'2.0','generator':'LiftLab anatomical extraction; BodyParts3D and Z-Anatomy via BodyExplorer','copyright':'BodyParts3D © The Database Center for Life Science, CC BY-SA 2.1 Japan. Z-Anatomy supplementary muscles, CC BY-SA 4.0. See ATTRIBUTION.md and manifest component licenses.'},'scene':0,'scenes':[{'nodes':[]}],'nodes':[],'meshes':[],'accessors':[],'bufferViews':[],'buffers':[{'byteLength':0}]}
+out={'asset':{'version':'2.0','generator':'Kinetra anatomical extraction; BodyParts3D and Z-Anatomy via BodyExplorer','copyright':'BodyParts3D © The Database Center for Life Science, CC BY-SA 2.1 Japan. Z-Anatomy supplementary muscles, CC BY-SA 4.0. See ATTRIBUTION.md and manifest component licenses.'},'scene':0,'scenes':[{'nodes':[]}],'nodes':[],'meshes':[],'accessors':[],'bufferViews':[],'buffers':[{'byteLength':0}]}
 binary=bytearray()
 def emit(values,fmt,size,typ,target):
  while len(binary)%4:binary.append(0)
@@ -170,4 +170,4 @@ for key,g in groups.items():
  mesh=len(out['meshes']);out['meshes'].append({'name':key,'primitives':[{'attributes':attrs,'indices':indices}]});out['nodes'].append({'name':key,'mesh':mesh,'extras':meta});out['scenes'][0]['nodes'].append(mesh);manifest['groups'].append({'name':key,**meta})
 out['buffers'][0]['byteLength']=len(binary);encoded=json.dumps(out,separators=(',',':')).encode();encoded+=b' '*((-len(encoded))%4);binary+=b'\0'*((-len(binary))%4)
 asset=struct.pack('<III',0x46546c67,2,28+len(encoded)+len(binary))+struct.pack('<II',len(encoded),0x4e4f534a)+encoded+struct.pack('<II',len(binary),0x004e4942)+binary
-(ROOT/'public/models/liftlab-anatomy.glb').write_bytes(asset);(ROOT/'public/models/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');print('Created',len(asset),'bytes;',counts,'in',len(groups),'render groups')
+(ROOT/'public/models/kinetra-anatomy.glb').write_bytes(asset);(ROOT/'public/models/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');print('Created',len(asset),'bytes;',counts,'in',len(groups),'render groups')

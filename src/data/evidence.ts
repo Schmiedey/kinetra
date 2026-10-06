@@ -43,7 +43,7 @@ export const evidence: EvidenceReference[] = [
     supports: ['Effort is distinct from external mechanics'],
     confidence: 'limited',
     notes:
-      'Found no clear superiority for momentary failure over non-failure and suggested a nonlinear relationship. This does not establish a precise RIR-to-growth curve. LiftLab’s RIR factors are explicit exploratory assumptions.',
+      'Found no clear superiority for momentary failure over non-failure and suggested a nonlinear relationship. This does not establish a precise RIR-to-growth curve. Kinetra’s RIR factors are explicit exploratory assumptions.',
   },
   {
     id: 'length',

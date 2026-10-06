@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#f7faff"/><stop offset="1" stop-color="#dfe9ff"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<g fill="none" stroke="#315fe8" opacity=".10" stroke-width="2"><circle cx="1080" cy="370" r="220"/><circle cx="1080" cy="370" r="160"/><circle cx="1080" cy="370" r="100"/><path d="M775 70v490M715 370h485"/></g>
+<g transform="translate(74 65)"><rect width="58" height="58" rx="17" fill="#315fe8"/><path d="M16 14v30M43 14 28 29l15 15M16 29h12" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="43" cy="14" r="3.5" fill="#b5d9ff"/></g>
+<text x="150" y="108" fill="#17233d" font-family="Arial,sans-serif" font-size="47" font-weight="700" letter-spacing="-2">kinetra</text>
+<text x="76" y="212" fill="#315fe8" font-family="Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="4">THE MOVEMENT STUDIO</text>
+<text x="70" y="310" fill="#17233d" font-family="Arial,sans-serif" font-size="78" font-weight="600" letter-spacing="-4">Motion,</text>
+<text x="70" y="410" fill="#315fe8" font-family="Georgia,serif" font-style="italic" font-size="89" letter-spacing="-3">understood.</text>
+<text x="76" y="473" fill="#61718d" font-family="Arial,sans-serif" font-size="23">Explore the anatomy. Follow the forces.</text>
+<text x="76" y="509" fill="#61718d" font-family="Arial,sans-serif" font-size="23">Build your next session.</text>
+<path d="M76 561h1048" stroke="#becdea"/><text x="76" y="597" fill="#61718d" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">44 MOVEMENTS / ANATOMY / MECHANICS / TRAINING</text>
+<g transform="translate(827 226)"><rect width="236" height="236" rx="72" fill="#315fe8"/><path d="M65 59v118M174 59l-61 59 61 59M65 118h48" fill="none" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><circle cx="174" cy="59" r="13" fill="#b5d9ff"/></g>
+</svg>

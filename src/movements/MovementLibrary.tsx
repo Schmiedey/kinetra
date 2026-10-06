@@ -36,11 +36,7 @@ import type { Library } from './useLibrary';
 import { useSimulationStore } from '../store/useSimulationStore';
 import { useLabStore } from '../store/useLabStore';
 import { solveMovementFrame } from './simulateMovement';
-import {
-  jointIds,
-  tissueIds,
-  type JointId,
-} from '../engine/tissueLoad';
+import { jointIds, tissueIds, type JointId } from '../engine/tissueLoad';
 const MovementScene = lazy(() => import('./MovementScene'));
 
 const jointLabel: Record<JointId, string> = {
@@ -90,7 +86,13 @@ export function RangeControl({
   );
 }
 
-function Spark({ frames, id }: { frames: { demand: Record<GroupId, number> }[]; id: GroupId }) {
+function Spark({
+  frames,
+  id,
+}: {
+  frames: { demand: Record<GroupId, number> }[];
+  id: GroupId;
+}) {
   const w = 220,
     h = 36;
   const pts = frames
@@ -102,7 +104,12 @@ function Spark({ frames, id }: { frames: { demand: Record<GroupId, number> }[]; 
     .join(' ');
   return (
     <svg className="lab-spark" viewBox={`0 0 ${w} ${h}`} aria-hidden>
-      <polyline fill="none" stroke="currentColor" strokeWidth="1.6" points={pts} />
+      <polyline
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        points={pts}
+      />
     </svg>
   );
 }
@@ -347,7 +354,7 @@ export default function MovementLibrary({ library }: { library: Library }) {
         },
       ],
     }));
-    setNotice(`Queued at ${loadKg} kg. Open Session to prescribe sets.`);
+    setNotice(`Queued at ${loadKg} kg. Open Train to prescribe sets.`);
   }
 
   const create = (clone: boolean) => {
@@ -372,6 +379,10 @@ export default function MovementLibrary({ library }: { library: Library }) {
   return (
     <main className="lab">
       <aside className="lab-catalog">
+        <div className="lab-catalog-heading">
+          <b>MOVEMENT INDEX</b>
+          <span>EXPLORE / 01</span>
+        </div>
         <div className="lab-search">
           <Search size={14} />
           <Input
@@ -459,7 +470,9 @@ export default function MovementLibrary({ library }: { library: Library }) {
               ))}
             </div>
           </div>
-          <Suspense fallback={<div className="page-loading">Loading anatomy…</div>}>
+          <Suspense
+            fallback={<div className="page-loading">Loading anatomy…</div>}
+          >
             <MovementScene
               movement={movement}
               progress={progress}
@@ -683,7 +696,7 @@ export default function MovementLibrary({ library }: { library: Library }) {
                 [
                   JSON.stringify(
                     {
-                      model: 'LiftLab tissue-load v0.2',
+                      model: 'Kinetra tissue-load v0.2',
                       movement,
                       loadKg,
                       bodyMassKg,
@@ -702,7 +715,7 @@ export default function MovementLibrary({ library }: { library: Library }) {
               const url = URL.createObjectURL(blob);
               const a = document.createElement('a');
               a.href = url;
-              a.download = `${original.id}-load.json`;
+              a.download = `kinetra-${original.id}-load.json`;
               a.click();
               setTimeout(() => URL.revokeObjectURL(url), 500);
             }}
@@ -727,7 +740,9 @@ export default function MovementLibrary({ library }: { library: Library }) {
           {jointIds.map((j) => (
             <button
               key={j}
-              className={'lab-bar' + (j === live.peakMomentJoint ? ' peak' : '')}
+              className={
+                'lab-bar' + (j === live.peakMomentJoint ? ' peak' : '')
+              }
               type="button"
             >
               <span>{jointLabel[j]}</span>
@@ -810,8 +825,8 @@ export default function MovementLibrary({ library }: { library: Library }) {
         </section>
 
         <p className="lab-note">
-          Color is modeled demand from current joint moments, not EMG.
-          Arrows are external load and ground reaction. Compression uses |F| plus
+          Color is modeled demand from current joint moments, not EMG. Arrows
+          are external load and ground reaction. Compression uses |F| plus
           moment / 5 cm as a muscle-force proxy.
         </p>
       </aside>

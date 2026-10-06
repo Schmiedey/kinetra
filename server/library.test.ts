@@ -3,6 +3,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { api, type Database } from './index';
 import { emptyLibrary, catalog } from '../src/movements/catalog';
+import { legacyLibraryCookie } from '../src/lib/libraryBackup';
 let sqlite: DatabaseSync, db: Database;
 beforeEach(() => {
   sqlite = new DatabaseSync(':memory:');
@@ -33,7 +34,7 @@ beforeEach(() => {
 afterEach(() => sqlite.close());
 const get = (cookie = '') =>
   api(
-    new Request('https://liftlab.test/api/library', {
+    new Request('https://kinetra.test/api/library', {
       headers: { Cookie: cookie },
     }),
     db,
@@ -42,10 +43,10 @@ const put = (
   cookie: string,
   data: unknown,
   revision = 0,
-  origin = 'https://liftlab.test',
+  origin = 'https://kinetra.test',
 ) =>
   api(
-    new Request('https://liftlab.test/api/library', {
+    new Request('https://kinetra.test/api/library', {
       method: 'PUT',
       headers: {
         Cookie: cookie,
@@ -56,6 +57,19 @@ const put = (
     }),
     db,
   );
+it('keeps an existing library when migrating its cookie to the new brand', async () => {
+  const first = await get();
+  const currentCookie = first.headers.get('Set-Cookie')!.split(';')[0];
+  const previousCookie = currentCookie.replace(
+    'kinetra_library',
+    legacyLibraryCookie,
+  );
+  const data = { ...emptyLibrary, workoutName: 'Saved before the rebrand' };
+  expect((await put(previousCookie, data)).status).toBe(200);
+  const migrated = await get(previousCookie);
+  expect((await migrated.json()).data).toEqual(data);
+  expect(migrated.headers.get('Set-Cookie')!.split(';')[0]).toBe(currentCookie);
+});
 it('persists custom movements and workout history while isolating visitor libraries', async () => {
   const first = await get(),
     cookie = first.headers.get('Set-Cookie')!.split(';')[0];

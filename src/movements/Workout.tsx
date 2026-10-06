@@ -12,7 +12,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { exportLibrary, type Library } from './useLibrary';
-import { validLibrary, muscleGroups, type WorkoutItem } from './catalog';
+import { muscleGroups, type WorkoutItem } from './catalog';
+import { parseLibraryBackup } from '../lib/libraryBackup';
 import { useSimulationStore } from '../store/useSimulationStore';
 import { useLabStore } from '../store/useLabStore';
 import { simulateSession } from './simulateMovement';
@@ -32,10 +33,7 @@ export default function Workout({ library }: { library: Library }) {
     const id = setInterval(tick, 500);
     return () => clearInterval(id);
   }, [restUntil]);
-  const session = useMemo(
-    () => simulateSession(data.workout),
-    [data.workout],
-  );
+  const session = useMemo(() => simulateSession(data.workout), [data.workout]);
   const patch = (id: string, values: Partial<WorkoutItem>) =>
     update((d) => ({
       ...d,
@@ -52,19 +50,13 @@ export default function Workout({ library }: { library: Library }) {
   async function importFile(f: File) {
     try {
       if (f.size > 1000000) throw Error('Backup is too large.');
-      const parsed = JSON.parse(await f.text());
-      if (
-        parsed.format !== 'liftlab-library' ||
-        parsed.version !== 1 ||
-        !validLibrary(parsed.data)
-      )
-        throw Error('Choose a valid LiftLab library backup.');
+      const imported = parseLibraryBackup(JSON.parse(await f.text()));
       if (
         window.confirm(
           'Replace your library, current workout and history with this backup? Export first if you want to keep them.',
         )
       ) {
-        update(() => parsed.data);
+        update(() => imported);
         setNotice('Backup imported.');
       }
     } catch (e) {
@@ -98,13 +90,14 @@ export default function Workout({ library }: { library: Library }) {
     <main className="workout-page">
       <div className="workout-heading">
         <div>
-          <h1>Session</h1>
+          <span className="eyebrow">KINETRA / TRAIN</span>
+          <h1>Your next strong session.</h1>
           <p>Load on the bar, then the tissue stack that session produces.</p>
         </div>
         <Button
           onClick={() => useSimulationStore.getState().setTab('Movements')}
         >
-          <Plus size={16} /> Lab
+          <Plus size={16} /> Explore movements
         </Button>
       </div>
       <div className="workout-summary">
@@ -177,11 +170,11 @@ export default function Workout({ library }: { library: Library }) {
       {!data.workout.length && (
         <section className="workout-empty">
           <h2>Empty rack</h2>
-          <p>Add a movement from the lab with its current load.</p>
+          <p>Choose a movement, set your load, and make the session yours.</p>
           <Button
             onClick={() => useSimulationStore.getState().setTab('Movements')}
           >
-            Open lab <Plus size={15} />
+            Explore movements <Plus size={15} />
           </Button>
         </section>
       )}

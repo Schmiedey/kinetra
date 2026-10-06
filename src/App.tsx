@@ -1,23 +1,24 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { Activity, FlaskConical, Copy, Download } from 'lucide-react';
+import { ArrowUpRight, FlaskConical, Copy, Download } from 'lucide-react';
+import BrandMark from './components/BrandMark';
 import { Button } from '@/components/ui/button';
 import { useSimulationStore } from './store/useSimulationStore';
 import Sandbox from './components/Sandbox';
 import Methodology, { Research } from './components/Methodology';
 import ExplainChanges from './components/ExplainChanges';
 import { AnimationClock } from './components/Transport';
-import { registerLiftLabTools } from './lib/webmcp';
+import { registerKinetraTools } from './lib/webmcp';
 import { useLibrary, exportLibrary } from './movements/useLibrary';
 const MovementLibrary = lazy(() => import('./movements/MovementLibrary'));
 const Workout = lazy(() => import('./movements/Workout'));
 const Compare = lazy(() => import('./components/Compare'));
 
 const tabs = [
-  ['Movements', 'Lab'],
-  ['Workout', 'Session'],
-  ['Sandbox', 'Bench'],
+  ['Movements', 'Explore'],
+  ['Workout', 'Train'],
+  ['Sandbox', 'Mechanics'],
   ['Compare', 'Compare'],
-  ['Research', 'Notes'],
+  ['Research', 'Evidence'],
 ] as const;
 
 export default function App() {
@@ -28,14 +29,14 @@ export default function App() {
   const [methodology, setMethodology] = useState(false),
     [explain, setExplain] = useState(false),
     [saveMenu, setSaveMenu] = useState(false);
-  useEffect(() => registerLiftLabTools(), []);
+  useEffect(() => registerKinetraTools(), []);
   function exportResults() {
     const s = useSimulationStore.getState();
     const blob = new Blob(
       [
         JSON.stringify(
           {
-            model: 'LiftLab bench v0.1',
+            model: 'Kinetra bench v0.1',
             notice:
               'Comparative model estimates, not measured hypertrophy. External moments assume only vertical load.',
             sandbox: s.result,
@@ -50,7 +51,7 @@ export default function App() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'liftlab-simulation.json';
+    a.download = 'kinetra-simulation.json';
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -58,14 +59,10 @@ export default function App() {
     <div className="app">
       <AnimationClock />
       <header className="topbar">
-        <a
-          className="brand"
-          href="#lab"
-          onClick={() => setTab('Movements')}
-        >
-          <Activity />
+        <a className="brand" href="#lab" onClick={() => setTab('Movements')}>
+          <BrandMark />
           <b>
-            LiftLab<span>®</span>
+            kinetra<span>MOTION, UNDERSTOOD.</span>
           </b>
         </a>
         <nav aria-label="Main navigation">
@@ -84,9 +81,7 @@ export default function App() {
           ))}
         </nav>
         <div className="topbar-end">
-          <span className="version">
-            LOAD LAB <i /> v0.2
-          </span>
+          <span className="version">THE MOVEMENT STUDIO</span>
           <Button
             variant="ghost"
             size="icon-sm"
@@ -97,6 +92,30 @@ export default function App() {
           </Button>
         </div>
       </header>
+      {tab === 'Movements' && (
+        <section className="brand-intro" aria-labelledby="studio-title">
+          <div>
+            <span className="eyebrow">A NEW PERSPECTIVE ON STRENGTH</span>
+            <h1 id="studio-title">
+              Move with <em>understanding.</em>
+            </h1>
+            <p>
+              Explore the anatomy. Follow the forces. Build your next session.
+            </p>
+          </div>
+          <div className="studio-summary">
+            <span>
+              <strong>44</strong> movements to explore
+            </span>
+            <span>
+              <strong>01</strong> body. Countless possibilities.
+            </span>
+            <button onClick={() => setTab('Workout')}>
+              Build a session <ArrowUpRight size={16} />
+            </button>
+          </div>
+        </section>
+      )}
       {(tab === 'Movements' || tab === 'Workout') && (
         <output className="library-save-status">
           <span className={library.error ? 'save-error' : ''}>
@@ -127,8 +146,8 @@ export default function App() {
       {tab === 'Sandbox' && (
         <div className="workspace-title">
           <div>
-            <span className="eyebrow">4-MUSCLE BENCH MODEL</span>
-            <h1>Barbell bench mechanics</h1>
+            <span className="eyebrow">KINETRA / MECHANICS</span>
+            <h1>See strength from every angle.</h1>
           </div>
           <div className="workspace-actions">
             <span className="status">
@@ -171,7 +190,11 @@ export default function App() {
         </div>
       )}
       {tab === 'Movements' || tab === 'Workout' ? (
-        <Suspense fallback={<div className="page-loading">Opening lab…</div>}>
+        <Suspense
+          fallback={
+            <div className="page-loading">Opening your movement studio…</div>
+          }
+        >
           {tab === 'Movements' ? (
             <MovementLibrary library={library} />
           ) : (
@@ -184,7 +207,9 @@ export default function App() {
           onExplain={() => setExplain(true)}
         />
       ) : tab === 'Compare' ? (
-        <Suspense fallback={<div className="page-loading">Opening compare…</div>}>
+        <Suspense
+          fallback={<div className="page-loading">Opening compare…</div>}
+        >
           <Compare onMethodology={() => setMethodology(true)} />
         </Suspense>
       ) : (
@@ -192,7 +217,7 @@ export default function App() {
       )}
       {tab !== 'Movements' && (
         <footer className="page-footer">
-          <span>LiftLab / load lab v0.2</span>
+          <span>KINETRA / MOTION, UNDERSTOOD.</span>
           <span>
             Static r × F moments.{' '}
             <button onClick={() => setMethodology(true)}>Model limits</button>

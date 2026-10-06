@@ -1,0 +1,546 @@
+:root {
+  --background: #f3f6fb;
+  --foreground: #17233d;
+  --card: #ffffff;
+  --primary: #315fe8;
+  --muted: #e7edf7;
+  --border: #d8e1ef;
+  --radius: 0.75rem;
+  --font-sans: 'Avenir Next', 'Segoe UI', sans-serif;
+  --font-display: 'Avenir Next', 'Segoe UI', sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, monospace;
+}
+@theme inline {
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #e7edf7;
+  --color-accent: #eaf0ff;
+  --color-border: #d8e1ef;
+  --color-input: #d8e1ef;
+  --color-ring: #315fe8;
+  --radius-lg: 0.75rem;
+}
+body {
+  font-family: var(--font-sans);
+}
+.topbar {
+  height: 88px;
+  padding: 0 36px;
+  background: white;
+  border-color: var(--border);
+}
+.brand {
+  gap: 12px;
+}
+.brand > svg {
+  width: 40px;
+  height: 40px;
+  color: var(--primary);
+}
+.brand b {
+  font-family: var(--font-sans);
+  font-size: 29px;
+  letter-spacing: -1.4px;
+  font-weight: 750;
+  text-transform: none;
+  line-height: 1;
+}
+.brand b span {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 1.7px;
+  margin: 9px 0 0;
+  color: #64728b;
+  font-weight: 650;
+}
+.topbar nav {
+  gap: 8px;
+  align-items: center;
+}
+.topbar nav button {
+  font-family: var(--font-sans);
+  padding: 11px 17px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #65738a;
+}
+.topbar nav button.active {
+  color: var(--primary);
+  background: #ecf1ff;
+}
+.topbar nav button.active:after {
+  display: none;
+}
+.version {
+  letter-spacing: 1.5px;
+  font-size: 8px;
+  color: #65738a;
+}
+.brand-intro {
+  padding: 30px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(115deg, #f6f9ff, #eaf0ff);
+}
+.brand-intro .eyebrow {
+  color: var(--primary);
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+.brand-intro h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3.3vw, 46px);
+  letter-spacing: -2px;
+  font-weight: 600;
+  margin: 9px 0;
+  text-transform: none;
+}
+.brand-intro h1 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: var(--primary);
+}
+.brand-intro p {
+  font-size: 12px;
+  color: #65738a;
+}
+.studio-summary {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 8px 22px;
+  max-width: 345px;
+  font-size: 9px;
+  color: #65738a;
+}
+.studio-summary strong {
+  display: block;
+  font-size: 25px;
+  font-weight: 500;
+  color: #17233d;
+  letter-spacing: -1px;
+}
+.studio-summary button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  grid-column: 1/-1;
+  color: var(--primary);
+  font-size: 11px;
+  margin-top: 7px;
+  font-weight: 650;
+}
+.library-save-status {
+  background: white;
+  justify-content: flex-end;
+  font-family: var(--font-sans);
+  padding: 9px 36px;
+  color: #68758b;
+  font-size: 10px;
+}
+.library-save-status .save-error {
+  color: #b34e27;
+}
+.lab {
+  grid-template-columns: 255px minmax(0, 1fr) 310px;
+  height: max(680px, calc(100dvh - 285px));
+  max-height: none;
+  margin: 22px 26px 30px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px #24365c08;
+}
+.lab-catalog,
+.lab-data {
+  background: white;
+  padding: 20px 16px;
+  border-color: var(--border);
+}
+.lab-catalog-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #68758b;
+  margin-bottom: 8px;
+}
+.lab-catalog-heading b {
+  color: var(--primary);
+  font-weight: 600;
+}
+.lab-search input {
+  border-radius: 8px;
+  background: #f6f8fc;
+  height: 38px;
+  font-family: var(--font-sans);
+}
+.lab-filters select,
+.movement-editor select {
+  border-radius: 7px;
+  background: #f6f8fc;
+  font-family: var(--font-sans);
+}
+.lab-scopes {
+  background: #f2f5fb;
+  border: 0;
+  border-radius: 8px;
+  padding: 4px;
+}
+.lab-scopes button {
+  border-radius: 6px;
+  font-size: 10px;
+  font-family: var(--font-sans);
+}
+.lab-scopes button.on {
+  background: white;
+  color: var(--primary);
+  box-shadow: 0 2px 5px #17233d0c;
+}
+.lab-list button {
+  margin: 3px 0;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+}
+.lab-list button.on {
+  background: #edf2ff;
+  border-color: #cbd8ff;
+  color: #17233d;
+}
+.lab-list button:hover {
+  background: #f2f5fc;
+}
+.lab-list strong {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: none;
+}
+.lab-list em {
+  color: #5475ba;
+  font-size: 8px;
+}
+.lab-list span {
+  color: #67748b;
+}
+.lab-stage {
+  background: #f8faff;
+}
+.lab-viewport {
+  background: #101b32;
+}
+.lab-view-tools span {
+  color: #b5c4df;
+}
+.lab-view-tools div {
+  background: #172641e8;
+  border-color: #3e5377;
+  border-radius: 8px;
+  padding: 3px;
+}
+.lab-view-tools button {
+  color: #bccbe6;
+  border-radius: 5px;
+}
+.lab-view-tools button.on {
+  background: #315fe8;
+  color: white;
+}
+.lab-hud {
+  background: #172641ed;
+  border-color: #3e5377;
+  border-radius: 10px;
+}
+.lab-hud span,
+.lab-hud small {
+  color: #a8bbdd;
+}
+.lab-hud b {
+  color: #edf3ff;
+}
+.lab-bone-toggle {
+  background: #172641ed !important;
+  border-color: #3e5377 !important;
+  color: #bfcee8;
+  border-radius: 8px;
+}
+.lab-bone-toggle.on {
+  color: #c4dcff;
+  background: #2a4168 !important;
+}
+.lab-transport,
+.lab-load,
+.lab-actions,
+.lab-setup {
+  border-color: var(--border);
+}
+.lab-load {
+  background: white;
+}
+.lab-stepper input {
+  color: #17233d;
+  font-family: var(--font-sans);
+}
+.lab-stepper button {
+  border-color: var(--border) !important;
+  border-radius: 6px;
+}
+.lab-data header h1 {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: -0.8px;
+  font-size: 25px;
+  font-weight: 650;
+}
+.lab-data h2 {
+  color: var(--primary);
+  font-family: var(--font-sans);
+  letter-spacing: 1.5px;
+  font-size: 9px;
+}
+.lab-bar b {
+  background: #9bb4f7;
+}
+.lab-bar.peak b,
+.lab-tissues b {
+  background: var(--primary);
+}
+.lab-tissues s {
+  background: #17233d;
+}
+.lab-spark {
+  color: var(--primary);
+}
+.lab-note {
+  font-size: 10px;
+  line-height: 1.7;
+}
+[data-slot='button'] {
+  border-radius: 8px;
+  font-family: var(--font-sans);
+}
+[data-slot='input'] {
+  background: #f8faff;
+  border-radius: 7px;
+}
+.workspace-title h1,
+.compare-title h1,
+.research-page h1,
+.workout-page h1,
+.workout-empty h2 {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: -1.2px;
+}
+.workout-page {
+  padding: 35px 32px;
+}
+.workout-summary,
+.workout-item,
+.workout-session,
+.library-backup {
+  border-radius: 14px;
+  background: white;
+  border-color: var(--border);
+}
+.workout-summary input {
+  background: #f6f8fc;
+}
+.workout-heading h1 {
+  font-size: 38px;
+}
+.page-footer {
+  color: #68758b;
+  letter-spacing: 0.8px;
+}
+.scene-toolbar,
+.scene-corner,
+.orbit-hint {
+  color: #b9c8e3;
+}
+.scene-toolbar > span:first-child {
+  color: #b9d4ff;
+}
+.scene-telemetry {
+  background: #172641e8;
+  color: #edf3ff;
+  border-color: #3e5377;
+}
+@media (max-width: 1100px) {
+  .version {
+    display: none;
+  }
+  .lab {
+    grid-template-columns: 210px minmax(0, 1fr) 265px;
+    margin-inline: 16px;
+  }
+  .topbar {
+    padding: 0 24px;
+  }
+  .studio-summary {
+    max-width: 280px;
+  }
+}
+@media (max-width: 900px) {
+  .studio-summary {
+    display: none;
+  }
+  .lab {
+    grid-template-columns: 190px minmax(0, 1fr);
+    height: auto;
+    overflow: visible;
+  }
+  .lab-catalog {
+    max-height: 740px;
+    border-radius: 18px 0 0 0;
+  }
+  .lab-stage {
+    min-height: 700px;
+    border-radius: 0 18px 0 0;
+    overflow: hidden;
+  }
+  .lab-data {
+    grid-column: 1/-1;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 18px 18px;
+  }
+  .lab-viewport {
+    min-height: 410px;
+  }
+}
+@media (max-width: 650px) {
+  .topbar {
+    height: auto;
+    min-height: 104px;
+    flex-wrap: wrap;
+    padding: 14px 18px 9px;
+    gap: 10px;
+  }
+  .brand > svg {
+    width: 32px;
+    height: 32px;
+  }
+  .brand b {
+    font-size: 25px;
+  }
+  .brand b span {
+    font-size: 6px;
+    margin-top: 6px;
+  }
+  .topbar nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .topbar nav button {
+    padding: 8px 12px;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  .brand-intro {
+    padding: 24px 20px;
+  }
+  .brand-intro h1 {
+    letter-spacing: -1.4px;
+    font-size: 30px;
+  }
+  .brand-intro p {
+    font-size: 11px;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+  .library-save-status {
+    padding: 8px 20px;
+  }
+  .lab {
+    display: flex;
+    flex-direction: column;
+    margin: 14px 12px 24px;
+    overflow: hidden;
+  }
+  .lab-catalog {
+    max-height: 340px;
+    border: 0;
+    border-radius: 0;
+  }
+  .lab-stage {
+    border-radius: 0;
+    min-height: 690px;
+  }
+  .lab-viewport {
+    min-height: 390px;
+  }
+  .lab-data {
+    border-radius: 0;
+  }
+  .workout-page {
+    padding: 25px 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+.lab-tissues button,
+.lab-bar {
+  width: 100%;
+}
+.lab-tissues {
+  width: 100%;
+}
+.viewport-title > .eyebrow,
+.live-telemetry span,
+.live-telemetry small,
+.live-telemetry button {
+  color: #a8bbdd;
+}
+.viewport-title > div,
+.live-telemetry strong {
+  color: #edf3ff;
+}
+.camera-controls,
+.anatomy-legend,
+.anatomy-selection {
+  background: #172641ed;
+  border-color: #3e5377;
+  border-radius: 8px;
+}
+.camera-controls button {
+  color: #bfcee8;
+}
+.camera-controls button.selected {
+  background: #315fe8;
+  color: white;
+}
+.anatomy-legend,
+.anatomy-legend p,
+.anatomy-legend small,
+.anatomy-legend span,
+.anatomy-legend h3 {
+  color: #bfcee8;
+}
+.anatomy-legend strong,
+.anatomy-selection strong {
+  color: #edf3ff;
+}
+.joints-toggle,
+.joints-toggle[aria-pressed='true'] {
+  color: #8eb7ff;
+}
+@media (max-width: 650px) {
+  .topbar nav button {
+    font-size: 9px;
+    letter-spacing: 0.6px;
+    padding: 8px 7px;
+  }
+}

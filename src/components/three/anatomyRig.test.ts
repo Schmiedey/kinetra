@@ -17,7 +17,7 @@ import { muscles } from '../../data/muscles';
 const manifest = JSON.parse(
   readFileSync('public/models/manifest.json', 'utf8'),
 );
-const raw = readFileSync('public/models/liftlab-anatomy.glb');
+const raw = readFileSync('public/models/kinetra-anatomy.glb');
 const gltf = await new GLTFLoader().parseAsync(
   raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength),
   '',

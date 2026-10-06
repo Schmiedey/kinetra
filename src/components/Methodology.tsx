@@ -13,12 +13,12 @@ export function MethodologyContent() {
       <span className="eyebrow">MODEL LIMITS</span>
       <h2>What the numbers are.</h2>
       <p>
-        The Lab runs a static inverse-dynamics pass on every movement: external
-        load (or ground reaction) applied at the hands or feet, joint moments
-        from |r × F|, tissue demand from those moments, and an impact estimate
-        of |F| plus moment / 5 cm. The 4-muscle Bench tab is a tighter model of
-        one lift. None of this is EMG, joint contact from imaging, or a
-        hypertrophy prediction.
+        Kinetra Explore runs a static inverse-dynamics pass on every movement:
+        external load (or ground reaction) applied at the hands or feet, joint
+        moments from |r × F|, tissue demand from those moments, and an impact
+        estimate of |F| plus moment / 5 cm. The 4-muscle Mechanics tab is a
+        tighter model of one lift. None of this is EMG, joint contact from
+        imaging, or a hypertrophy prediction.
       </p>
       <div className="confidence-table">
         {[
@@ -95,12 +95,11 @@ export function MethodologyContent() {
         the open BodyExplorer GitHub repository. The movement library includes
         280 muscle meshes from BodyParts3D and Z-Anatomy, including neck, face,
         forearm, and limb-completing tissue that the first atlas omitted.
-        Fourteen press meshes still provide
-        the actual bilateral pec subdivisions, anterior deltoid and triceps
-        heads. The atlas is fitted to the generic engine proportions and posed
-        using rigid bone transforms and blended soft-tissue deformation. Shape
-        detail does not make the motion or stimulus model a validated
-        physiological simulation.
+        Fourteen press meshes still provide the actual bilateral pec
+        subdivisions, anterior deltoid and triceps heads. The atlas is fitted to
+        the generic engine proportions and posed using rigid bone transforms and
+        blended soft-tissue deformation. Shape detail does not make the motion
+        or stimulus model a validated physiological simulation.
       </p>
       <p>
         Demand mode colors the muscle surface using the selected frame’s
@@ -126,7 +125,13 @@ export function MethodologyContent() {
         </a>
       </p>
       <h3>05 / Scope & limits</h3>
-      <p>The movement library uses simplified pattern illustrations and assigned primary/supporting muscle roles. Its highlights are not EMG measurements or calculated activation. Custom movements inherit their chosen pattern; they do not create a new validated biomechanics model. The formulas above apply only to the detailed Bench lab.</p>
+      <p>
+        The movement library uses simplified pattern illustrations and assigned
+        primary/supporting muscle roles. Its highlights are not EMG measurements
+        or calculated activation. Custom movements inherit their chosen pattern;
+        they do not create a new validated biomechanics model. The formulas
+        above apply only to the detailed Bench lab.
+      </p>
       <p>
         Reps record the set context; they do not multiply the score. This
         version does not model fatigue, set duration, session or weekly volume,

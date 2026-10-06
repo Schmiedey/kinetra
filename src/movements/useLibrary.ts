@@ -98,7 +98,7 @@ export function exportLibrary(data: LibraryData) {
     new Blob(
       [
         JSON.stringify(
-          { format: 'liftlab-library', version: 1, data },
+          { format: 'kinetra-library', version: 1, data },
           null,
           2,
         ),
@@ -108,7 +108,7 @@ export function exportLibrary(data: LibraryData) {
   );
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'liftlab-workouts.json';
+  a.download = 'kinetra-workouts.json';
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

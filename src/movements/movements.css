@@ -3,20 +3,20 @@
   gap: 8px;
   align-items: center;
   padding: 6px 18px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
-  color: #8a8e82;
-  border-bottom: 1px solid #24261f;
+  color: #425176;
+  border-bottom: 1px solid #ccd2e0;
 }
 .library-save-status .save-error {
-  color: #ff6a1a;
+  color: #154fe0;
 }
 .page-loading {
   display: grid;
   place-items: center;
   min-height: 240px;
-  color: #8a8e82;
-  font-family: var(--font-mono);
+  color: #425176;
+  font-family: var(--font-sans);
   font-size: 12px;
 }
 
@@ -26,7 +26,7 @@
   height: calc(100dvh - 92px);
   max-height: calc(100dvh - 92px);
   overflow: hidden;
-  border-top: 1px solid #24261f;
+  border-top: 1px solid #ccd2e0;
 }
 .lab-catalog,
 .lab-data,
@@ -39,13 +39,13 @@
   flex-direction: column;
   gap: 10px;
   padding: 14px 12px 18px;
-  background: #10110f;
-  border-right: 1px solid #24261f;
+  background: #f8f9fc;
+  border-right: 1px solid #ccd2e0;
   overflow: auto;
 }
 .lab-data {
   border-right: 0;
-  border-left: 1px solid #24261f;
+  border-left: 1px solid #ccd2e0;
   overflow: auto;
 }
 .lab-search {
@@ -55,12 +55,12 @@
   position: absolute;
   top: 11px;
   left: 9px;
-  color: #7a7e74;
+  color: #425176;
 }
 .lab-search input {
   padding-left: 28px;
   height: 34px;
-  background: #0b0c0a;
+  background: #f8f9fc;
   border-radius: 2px;
   font-size: 12px;
 }
@@ -73,18 +73,18 @@
 .movement-editor select {
   width: 100%;
   min-width: 0;
-  border: 1px solid #2c2f27;
+  border: 1px solid #ccd2e0;
   border-radius: 2px;
-  background: #0b0c0a;
-  color: #c9cbbf;
+  background: #f8f9fc;
+  color: #1d2434;
   padding: 7px 6px;
   font-size: 10px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 .lab-scopes {
   display: flex;
   gap: 0;
-  border: 1px solid #2c2f27;
+  border: 1px solid #ccd2e0;
 }
 .lab-scopes button,
 .lab-view-tools button,
@@ -92,7 +92,7 @@
 .lab-bone-toggle {
   background: transparent;
   border: 0;
-  color: #8b8f84;
+  color: #425176;
   font-family: var(--font-display);
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -106,13 +106,13 @@
 .lab-view-tools button.on,
 .lab-bone-toggle.on,
 .lab-list button.on {
-  color: #f3ead8;
-  background: #1b1d18;
+  color: #154fe0;
+  background: #f8f9fc;
 }
 .lab-count {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10px;
-  color: #6f746a;
+  color: #425176;
 }
 .lab-list {
   overflow: auto;
@@ -131,7 +131,7 @@
   border-left: 2px solid transparent;
 }
 .lab-list button.on {
-  border-left-color: #ff6a1a;
+  border-left-color: #5c86f0;
 }
 .lab-list em {
   display: block;
@@ -139,7 +139,7 @@
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #8a6a4a;
+  color: #4f618c;
   font-family: var(--font-display);
 }
 .lab-list strong {
@@ -149,9 +149,9 @@
   letter-spacing: 0.01em;
 }
 .lab-list span {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10px;
-  color: #7d8278;
+  color: #425176;
 }
 .lab-stage {
   display: flex;
@@ -159,7 +159,7 @@
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  background: #0c0d0b;
+  background: #f8f9fc;
 }
 .lab-viewport {
   position: relative;
@@ -188,17 +188,17 @@
   pointer-events: none;
 }
 .lab-view-tools span {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10px;
-  color: #8d9186;
+  color: #425176;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .lab-view-tools div {
   pointer-events: auto;
   display: flex;
-  border: 1px solid #2c2f27;
-  background: #10110fd9;
+  border: 1px solid #ccd2e0;
+  background: #f8f9fcd9;
 }
 .lab-hud {
   position: absolute;
@@ -211,8 +211,8 @@
   grid-template-columns: repeat(4, auto);
   gap: 18px;
   padding: 10px 14px;
-  background: #10110fe6;
-  border: 1px solid #2c2f27;
+  background: #f8f9fce6;
+  border: 1px solid #ccd2e0;
 }
 .lab-hud span {
   display: block;
@@ -220,17 +220,17 @@
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #8a8e82;
+  color: #425176;
 }
 .lab-hud b {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 22px;
   font-weight: 500;
-  color: #f3ead8;
+  color: #154fe0;
 }
 .lab-hud small {
   font-size: 11px;
-  color: #8a8e82;
+  color: #425176;
   margin-left: 4px;
 }
 .lab-bone-toggle {
@@ -238,8 +238,8 @@
   z-index: 4;
   right: 12px;
   bottom: 12px;
-  border: 1px solid #2c2f27 !important;
-  background: #10110fe6 !important;
+  border: 1px solid #ccd2e0 !important;
+  background: #f8f9fce6 !important;
 }
 .lab-transport,
 .lab-load,
@@ -248,11 +248,11 @@
   align-items: center;
   gap: 12px;
   padding: 8px 14px;
-  border-top: 1px solid #24261f;
+  border-top: 1px solid #ccd2e0;
 }
 .lab-transport input[type='range'] {
   flex: 1;
-  accent-color: #ff6a1a;
+  accent-color: #154fe0;
 }
 .lab-transport span,
 .lab-load span {
@@ -260,7 +260,7 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #8a8e82;
+  color: #425176;
   min-width: 92px;
 }
 .lab-load {
@@ -272,25 +272,25 @@
   gap: 4px;
 }
 .lab-stepper button {
-  border: 1px solid #2c2f27 !important;
+  border: 1px solid #ccd2e0 !important;
   min-width: 42px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 .lab-stepper input {
   width: 88px;
   height: 34px;
   text-align: right;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 16px;
 }
 .lab-stepper b {
-  font-family: var(--font-mono);
-  color: #8a8e82;
+  font-family: var(--font-sans);
+  color: #425176;
 }
 .lab-load p {
   margin-left: auto;
   font-size: 11px;
-  color: #7d8278;
+  color: #425176;
 }
 .lab-setup {
   display: grid;
@@ -298,7 +298,7 @@
   align-items: center;
   gap: 12px 18px;
   padding: 8px 14px;
-  border-top: 1px solid #24261f;
+  border-top: 1px solid #ccd2e0;
 }
 .lab-setup .movement-range {
   min-width: 0;
@@ -308,17 +308,17 @@
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8a8e82;
+  color: #425176;
 }
 .lab-setup .movement-range b {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   letter-spacing: 0;
   text-transform: none;
-  color: #f3ead8;
+  color: #154fe0;
 }
 .lab-setup input[type='range'] {
   width: 100%;
-  accent-color: #ff6a1a;
+  accent-color: #154fe0;
 }
 .lab-actions {
   flex-wrap: wrap;
@@ -333,9 +333,9 @@
 }
 .lab-data header p,
 .lab-note {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10px;
-  color: #8a8e82;
+  color: #425176;
   line-height: 1.45;
 }
 .lab-data section {
@@ -348,7 +348,7 @@
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ff6a1a;
+  color: #154fe0;
   margin-bottom: 4px;
 }
 .lab-bar,
@@ -366,48 +366,48 @@
 .lab-bar span,
 .lab-tissues span {
   font-size: 11px;
-  color: #c5c8bc;
+  color: #1d2434;
 }
 .lab-bar i,
 .lab-tissues i {
   position: relative;
   display: block;
   height: 6px;
-  background: #1c1e19;
+  background: #f8f9fc;
 }
 .lab-bar b,
 .lab-tissues b {
   display: block;
   height: 100%;
-  background: #c9a227;
+  background: #154fe0;
 }
 .lab-bar.peak b {
-  background: #ff6a1a;
+  background: #154fe0;
 }
 .lab-tissues b {
-  background: #ff6a1a;
+  background: #154fe0;
 }
 .lab-tissues s {
   position: absolute;
   top: -2px;
   width: 1px;
   height: 10px;
-  background: #f3ead8;
+  background: #154fe0;
 }
 .lab-bar em,
 .lab-tissues em {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
   font-style: normal;
   text-align: right;
 }
 .lab-tissues button.on span {
-  color: #ff6a1a;
+  color: #154fe0;
 }
 .lab-spark {
   width: 100%;
   height: 36px;
-  color: #ff6a1a;
+  color: #154fe0;
   margin-bottom: 6px;
 }
 .lab-impact dl {
@@ -420,17 +420,17 @@
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8a8e82;
+  color: #425176;
 }
 .lab-impact dd {
   margin: 2px 0 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 16px;
 }
 .lab-impact input {
   height: 30px;
   width: 88px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 .lab-note {
   margin-top: auto;
@@ -466,9 +466,9 @@
 .movement-notice {
   display: block;
   padding: 6px 14px 12px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
-  color: #c9a227;
+  color: #154fe0;
 }
 
 .workout-page {
@@ -493,7 +493,7 @@
 }
 .workout-page p,
 .workout-help {
-  color: #8a8e82;
+  color: #425176;
   font-size: 13px;
 }
 .workout-summary {
@@ -502,8 +502,8 @@
   gap: 12px;
   margin-bottom: 22px;
   padding: 14px;
-  border: 1px solid #2c2f27;
-  background: #10110f;
+  border: 1px solid #ccd2e0;
+  background: #f8f9fc;
 }
 .workout-summary span,
 .workout-summary label {
@@ -511,18 +511,18 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #8a8e82;
+  color: #425176;
 }
 .workout-summary strong {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 28px;
   font-weight: 500;
-  color: #f3ead8;
+  color: #154fe0;
 }
 .workout-session {
-  border: 1px solid #2c2f27;
-  background: #10110f;
+  border: 1px solid #ccd2e0;
+  background: #f8f9fc;
   padding: 14px 16px 16px;
   margin-bottom: 22px;
 }
@@ -531,7 +531,7 @@
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #ff6a1a;
+  color: #154fe0;
   margin-bottom: 10px;
 }
 .session-tissues {
@@ -548,21 +548,21 @@
 .session-tissues i {
   display: block;
   height: 6px;
-  background: #1c1e19;
+  background: #f8f9fc;
 }
 .session-tissues b {
   display: block;
   height: 100%;
-  background: #ff6a1a;
+  background: #154fe0;
 }
 .session-tissues em {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-style: normal;
   font-size: 11px;
   text-align: right;
 }
 .workout-empty {
-  border: 1px dashed #2c2f27;
+  border: 1px dashed #ccd2e0;
   padding: 36px 24px;
   margin-bottom: 24px;
 }
@@ -578,8 +578,8 @@
   gap: 12px;
 }
 .workout-item {
-  border: 1px solid #2c2f27;
-  background: #10110f;
+  border: 1px solid #ccd2e0;
+  background: #f8f9fc;
   padding: 14px;
 }
 .workout-item-heading {
@@ -589,8 +589,8 @@
   margin-bottom: 12px;
 }
 .workout-number {
-  font-family: var(--font-mono);
-  color: #ff6a1a;
+  font-family: var(--font-sans);
+  color: #154fe0;
   font-size: 12px;
   padding-top: 6px;
 }
@@ -601,7 +601,7 @@
   letter-spacing: 0.04em;
 }
 .workout-item p {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
 }
 .workout-order {
@@ -618,16 +618,16 @@
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8a8e82;
+  color: #425176;
 }
 .workout-log {
   display: flex;
   align-items: center;
   gap: 12px;
   margin: 12px 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
-  color: #8a8e82;
+  color: #425176;
 }
 .workout-set-buttons {
   display: flex;
@@ -636,17 +636,17 @@
 .workout-set-buttons button {
   width: 32px;
   height: 32px;
-  border: 1px solid #2c2f27;
+  border: 1px solid #ccd2e0;
   background: transparent;
-  color: #c9cbbf;
+  color: #1d2434;
 }
 .workout-set-buttons button.done {
-  background: #ff6a1a;
-  color: #140d08;
-  border-color: #ff6a1a;
+  background: #154fe0;
+  color: #4f618c;
+  border-color: #5c86f0;
 }
 .workout-history details {
-  border-top: 1px solid #2c2f27;
+  border-top: 1px solid #ccd2e0;
   padding: 10px 0;
 }
 .workout-history summary {
@@ -657,8 +657,8 @@
 }
 .workout-history small {
   display: block;
-  font-family: var(--font-mono);
-  color: #8a8e82;
+  font-family: var(--font-sans);
+  color: #425176;
   font-size: 11px;
 }
 .history-detail {
@@ -669,7 +669,7 @@
 .library-backup {
   margin-top: 28px;
   padding-top: 18px;
-  border-top: 1px solid #2c2f27;
+  border-top: 1px solid #ccd2e0;
   display: flex;
   justify-content: space-between;
   gap: 16px;

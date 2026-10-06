@@ -22,7 +22,7 @@ import { frameAt } from '../../engine/simulate';
 import { add, lerp, rad } from '../../engine/vector';
 import { calibration } from '../../data/calibration';
 import AnatomicalBody from './AnatomicalBody';
-const neutral = '#737f76';
+const neutral = '#6a7388';
 function Segment({
   a,
   b,
@@ -116,12 +116,12 @@ function Bench({ angle }: { angle: number }) {
       <group position={benchOrigin} rotation={[rad(angle), 0, 0]}>
         <mesh position={[0, -0.02, -0.38]} castShadow>
           <boxGeometry args={[0.34, 0.095, 1.12]} />
-          <meshStandardMaterial color="#3b443e" roughness={0.92} />
+          <meshStandardMaterial color="#383d47" roughness={0.92} />
         </mesh>
         <mesh position={[0, -0.072, -0.38]}>
           <boxGeometry args={[0.29, 0.025, 1.08]} />
           <meshStandardMaterial
-            color="#6c7970"
+            color="#656d80"
             metalness={0.75}
             roughness={0.35}
           />
@@ -129,7 +129,7 @@ function Bench({ angle }: { angle: number }) {
       </group>
       <mesh position={[0, 0.5, 0.48]} castShadow>
         <boxGeometry args={[0.35, 0.09, 0.33]} />
-        <meshStandardMaterial color="#3b443e" roughness={0.9} />
+        <meshStandardMaterial color="#383d47" roughness={0.9} />
       </mesh>
       {[-0.3, 0.45].map((z) => (
         <group key={z}>
@@ -137,20 +137,20 @@ function Bench({ angle }: { angle: number }) {
             a={[0, 0.05, z]}
             b={[0, 0.48, z]}
             r={0.027}
-            color="#59645c"
+            color="#535a6a"
             metalness={0.7}
           />
           <Segment
             a={[-0.29, 0.04, z]}
             b={[0.29, 0.04, z]}
             r={0.026}
-            color="#59645c"
+            color="#535a6a"
             metalness={0.7}
           />
           {[-0.29, 0.29].map((x) => (
             <mesh key={x} position={[x, 0.035, z]}>
               <boxGeometry args={[0.1, 0.06, 0.12]} />
-              <meshStandardMaterial color="#222a24" />
+              <meshStandardMaterial color="#21242b" />
             </mesh>
           ))}
         </group>
@@ -159,7 +159,7 @@ function Bench({ angle }: { angle: number }) {
         a={[0, 0.2, -0.3]}
         b={[0, 0.2, 0.45]}
         r={0.03}
-        color="#4a574d"
+        color="#474d5a"
         metalness={0.7}
       />
     </group>
@@ -172,7 +172,7 @@ function Barbell({ position, load }: { position: Vec3; load: number }) {
       <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
         <cylinderGeometry args={[0.013, 0.013, 2.2, 20]} />
         <meshStandardMaterial
-          color="#bec6bd"
+          color="#babfc9"
           roughness={0.25}
           metalness={0.9}
         />
@@ -182,7 +182,7 @@ function Barbell({ position, load }: { position: Vec3; load: number }) {
           <mesh position={[side * 0.78, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.028, 0.028, 0.45, 20]} />
             <meshStandardMaterial
-              color="#89998a"
+              color="#848c9e"
               metalness={0.85}
               roughness={0.3}
             />
@@ -194,7 +194,7 @@ function Barbell({ position, load }: { position: Vec3; load: number }) {
                   args={[0.21 - i * 0.006, 0.21 - i * 0.006, 0.039, 48]}
                 />
                 <meshStandardMaterial
-                  color="#29362b"
+                  color="#292d36"
                   metalness={0.25}
                   roughness={0.65}
                 />
@@ -204,12 +204,12 @@ function Barbell({ position, load }: { position: Vec3; load: number }) {
                 position={[side * 0.021, 0, 0]}
               >
                 <torusGeometry args={[0.17 - i * 0.006, 0.004, 8, 48]} />
-                <meshStandardMaterial color="#9fb784" roughness={0.6} />
+                <meshStandardMaterial color="#8494b7" roughness={0.6} />
               </mesh>
               <mesh rotation={[0, 0, Math.PI / 2]}>
                 <cylinderGeometry args={[0.041, 0.041, 0.048, 20]} />
                 <meshStandardMaterial
-                  color="#939f8e"
+                  color="#8a92a3"
                   metalness={0.8}
                   roughness={0.25}
                 />
@@ -267,7 +267,7 @@ function Human({
                 <mesh position={p} key={i}>
                   <sphereGeometry args={[0.009, 12, 12]} />
                   <meshBasicMaterial
-                    color="#d0f991"
+                    color="#99b4f0"
                     transparent
                     opacity={0.8}
                     depthTest={false}
@@ -278,12 +278,12 @@ function Human({
               <Force
                 origin={add(h, [0, 0.3, 0])}
                 length={(config.loadKg * calibration.gravity) / 2 / 1500}
-                color="#e4b478"
+                color="#7899e4"
               />
             )}
             {mode === 'moments' && (
               <>
-                <Moment at={s} value={frame.moments.shoulder} color="#d0f991" />
+                <Moment at={s} value={frame.moments.shoulder} color="#99b4f0" />
                 <Moment at={e} value={frame.moments.elbow} color="#a6b9ee" />
               </>
             )}
@@ -301,7 +301,7 @@ function Human({
         points={result.frames
           .filter((_, i) => i % 5 === 0)
           .map((f) => f.barPosition)}
-        color="#d0f991"
+        color="#99b4f0"
         transparent
         opacity={0.18}
         dashed
@@ -408,10 +408,10 @@ export default function BenchScene({
           </div>
         }
       >
-        <color attach="background" args={['#141916']} />
-        <fog attach="fog" args={['#141916', 5, 11]} />
+        <color attach="background" args={['#141519']} />
+        <fog attach="fog" args={['#141519', 5, 11]} />
         <ambientLight intensity={0.5} />
-        <hemisphereLight args={['#e8eedb', '#24352b', 1.1]} />
+        <hemisphereLight args={['#dbe1ee', '#242935', 1.1]} />
         <directionalLight
           position={[2, 4, 3]}
           intensity={2.3}
@@ -421,14 +421,14 @@ export default function BenchScene({
         <directionalLight
           position={[-3, 2, -2]}
           intensity={1.2}
-          color="#b9d6b4"
+          color="#b4bfd6"
         />
         <Grid
           infiniteGrid
           cellSize={0.25}
           sectionSize={1}
-          cellColor="#29352c"
-          sectionColor="#394a38"
+          cellColor="#292d35"
+          sectionColor="#383e4a"
           cellThickness={0.4}
           sectionThickness={0.6}
           fadeDistance={9}

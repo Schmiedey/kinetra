@@ -1,4 +1,5 @@
 import { emptyLibrary, validLibrary } from '../src/movements/catalog';
+import { legacyLibraryCookie } from '../src/lib/libraryBackup';
 export interface Database {
   prepare(sql: string): { bind(...values: unknown[]): Statement };
 }
@@ -22,9 +23,12 @@ const json = (
 export async function api(request: Request, db: Database): Promise<Response> {
   const url = new URL(request.url);
   if (url.pathname !== '/api/library') return json({ error: 'Not found' }, 404);
-  const cookie = request.headers
-    .get('Cookie')
-    ?.match(/(?:^|;\s*)liftlab_library=([a-f0-9]{64})(?:;|$)/)?.[1];
+  const cookies = request.headers.get('Cookie') ?? '';
+  const cookie =
+    cookies.match(/(?:^|;\s*)kinetra_library=([a-f0-9]{64})(?:;|$)/)?.[1] ??
+    cookies.match(
+      new RegExp(`(?:^|;\\s*)${legacyLibraryCookie}=([a-f0-9]{64})(?:;|$)`),
+    )?.[1];
   if (request.method === 'GET') {
     const id =
       cookie ??
@@ -42,7 +46,7 @@ export async function api(request: Request, db: Database): Promise<Response> {
       .bind(id)
       .first<{ data: string; revision: number }>();
     return json({ data: JSON.parse(row!.data), revision: row!.revision }, 200, {
-      'Set-Cookie': `liftlab_library=${id}; HttpOnly; SameSite=Strict; Path=/; Max-Age=31536000${url.protocol === 'https:' ? '; Secure' : ''}`,
+      'Set-Cookie': `kinetra_library=${id}; HttpOnly; SameSite=Strict; Path=/; Max-Age=31536000${url.protocol === 'https:' ? '; Secure' : ''}`,
     });
   }
   if (request.method !== 'PUT')

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
-import { registerLiftLabTools } from './webmcp';
+import { registerKinetraTools } from './webmcp';
 import { useSimulationStore as store } from '../store/useSimulationStore';
 const original = store.getState();
 beforeEach(() => store.setState(original, true));
@@ -27,7 +27,7 @@ describe('optional WebMCP tool contract (simulated context)', () => {
       callback();
       return 1;
     });
-    const cleanup = registerLiftLabTools();
+    const cleanup = registerKinetraTools();
     expect(calls.map((c) => c.tool.name)).toEqual([
       'configure_bench_simulation',
       'read_bench_simulation',
@@ -50,6 +50,6 @@ describe('optional WebMCP tool contract (simulated context)', () => {
   });
   it('works normally in browsers without this optional API', () => {
     vi.stubGlobal('document', {});
-    expect(registerLiftLabTools()).toBeUndefined();
+    expect(registerKinetraTools()).toBeUndefined();
   });
 });
