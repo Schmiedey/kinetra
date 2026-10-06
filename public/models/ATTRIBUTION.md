@@ -27,3 +27,5 @@ The four supplementary latissimus dorsi and rectus abdominis meshes use the upst
 Mesh components retain their source licenses: **CC BY-SA 2.1 Japan** for BodyParts3D and **CC BY-SA 4.0** for supplementary Z-Anatomy components. Retain both attributions and applicable licenses when sharing the combined asset or derivatives. Source names, FMA mappings, per-component sources, pinned repository commit and asset hashes are provided in `manifest.json`; the reproducible extraction script is `scripts/prepare_anatomy.py` in the Kinetra source.
 
 Anatomical shape data does not validate the simulated joint motion, tissue deformation, demand allocation, or Estimated Stimulus Index. Those remain approximate models.
+
+The shipped Kinetra asset uses lossless `EXT_meshopt_compression` encoding. `scripts/compress-anatomy.mjs` verifies positions, normals, triangle winding, node transforms and attribution metadata before replacing the raw asset. Mesh counts and source provenance remain unchanged.

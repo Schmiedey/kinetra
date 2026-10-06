@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'meshoptimizer';
 import { Vector3 } from 'three';
 import { buildAnatomy } from './AnatomicalBody';
 import {
@@ -18,10 +19,12 @@ const manifest = JSON.parse(
   readFileSync('public/models/manifest.json', 'utf8'),
 );
 const raw = readFileSync('public/models/kinetra-anatomy.glb');
-const gltf = await new GLTFLoader().parseAsync(
-  raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength),
-  '',
-);
+const gltf = await new GLTFLoader()
+  .setMeshoptDecoder(MeshoptDecoder)
+  .parseAsync(
+    raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength),
+    '',
+  );
 describe('sourced anatomical geometry and live rig', () => {
   it('ships the claimed sourced meshes with licensed provenance', () => {
     expect(manifest.counts.bones).toBe(200);
